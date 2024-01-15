@@ -1,4 +1,8 @@
+<?php
 
+include("config.php");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +55,7 @@
                         </label>
                       </div> 
                       
-                      <button type="submit" name="create_account" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                      <button type="submit" name="create_account" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline">
                        Create Account 
                       </button> 
                     </form>
