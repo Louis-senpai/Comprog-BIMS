@@ -147,11 +147,110 @@ require_once '../includes/components/header.php';
                             </div>
                         </div>
 
+                        <div class="py-6 col-span-4 lg:col-span-2 border border-gray-900" id="pie-chart"></div>
+
                     </div>
                 </div>
+            </div>
         </main>
 
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <?php
+    $sql = "SELECT CivilStatus, COUNT(*) AS count FROM Survey GROUP BY CivilStatus";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+
+        $statusCounts = array(
+            "Single" => 0,
+            "Married" => 0,
+            "Divorced" => 0,
+            "Widowed" => 0
+        );
+
+        while ($row = $result->fetch_assoc()) {
+            $statusCounts[$row["CivilStatus"]] = $row["count"];
+        }
+
+        $total = array_sum($statusCounts);
+        $statusPercentages = array_map(function ($count) use ($total) {
+            return round(($count / $total) * 100, 2);
+        }, $statusCounts);
+
+        $statusPercentagesJson = json_encode(array_values($statusPercentages));
+
+        echo '<script>
+        window.addEventListener("load", function () {
+            const seriesData = ' . $statusPercentagesJson . ';
+            const getChartOptions = () => {
+                return {
+                    series: seriesData,
+                    colors: ["#52D3D8", "#3887BE", "#38419D", "#200E3A"],
+                    chart: {
+                        height: 420,
+                        width: "100%",
+                        type: "pie",
+                    },
+                    stroke: {
+                        colors: ["white"],
+                        lineCap: "",
+                    },
+                    plotOptions: {
+                        pie: {
+                            labels: {
+                                show: true,
+                            },
+                            size: "100%",
+                            dataLabels: {
+                                offset: -25
+                            }
+                        },
+                    },
+                    labels: ["Single", "Married", "Divorced", "Widowed"],
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontFamily: "Inter, sans-serif",
+                        },
+                    },
+                    legend: {
+                        position: "bottom",
+                        fontFamily: "Inter, sans-serif",
+                    },
+                    yaxis: {
+                        labels: {
+                            formatter: function (value) {
+                                return value + "%"
+                            },
+                        },
+                    },
+                    xaxis: {
+                        labels: {
+                            formatter: function (value) {
+                                return value + "%"
+                            },
+                        },
+                        axisTicks: {
+                            show: false,
+                        },
+                        axisBorder: {
+                            show: false,
+                        },
+                    },
+                };
+            }
+            if (document.getElementById("pie-chart") && typeof ApexCharts !== "undefined") {
+                const chart = new ApexCharts(document.getElementById("pie-chart"), getChartOptions());
+                chart.render();
+            }
+        });
+    </script>';
+    } else {
+        echo "0 results";
+    }
+    ?>
 </body>
 
 </html>
