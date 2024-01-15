@@ -15,10 +15,9 @@
 	else{
 		while ($row = mysqli_fetch_array($result)) {
 			$_SESSION['USER'] = $row['Username'];
-			$_SESSION['FNAME'] = $row['Firstname'];
-			$_SESSION['LNAME'] = $row['Lastname'];
 
-			header("location:home.php");
+
+			header("location: admin/home.php");
 		}
 	}
 

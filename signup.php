@@ -2,7 +2,10 @@
 
 include("config.php");
 
+
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,8 +33,8 @@ include("config.php");
                 <!-- form  here -->
                 <form action="signup.php" method="post">
         <div class="mb-4">
-                        <label class="block mb-2 text-sm font-bold text-gray-700" for="fullname">
-                            Name
+                        <label class="block mb-2 text-sm font-bold text-gray-700" for="username">
+                            User Name
                             <input class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus focus:outline-none focus:shadow-outline" type="text" name="fullname" placeholder="FullName">
                     
                         </label>
@@ -58,6 +61,7 @@ include("config.php");
                       <button type="submit" name="create_account" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline">
                        Create Account 
                       </button> 
+                     
                     </form>
 
                     <div>
@@ -68,6 +72,6 @@ include("config.php");
     </div>
 </body>
 </html>
-    <!-- pano po mag dagdag ng table sa database pwede ba mano mano hehehehe-->
+
 
 
