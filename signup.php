@@ -4,6 +4,8 @@ include("config.php");
 
 
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -31,11 +33,64 @@ include("config.php");
                 
                 </div>
                 <!-- form  here -->
+                <?php
+                if(isset($_POST["submit"])){
+                    $username = $_POST["username"];
+                    $email = $_POST["email"];
+                    $password = $_POST["password"];
+                    $passwordrepeat = $_POST["repeat_password"];
+
+                    $passwordhash = password_hash($password , PASSWORD_DEFAULT);
+
+                    $errors = array();
+                
+                    if (empty($username) OR empty($email)  OR empty($password) OR empty($passwordrepeat )){
+                        array_push($errors,"All fields are required");
+                    }
+                    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                        array_push($errors, "Email is not valid");
+                    }
+                    if(strlen($password) < 8){
+                        array_push($errors, "Password must be at least 8 characters long");
+                    }
+                    if($password!==$passwordrepeat){
+                        array_push($errors,"Password does not match");
+                    }
+                    
+                    // same email not allowed 
+                    $sql = "SELECT * FROM  users WHERE email = '$emial'";
+                    $result = mysqli_query($sql);
+                    $rowCount = mysqli_num_rows($result);
+                    if ($rowCount>0){
+                        array_push($errors,"Email already exists");
+
+                    }
+
+                    if(count($errors)>0){
+                        foreach($errors as $error){
+                            echo "<div class='bg-red-100 text-red-500 p-4 mb-4 rounded h-14'>$error</div>";
+                        }
+                    }else{
+                     require_once  "config.php";
+                     $sql ="INSERT INTO users(username, email, password) VALUES ( ?, ?, ? )";
+                     $stmt = mysqli_stmt_init($conn);
+                     $prepareStmt = mysqli_stmt_prepare($stmt,$sql);
+                     if($prepareStmt){
+                        mysqli_stmt_bind_param($stmt,"sss",$username, $eamil, $passwordhash);
+                        mysqli_stmt_execute($stmt);
+                        echo"<div class='bg-green-100 text-green-500 p-4 mb-4 rounded h-14'> You are registered successfully.</div.";
+                     }else{
+                        die("something went wrong");
+                     }
+
+                    }
+                }
+                ?>
                 <form action="signup.php" method="post">
         <div class="mb-4">
-                        <label class="block mb-2 text-sm font-bold text-gray-700" for="username">
+                        <label class="block mb-2 text-sm font-bold text-gray-700"  for="username">
                             User Name
-                            <input class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus focus:outline-none focus:shadow-outline" type="text" name="fullname" placeholder="FullName">
+                            <input class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus focus:outline-none focus:shadow-outline" type="text" name="username" placeholder="UserName">
                     
                         </label>
                         <label class="block mb-2 text-sm font-bold text-gray-700" for="email">
@@ -45,20 +100,18 @@ include("config.php");
                         </label>
                         <label class="block mb-2 text-sm font-bold text-gray-700" for="password">
                             Password
-                            <input class="w-full px-3 py-2 mb-3 leading-tight border border-red-500 rounded shadow appearance-none text-gray- 700 focus:outline-none focus:shadow-outline" id="password" type="password" name="
-                            password" placeholder="********">
+                            <input class="w-full px-3 py-2 mb-3 leading-tight border border-red-500 rounded shadow appearance-none text-gray- 700 focus:outline-none focus:shadow-outline" id="password" type="password" name="password" placeholder="********">
                           
                            
                         </label>
                         <label class="block mb-2 text-sm font-bold text-gray-700" for="repeat_password">
                            Repeat Password
-                            <input class="w-full px-3 py-2 mb-3 leading-tight border border-red-500 rounded shadow appearance-none text-gray- 700 focus:outline-none focus:shadow-outline" id="repeat_password" type="repeat_password" name="
-                            repeat_password" placeholder="********">
+                            <input class="w-full px-3 py-2 mb-3 leading-tight border border-red-500 rounded shadow appearance-none text-gray- 700 focus:outline-none focus:shadow-outline" id="repeat_password" type="password" name="repeat_password" placeholder="********">
   
                         </label>
                       </div> 
                       
-                      <button type="submit" name="create_account" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline">
+                      <button type="submit" name="submit" class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline">
                        Create Account 
                       </button> 
                      
@@ -74,4 +127,4 @@ include("config.php");
 </html>
 
 
-
+                
