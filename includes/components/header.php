@@ -2,7 +2,7 @@
 require_once "../config.php";
 ?>
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="light">
 
 <head>
     <meta charset="UTF-8">
@@ -17,15 +17,17 @@ require_once "../config.php";
     <script src="../js/tailwind.config.js" > </script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.tailwindcss.min.css">
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css"  rel="stylesheet" /> -->
-    <link rel="stylesheet" href="https://flowbite-admin-dashboard.vercel.app//app.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://flowbite-admin-dashboard.vercel.app//app.css">
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
     <script>
-    
-    // if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    //     document.documentElement.classList.add('dark');
-    // } else {
-    //     document.documentElement.classList.remove('dark')
-    // }
+   
 </script>
+
 
 </head>
 <?php 

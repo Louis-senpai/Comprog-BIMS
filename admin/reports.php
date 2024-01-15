@@ -65,6 +65,9 @@ require_once '../includes/components/header.php';
 
 
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg h-[70rem]">
+                        <button id="exportButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    Export to CSV
+</button>
                             <table id="SurveyData"
                                 class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
                                 <thead
@@ -380,6 +383,7 @@ require_once '../includes/components/header.php';
         });
     });
     </script>
+    
 
 
 </body>
