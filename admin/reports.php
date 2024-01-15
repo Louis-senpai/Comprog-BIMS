@@ -3,170 +3,180 @@ require_once '../includes/components/header.php';
 
 
 ?>
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
-<style>
-[x-cloak] {
-    display: none;
-}
 
-[type="checkbox"] {
-    box-sizing: border-box;
-    padding: 0;
-}
-
-.form-checkbox {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    -webkit-print-color-adjust: exact;
-    color-adjust: exact;
-    display: inline-block;
-    vertical-align: middle;
-    background-origin: border-box;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    flex-shrink: 0;
-    color: currentColor;
-    background-color: #fff;
-    border-color: #e2e8f0;
-    border-width: 1px;
-    border-radius: 0.25rem;
-    height: 1.2em;
-    width: 1.2em;
-}
-
-.form-checkbox:checked {
-    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
-    border-color: transparent;
-    background-color: currentColor;
-    background-size: 100% 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-</style>
 
 <body>
-    <div class="flex h-screen bg-gray-100">
+
 
         <!-- sidebar -->
-        <?php require_once '../includes/components/sidebar.php';?>
-        <div class="flex flex-col flex-1 overflow-y-auto">
-            <?php require_once "../includes/components/nav.php";?>
-            <div class="p-4">
+        <?php require_once "../includes/components/nav.php";?>
+        <div class="flex pt-16 overflow-hidden h-screen bg-gray-50 dark:bg-gray-900">
+            <?php require_once '../includes/components/sidebar.php';?>
+
+
+            <div class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
+                <main>
+                    <div class="px-4 pt-6">
+                        <div class="mb-4">
+                            <nav class="flex mb-5" aria-label="Breadcrumb">
+                                <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
+                                    <li class="inline-flex items-center">
+                                        <a href="home.php"
+                                            class="inline-flex items-center text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-white">
+                                            <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                                                </path>
+                                            </svg>
+                                            Home
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="flex items-center">
+                                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                            <a href="#"
+                                                class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Admin</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="flex items-center">
+                                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500"
+                                                aria-current="page"><?php echo $filename; ?></span>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </nav>
+                            <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All Residents
+                            </h1>
+                        </div>
+
+
+
+                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg h-[70rem]">
+                            <table id="SurveyData"
+                                class="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
+                                <thead
+                                    class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    <tr class="text-left">
+
+                                        <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
+                                            <label>
+                                                ID
+                                            </label>
+                                        </th>
+                                        <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
+                                            <label>
+                                                Lastname
+                                            </label>
+                                        </th>
+                                        <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
+                                            <label>
+                                                FirstName
+                                            </label>
+                                        </th>
+                                        <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
+                                            <label>
+                                                MiddleInitial
+                                            </label>
+                                        </th>
+                                        <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
+                                            <label>
+                                                BirthPlace
+                                            </label>
+                                        </th>
+                                        <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
+                                            <label>
+                                                BirthDate
+                                            </label>
+                                        </th>
+                                        <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
+                                            <label>
+                                                Age
+                                            </label>
+                                        </th>
+                                        <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
+                                            <label>
+                                                Gender
+                                            </label>
+                                        </th>
+                                        <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
+                                            <label>
+                                                CivilStatus
+                                            </label>
+                                        </th>
+                                        <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
+                                            <label>
+                                                Religion
+                                            </label>
+                                        </th>
+                                        <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
+                                            <label>
+                                                Dialect
+                                            </label>
+                                        </th>
+                                        <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
+                                            <label>
+                                                Education
+                                            </label>
+                                        </th>
+                                        <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
+                                            <label>
+                                                Job
+
+                                            </label>
+                                        </th>
+                                        <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
+                                            <label>
+                                                MonthLyIncome
+                                            </label>
+                                        </th>
+                                        <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
+                                            <label>
+                                                PhoneNumber
+                                            </label>
+                                        </th>
+                                        <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
+                                            <label>
+                                                Email
+                                            </label>
+                                        </th>
+                                        <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
+                                            <label>
+                                                Year
+                                            </label>
+                                        </th>
+                                        <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
+                                            <label>
+                                                Action
+                                            </label>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </main>
                 <!-- report title -->
 
-                <h1 class="py-4 mb-10 text-3xl border-b">Datatable</h1>
 
-
-
-                <div class="relative overflow-x-auto overflow-y-auto bg-white rounded-lg shadow h-[40rem]">
-                    <table id="SurveyData"
-                        class="relative w-full whitespace-no-wrap bg-white border-collapse table-auto table-striped">
-                        <thead>
-                            <tr class="text-left">
-
-                                <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
-                                    <label>
-                                        ID
-                                    </label>
-                                </th>
-                                <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
-                                    <label>
-                                        Lastname
-                                    </label>
-                                </th>
-                                <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
-                                    <label>
-                                        FirstName
-                                    </label>
-                                </th>
-                                <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
-                                    <label>
-                                        MiddleInitial
-                                    </label>
-                                </th>
-                                <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
-                                    <label>
-                                        BirthPlace
-                                    </label>
-                                </th>
-                                <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
-                                    <label>
-                                        BirthDate
-                                    </label>
-                                </th>
-                                <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
-                                    <label>
-                                        Age
-                                    </label>
-                                </th>
-                                <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
-                                    <label>
-                                        Gender
-                                    </label>
-                                </th>
-                                <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
-                                    <label>
-                                        CivilStatus
-                                    </label>
-                                </th>
-                                <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
-                                    <label>
-                                        Religion
-                                    </label>
-                                </th>
-                                <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
-                                    <label>
-                                        Dialect
-                                    </label>
-                                </th>
-                                <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
-                                    <label>
-                                        Education
-                                    </label>
-                                </th>
-                                <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
-                                    <label>
-                                        Job
-
-                                    </label>
-                                </th>
-                                <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
-                                    <label>
-                                        MonthLyIncome
-                                    </label>
-                                </th>
-                                <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
-                                    <label>
-                                        PhoneNumber
-                                    </label>
-                                </th>
-                                <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
-                                    <label>
-                                        Email
-                                    </label>
-                                </th>
-                                <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
-                                    <label>
-                                        Year
-                                    </label>
-                                </th>
-                                <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
-                                    <label>
-                                        Action
-                                    </label>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-
-
-                        </tbody>
-                    </table>
-                </div>
 
             </div>
 
@@ -225,7 +235,8 @@ require_once '../includes/components/header.php';
                 "type": "GET" // HTTP method to use for the AJAX call
             },
             "columns": [{
-                    "data": "ID"
+                    "data": "ID",
+                    "class": "font-bold"
                 }, // Column for first name
                 {
                     "data": "FirstName"
@@ -234,7 +245,8 @@ require_once '../includes/components/header.php';
                     "data": "LastName"
                 }, // Column for last name
                 {
-                    "data": "MiddleInitial"
+                    "data": "MiddleInitial",
+                    "class": "uppercase"
                 }, // Column for last name
                 {
                     "data": "BirthPLace"
@@ -309,51 +321,57 @@ require_once '../includes/components/header.php';
 
                 // Style the DataTable container
                 $('.dataTables_wrapper').addClass(
-                    'p-4 bg-white rounded-lg shadow');
+                    'p-4 border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700" rounded-lg shadow grid grid-cols-2 overflow-auto');
 
                 // Style the DataTable
-                $('#SurveyData').addClass('min-w-full divide-y divide-gray-200');
+                $('#SurveyData').addClass('col-span-2 min-w-full mt-5');
 
                 // Style the DataTable header
-                $('#SurveyData thead').addClass('bg-gray-50');
+                $('#SurveyData thead').addClass(
+                    'text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'
+                );
                 $('#SurveyData thead th').addClass(
-                    'px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
-                    );
+                    'bg-gray-50 dark:bg-gray-700 px-6 py-3 text-xs font-medium text-gray-100 uppercase tracking-wider'
+                );
 
                 // Style the DataTable body
-                $('#SurveyData tbody').addClass('bg-white divide-y divide-gray-200');
-                $('#SurveyData tbody td').addClass('px-6 py-4 whitespace-nowrap');
+                $('#SurveyData tbody').addClass(
+                    'bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900');
+                $('#SurveyData tbody td').addClass('px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-100');
 
                 // Style the DataTable pagination
-                $('.dataTables_paginate').addClass('flex justify-between pt-4');
+                $('.dataTables_paginate').addClass('flex justify-between pt-4 ');
                 $('.paginate_button').addClass(
                     'px-4 py-2 mx-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                    );
+                );
 
                 // Style the DataTable length menu and search input
                 $('.dataTables_length select').addClass(
                     'block w-full px-3 py-1.5 w-10 font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
-                    );
+                );
                 $('.dataTables_filter input').addClass(
-                    'form-input rounded-md shadow-sm mt-1 block w-full');
+                    'form-input rounded-md shadow-sm mt-1 block w-full bg-gray-100');
 
                 // Style the DataTable processing indicator
-                $('.dataTables_info').addClass('text-sm text-gray-700');
+                $('.dataTables_info').addClass('text-sm text-gray-700 dark:text-gray-200');
                 $('#SurveyData_processing').addClass(
                     'h-6 bg-blue-500 text-white text-xs leading-6 rounded-md px-4 py-1');
+
                 // Style the DataTable length menu and search input
-                $('.dataTables_length').addClass('flex items-center gap-2');
+                $('.dataTables_length').addClass(
+                    'flex items-center dark:text-white gap-2 p-4 rounded-l-lg bg-white border-b border-gray-200 lg:mt-1.5 dark:bg-gray-700 dark:border-gray-600');
                 $('.dataTables_length label').addClass('flex items-center gap-1');
                 $('.dataTables_length select').addClass(
-                    'form-select block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
-                    );
-                $('.dataTables_filter').addClass('flex justify-end');
-                $('.dataTables_filter label').addClass('flex items-center gap-1');
+                    'form-select w-[10rem] bg-white text-black dark:text-white lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700" px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
+                );
+                $('.dataTables_filter').addClass('flex justify-end bg-white border-b border-gray-200 lg:mt-1.5 dark:bg-gray-700 dark:border-gray-600 rounded-r-lg p-4');
+                $('.dataTables_filter label').addClass('flex dark:text-white items-center gap-1');
                 $('.dataTables_filter input').addClass(
-                    'form-input rounded-md shadow-sm mt-1 block w-full');
+                    'bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
+                );
 
                 // Responsive adjustments
-                $('.dataTables_length select, .dataTables_filter input').addClass('text-sm');
+                $('.dataTables_length select, .dataTables_filter input').addClass('text-sm dark:text-gray-300');
                 $('.dataTables_length, .dataTables_filter').addClass(
                     'flex-col md:flex-row md:items-center');
 
@@ -362,6 +380,7 @@ require_once '../includes/components/header.php';
         });
     });
     </script>
+
 
 </body>
 
