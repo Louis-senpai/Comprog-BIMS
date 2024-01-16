@@ -248,7 +248,7 @@ require_once '../includes/components/header.php';
     </script>
     </script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.tailwindcss.min.js"></script>
-   <script src="../js/datatable.js"></script>
+    <script src="../js/datatable.js"></script>
 
 
 </body>
