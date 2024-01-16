@@ -1,5 +1,9 @@
 <?php
 require_once "../config.php";
+
+$filename = basename($_SERVER['PHP_SELF']);
+$filename = substr($filename, 0, -4);
+
 ?>
 <!DOCTYPE html>
 <html lang="en" class="light">
@@ -7,7 +11,7 @@ require_once "../config.php";
 <head>
     <meta charset="UTF-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <title>Document</title>
+    <title>BIMS | <?php echo $filename;?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../js/tailwindcss.js"></script>
     <link rel="canonical" href="https://flowbite-admin-dashboard.vercel.app/">
@@ -30,7 +34,3 @@ require_once "../config.php";
 
 
 </head>
-<?php 
-$filename = basename($_SERVER['PHP_SELF']);
-$filename = substr($filename, 0, -4);
-?>
