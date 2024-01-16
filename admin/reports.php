@@ -26,43 +26,7 @@ require_once '../includes/components/header.php';
                     @apply bg-blue-400 dark:bg-blue-500 duration-500 ease-in-out;
                 }
             }
-            /* @layer utilities {
-      .content-auto {
-        content-visibility: auto;
-      }
-   
-  
-            .dt-button-collection {
-                background-color: #200E3A;
-                    color: white;
-                    border: 1px solid #200E3A;
-                }
-            .dt-button-collection:hover {
-                background-color: #38419D;
-                    color: white;
-                    border: 1px solid #38419D;
-                }
-            .dt-button-collection:focus {
-                background-color: #38419D;
-                    color: white;
-                    border: 1px solid #38419D;
-                }
-           .dt-button-collection:active {
-                background-color: #38419D;
-                    color: white;
-                    border: 1px solid #38419D;
-                }
-           .dt-button-collection.dt-button-background {
-                background-color: #200E3A;
-                    color: white;
-                    border: 1px solid #200E3A;
-                }
-           .dt-button-collection.dt-button-background:hover {
-                background-color: #38419D;
-                    color: white;
-                    border: 1px solid #38419D;
-                }
-                    } */
+          
                             </style>
 
         <div class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 mb-10 dark:bg-gray-900">

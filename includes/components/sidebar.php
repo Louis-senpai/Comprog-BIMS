@@ -31,7 +31,7 @@
             </button>
             <ul id="dropdown-crud" class="hidden py-2 space-y-2 ">
               <li>
-                <a href="#" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 ">Manage Residents</a>
+                <a href="residents.php" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 ">Manage Residents</a>
               </li>
               <li>
                 <a href="#" class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 ">Add Residents</a>
