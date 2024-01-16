@@ -1,8 +1,16 @@
 <?php
+session_start();
 require_once "../config.php";
+
+if(!isset($_SESSION['logged_in'])){
+    $_SESSION['error_message'] = "You must be logged in to view this page!";
+    header("Location:../index.php");
+    exit();
+}
 
 $filename = basename($_SERVER['PHP_SELF']);
 $filename = substr($filename, 0, -4);
+
 
 ?>
 <!DOCTYPE html>
