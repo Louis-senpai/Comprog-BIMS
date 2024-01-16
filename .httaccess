@@ -1,0 +1,15 @@
+RewriteEngine On
+
+# Do not rewrite files or directories that exist
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rewrite /signup to signup.php
+RewriteRule ^signup$ signup.php [L,NC]
+
+# Rewrite /login to index.php
+RewriteRule ^login$ index.php [L,NC]
+
+# Optionally, hide .php extension for all files
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+?)/?$ $1.php [L]
