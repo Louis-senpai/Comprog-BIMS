@@ -53,51 +53,91 @@ class Survey extends MysqliDb {
      * @return array The paginated survey results.
      */
     public function getPaginatedSurveys($page, $resultsPerPage, $searchValue = '', $orderByColumn = 'FirstName', $orderDirection = 'ASC') {
-        $offset = ($page - 1) * $resultsPerPage;
+        $cacheDir = '../cache/';
+        $cacheFile = $cacheDir . 'survey_page_' . $page . '_perpage_' . $resultsPerPage . '_search_' . md5($searchValue) . '_order_' . $orderByColumn . '_' . $orderDirection . '.cache';
+        $cacheTime = 300; // Cache time in seconds
     
-        // Get total count without any filters
-        $this->withTotalCount();
-        $totalRecords = $this->getValue($this->tableName, "count(*)");
+        // Check if cache file exists and is still valid
+        if (file_exists($cacheFile) && (filemtime($cacheFile) > (time() - $cacheTime))) {
+            // Cache file is valid, return cached data
+            return json_decode(file_get_contents($cacheFile), true);
+        } else {
+            // Cache file is invalid or does not exist, fetch data from database
+            $offset = ($page - 1) * $resultsPerPage;
     
-        // Apply search filter if provided
-        if (!empty($searchValue)) {
-            $this->where('FirstName', '%' . $searchValue . '%', 'LIKE');
-            $this->orWhere('LastName', '%' . $searchValue . '%', 'LIKE');
+            // Get total count without any filters
+            $this->withTotalCount();
+            $totalRecords = $this->getValue($this->tableName, "count(*)");
+    
+            // Apply search filter if provided
+            if (!empty($searchValue)) {
+                $this->where('FirstName', '%' . $searchValue . '%', 'LIKE');
+                $this->orWhere('LastName', '%' . $searchValue . '%', 'LIKE');
+            }
+    
+            // Get total count with filters
+            $this->withTotalCount();
+            $filteredRecords = $this->getValue($this->tableName, "count(*)");
+    
+            // Apply ordering
+            $this->orderBy($orderByColumn, $orderDirection);
+    
+            // Get paginated results
+            $results = $this->get($this->tableName, [$offset, $resultsPerPage]);
+    
+            // Calculate total pages after filtering
+            $totalPages = ceil($filteredRecords / $resultsPerPage);
+    
+            $data = [
+                'draw' => $page,
+                'recordsTotal' => $totalRecords,
+                'recordsFiltered' => $filteredRecords,
+                'data' => $results,
+                'totalPages' => $totalPages
+            ];
+    
+            // Save data to cache file
+            if (!is_dir($cacheDir)) {
+                mkdir($cacheDir, 0755, true);
+            }
+            file_put_contents($cacheFile, json_encode($data));
+    
+            return $data;
         }
-    
-        // Get total count with filters
-        $this->withTotalCount();
-        $filteredRecords = $this->getValue($this->tableName, "count(*)");
-    
-        // Apply ordering
-        $this->orderBy($orderByColumn, $orderDirection);
-    
-        // Get paginated results
-        $results = $this->get($this->tableName, [$offset, $resultsPerPage]);
-    
-        // Calculate total pages after filtering
-        $totalPages = ceil($filteredRecords / $resultsPerPage);
-    
-        return [
-            'draw' => $page, // Assuming 'draw' is equivalent to the current page number
-            'recordsTotal' => $totalRecords,
-            'recordsFiltered' => $filteredRecords,
-            'data' => $results,
-            'totalPages' => $totalPages
-        ];
     }
-   public function addSurvey($data) {
-        return $this->insert($this->tableName, $data);
+    public function getAllSurvey(){
+        $results = $this->get($this->tableName);
+        
+        $data = [
+            
+            'data' => $results
+            
+        ];
+        return $data;
+    }
+    public function cacheSurveys() {
+        $surveys = $this->getAllSurvey();
+        $jsonData = json_encode($surveys);
+        file_put_contents('../cache/surveys.json', $jsonData);
     }
 
+    // Method to add a survey and update the cache
+    public function addSurvey($data) {
+        $result = $this->insert($this->tableName, $data);
+        if ($result) {
+            $this->cacheSurveys();
+        }
+        return $result;
+    }
+
+    // Method to update a survey and update the cache
     public function updateSurvey($id, $data) {
         $this->where('ID', $id);
-        return $this->update($this->tableName, $data);
-    }
-
-    public function deleteSurvey($id) {
-        $this->where('ID', $id);
-        return $this->delete($this->tableName);
+        $result = $this->update($this->tableName, $data);
+        if ($result) {
+            $this->cacheSurveys();
+        }
+        return $result;
     }
     
 }

@@ -10,9 +10,60 @@ require_once '../includes/components/header.php';
 
     <!-- sidebar -->
     <?php require_once "../includes/components/nav.php";?>
-    <div class="flex pt-16 overflow-hidden h-screen bg-gray-50 dark:bg-gray-900">
+    <div class="flex h-screen pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
         <?php require_once '../includes/components/sidebar.php';?>
 
+        <style type="text/tailwindcss">
+
+            @layer components{
+                .dt-button-collection {
+               @apply p-4 rounded-lg h-full;
+                }
+                .dtb-popover-close{
+                    @apply inline-flex items-center px-2 py-1 me-2 text-sm font-medium text-red-800 bg-red-100 rounded dark:bg-red-900 dark:text-red-300;
+                }
+                .selected{
+                    @apply bg-blue-400 dark:bg-blue-500 duration-500 ease-in-out;
+                }
+            }
+            /* @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+   
+  
+            .dt-button-collection {
+                background-color: #200E3A;
+                    color: white;
+                    border: 1px solid #200E3A;
+                }
+            .dt-button-collection:hover {
+                background-color: #38419D;
+                    color: white;
+                    border: 1px solid #38419D;
+                }
+            .dt-button-collection:focus {
+                background-color: #38419D;
+                    color: white;
+                    border: 1px solid #38419D;
+                }
+           .dt-button-collection:active {
+                background-color: #38419D;
+                    color: white;
+                    border: 1px solid #38419D;
+                }
+           .dt-button-collection.dt-button-background {
+                background-color: #200E3A;
+                    color: white;
+                    border: 1px solid #200E3A;
+                }
+           .dt-button-collection.dt-button-background:hover {
+                background-color: #38419D;
+                    color: white;
+                    border: 1px solid #38419D;
+                }
+                    } */
+                            </style>
 
         <div class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
             <main>
@@ -66,7 +117,7 @@ require_once '../includes/components/header.php';
 
                     <div class="relative shadow-md sm:rounded-lg h-[70rem]">
                         <button id="exportButton"
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
                             Export to CSV
                         </button>
                         <table id="SurveyData"
@@ -227,17 +278,19 @@ require_once '../includes/components/header.php';
     <link rel="stylesheet" type="text/css"
         href="https://cdn.datatables.net/1.13.7/css/dataTables.tailwindcss.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+    <script
+        src="https://cdn.datatables.net/v/dt/jszip-3.10.1/dt-1.13.8/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/date-1.5.1/sb-1.6.0/sp-2.2.0/sl-1.7.0/datatables.min.js">
+    </script>
+    </script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.tailwindcss.min.js"></script>
     <script>
     jQuery(document).ready(function($) {
         $('#SurveyData').DataTable({
             "processing": true, // Show processing indicator
-            "serverSide": true, // Enable server-side processing
-            "select": true,
             "ajax": {
-                "url": "../api/showAllData.php", // URL of the server-side processing script
-                "type": "GET" // HTTP method to use for the AJAX call
+                "url": "../cache/surveys.json" // URL of the server-side processing script
+
             },
             "columns": [{
                     "data": "ID",
@@ -296,14 +349,12 @@ require_once '../includes/components/header.php';
                 // Add more columns as needed, matching the data returned from the server
             ],
             // Optionally, you can add additional DataTables options here, such as:
-            "order": [
-                [0, 'asc']
-            ], // Default order on the first column
+            //    Default order on the first column
             "lengthMenu": [
                 [10, 25, 50, -1],
-                [10, 25, 50, 100, 150, 300]
+                [10, 25, 50]
             ], // Length menu options
-            "pageLength": 20, // Default number of rows to display
+            "pageLength": 50, // Default number of rows to display
             "language": {
                 "emptyTable": "No data available in table",
                 "info": "Showing _START_ to _END_ of _TOTAL_ entries",
@@ -321,6 +372,42 @@ require_once '../includes/components/header.php';
                     "previous": "Previous"
                 }
             },
+            dom: 'Bfrtip',
+            // This parameter ensures the buttons are displayed
+            buttons: [{
+                    extend: 'csvHtml5',
+                    text: 'Export to CSV',
+                    titleAttr: 'CSV export',
+                    className: 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
+                },
+              
+                {
+                    extend: 'print',
+                    text: 'Print selected',
+                    className: 'text-gray-900 bg-[#F7BE38] hover:bg-[#F7BE38]/90 focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 me-2 mb-2',
+                },
+                {
+                    extend: 'searchBuilder',
+                    text: 'Filters',
+                    config: {
+                        depthLimit: 2
+                    },
+                    className: "focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-80"
+                }
+            ],
+
+            search: {
+                regex: true,
+                smart: true,
+                caseInsensitive: true,
+                show: true,
+                placeholder: "Search...",
+                return: true
+
+            },
+            select: true,
+
+            deferRender: true, // This parameter ensures the table is redrawn when the user scrolls
             "drawCallback": function(settings) {
                 // Apply Tailwind CSS styles to the DataTable elements
 
@@ -363,7 +450,7 @@ require_once '../includes/components/header.php';
                 $('.dataTables_info').addClass('text-sm text-gray-700 dark:text-gray-200');
                 $('#SurveyData_processing').addClass(
                     'flex items-center font-medium col-span-2 p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800'
-                    );
+                );
 
                 // Style the DataTable length menu and search input
                 $('.dataTables_length').addClass(
@@ -374,7 +461,7 @@ require_once '../includes/components/header.php';
                     'form-select w-[10rem] bg-white text-black dark:text-white lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700" px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
                 );
                 $('.dataTables_filter').addClass(
-                    'flex justify-end bg-white border-b border-gray-200 lg:mt-1.5 dark:bg-gray-700 dark:border-gray-600 rounded-r-lg p-4'
+                    'flex justify-end col-span-2 bg-white border-b border-gray-200 lg:mt-1.5 dark:bg-gray-700 dark:border-gray-600 rounded-r-lg p-4'
                 );
                 $('.dataTables_filter label').addClass('flex dark:text-white items-center gap-1');
                 $('.dataTables_filter input').addClass(
@@ -386,15 +473,20 @@ require_once '../includes/components/header.php';
                     'text-sm dark:text-gray-300');
                 $('.dataTables_length, .dataTables_filter').addClass(
                     'flex-col md:flex-row md:items-center');
-// Pangination div
+                // Pangination div
                 $('#SurveyData_paginate').addClass(
                     'inline-flex -space-x-px text-sm');
-                // Add any additional styling as needed
+                // Export and print buttons
+                $('.dt-buttons').addClass(
+                    'flex items-center col-span-2 dark:text-white gap-2 p-4 rounded-l-lg bg-white border-b border-gray-200 lg:mt-1.5 dark:bg-gray-700 dark:border-gray-600'
+                );
+
             },
         });
+
+
     });
     </script>
-
 
 
 </body>

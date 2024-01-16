@@ -19,7 +19,7 @@ $filename = substr($filename, 0, -4);
     <script src="../js/alpine.min.js"></script>
     <script src="../js/htmx.min.js"></script>
     <script src="../js/tailwind.config.js" > </script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.tailwindcss.min.css">
+  
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css"  rel="stylesheet" /> -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +27,7 @@ $filename = substr($filename, 0, -4);
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://flowbite-admin-dashboard.vercel.app//app.css">
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-
+<link rel="stylesheet" href="https://cdn.datatables.net/searchbuilder/1.6.0/css/searchBuilder.dataTables.min.css">
     <script>
    
 </script>
