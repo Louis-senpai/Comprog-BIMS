@@ -1,11 +1,11 @@
 <?php 
 define('ROOT_DIR', realpath(__DIR__));
 $host = "aws.connect.psdb.cloud";
-$user = "j1opyx4g9t8f5a2wn8d8";
+$user = "czm65xx2cd3zqlrfqrnh";
 $name = "student";
-$pass = "pscale_pw_DG1bjpTwzSUAfXvos3Fy6mUBeKloIUtOjlMXMIxUXcd";
+$pass = "pscale_pw_lQDV8n86R55Ul3CjYFbzT6m5BkochiFY5kyz8z2Z2ti";
 $port = "3306";
-$ca_path = 'isrgrootx1.pem';
+$ca_path = 'cacert-2023-12-12.pem';
 
 
 
