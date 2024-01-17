@@ -1,5 +1,5 @@
 <footer
-                        class="p-4 my-6 mx-4 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 xl:p-8 dark:bg-gray-800">
+                        class="p-4 mx-4 my-6 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 xl:p-8 dark:bg-gray-800">
                         <ul class="flex flex-wrap items-center mb-6 space-y-1 md:mb-0">
                             <li><a href="#"
                                     class="mr-4 text-sm font-normal text-gray-500 hover:underline md:mr-6 dark:text-gray-400">Terms
@@ -65,7 +65,7 @@
 </p>
     <script async="" defer="" src="https://buttons.github.io/buttons.js"></script>
     <script src="https://flowbite-admin-dashboard.vercel.app//app.bundle.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
     <script>
 
 </script>

@@ -13,7 +13,7 @@ require_once '../includes/components/header.php';
 
             <main>
                 <div class="px-4 pt-6 pr-4">
-                    <div class="grid grid-cols-4 gap-3 mx-4 md:grid-cols-4 w-full">
+                    <div class="grid w-full grid-cols-4 gap-3 mx-4 md:grid-cols-4">
                         <!-- Widgets for dashboard-->
                         <div class="col-span-2 lg:col-span-1">
                             <div class="relative p-4 bg-gray-100 shadow-lg rounded-2xl">
@@ -43,7 +43,7 @@ require_once '../includes/components/header.php';
                                 </div>
                                 <div class="text-sm text-gray-700">Total Residents</div>
                             </div>
-                      
+
                         </div>
 
                         <div class="col-span-2 lg:col-span-1">
@@ -132,7 +132,7 @@ require_once '../includes/components/header.php';
                         </div>
 
                     </div>
-                    <div class="grid gap-4 xl:grid-cols-2 2xl:grid-cols-2 mt-4">
+                    <div class="grid gap-4 mt-4 xl:grid-cols-2 2xl:grid-cols-2">
                         <div
                             class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <div
@@ -141,7 +141,8 @@ require_once '../includes/components/header.php';
                                     <h3 class="text-base font-normal text-gray-500 dark:text-gray-400">Analitics
                                     </h3>
                                     <span
-                                        class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">Civil Status Chart</span>
+                                        class="text-2xl font-bold leading-none text-gray-900 sm:text-3xl dark:text-white">Civil
+                                        Status Chart</span>
                                 </div>
                                 <a href="#"
                                     class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-primary-700 sm:text-sm hover:bg-gray-100 dark:text-primary-500 dark:hover:bg-gray-700">
@@ -153,107 +154,128 @@ require_once '../includes/components/header.php';
                                     </svg>
                                 </a>
                             </div>
-                    <div class="py-6 col-span-4 lg:col-span-2" id="pie-chart"></div>
-                           
+                            <div class="col-span-4 py-6 lg:col-span-2" id="pie-chart"></div>
+
                             <!-- Card Footer -->
-                            
+
                         </div>
-                        <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-        <h3 class="flex items-center mb-4 text-lg font-semibold text-gray-900 dark:text-white">Current Barangy Official</h3>
-        <div data-popover="" id="popover-description" role="tooltip" class="absolute z-10 inline-block text-sm font-light text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 opacity-0 invisible" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(221px, 731px);" data-popper-placement="bottom-start">
-          <div data-popper-arrow="" style="position: absolute; left: 0px; transform: translate(7px, 0px);"></div>
-        </div>
-        <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg sm:flex dark:divide-gray-600 dark:text-gray-400" id="fullWidthTab" data-tabs-toggle="#fullWidthTabContent" role="tablist">
-            <li class="w-full">
-                <button id="faq-tab" data-tabs-target="#faq" type="button" role="tab" aria-controls="faq" aria-selected="true" class="inline-block w-full p-4 rounded-tl-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600 text-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 border-blue-600 dark:border-blue-500">Top products</button>
-            </li>
-        </ul>
-        <div id="fullWidthTabContent" class="border-t border-gray-200 dark:border-gray-600">
-            <div class="pt-4" id="faq" role="tabpanel" aria-labelledby="faq-tab">
-              <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-                <li class="py-3 sm:py-4">
-                  <div class="flex items-center justify-between">
-                    <div class="flex items-center min-w-0">
-                      <div class="ml-3">
-                        <p class="font-medium text-gray-900 truncate dark:text-white">
-                          iPhone 14 Pro 
-                        </p>
-                      </div>
-                    </div>
-                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                      $445,467
-                    </div>
-                  </div>
-                </li>
-                <li class="py-3 sm:py-4">
-                  <div class="flex items-center justify-between">
-                    <div class="flex items-center min-w-0">
-                      <div class="ml-3">
-                        <p class="font-medium text-gray-900 truncate dark:text-white">
-                          Apple iMac 27"
-                        </p>
-                      </div>
-                    </div>
-                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                      $256,982
-                    </div>
-                  </div>
-                </li>
-                <li class="py-3 sm:py-4">
-                  <div class="flex items-center justify-between">
-                    <div class="flex items-center min-w-0">
-                      <div class="ml-3">
-                        <p class="font-medium text-gray-900 truncate dark:text-white">
-                          Apple Watch SE
-                        </p>
-                      </div>
-                    </div>
-                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                      $201,869
-                    </div>
-                  </div>
-                </li>
-                <li class="py-3 sm:py-4">
-                  <div class="flex items-center justify-between">
-                    <div class="flex items-center min-w-0">
-                      <div class="ml-3">
-                        <p class="font-medium text-gray-900 truncate dark:text-white">
-                          Apple iPad Air
-                        </p>
-                    </div>
-                    </div>
-                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                      $103,967
-                    </div>
-                  </div>
-                </li>
-                <li class="py-3 sm:py-4">
-                  <div class="flex items-center justify-between">
-                    <div class="flex items-center min-w-0">
-                      <div class="ml-3">
-                        <p class="font-medium text-gray-900 truncate dark:text-white">
-                          Apple iMac 24"
-                        </p>
-                      </div>
-                    </div>
-                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                      $98,543
-                    </div>
-                  </div>
-                </li>               
-              </ul>
-            </div>
-        </div>
-        <!-- Card Footer -->
-        <div class="flex items-center justify-between pt-3 mt-5 border-t border-gray-200 sm:pt-6 dark:border-gray-700">
-          <div class="flex-shrink-0">
-            <a href="#" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-primary-700 sm:text-sm hover:bg-gray-100 dark:text-primary-500 dark:hover:bg-gray-700">
-              Full Report
-              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-            </a>
-          </div>
-        </div>
-      </div>
+                        <div
+                            class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                            <h3 class="flex items-center mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+                                Current Barangy Official</h3>
+                            <div data-popover="" id="popover-description" role="tooltip"
+                                class="absolute z-10 invisible inline-block text-sm font-light text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400"
+                                style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(221px, 731px);"
+                                data-popper-placement="bottom-start">
+                                <div data-popper-arrow=""
+                                    style="position: absolute; left: 0px; transform: translate(7px, 0px);"></div>
+                            </div>
+                            <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg sm:flex dark:divide-gray-600 dark:text-gray-400"
+                                id="fullWidthTab" data-tabs-toggle="#fullWidthTabContent" role="tablist">
+                                <li class="w-full">
+                                    <button id="faq-tab" data-tabs-target="#faq" type="button" role="tab"
+                                        aria-controls="faq" aria-selected="true"
+                                        class="inline-block w-full p-4 text-blue-600 border-blue-600 rounded-tl-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 dark:border-blue-500">Top
+                                        products</button>
+                                </li>
+                            </ul>
+                            <div id="fullWidthTabContent" class="border-t border-gray-200 dark:border-gray-600">
+                                <div class="pt-4" id="faq" role="tabpanel" aria-labelledby="faq-tab">
+                                    <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                                        <li class="py-3 sm:py-4">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center min-w-0">
+                                                    <div class="ml-3">
+                                                        <p class="font-medium text-gray-900 truncate dark:text-white">
+                                                            iPhone 14 Pro
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                                    $445,467
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="py-3 sm:py-4">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center min-w-0">
+                                                    <div class="ml-3">
+                                                        <p class="font-medium text-gray-900 truncate dark:text-white">
+                                                            Apple iMac 27"
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                                    $256,982
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="py-3 sm:py-4">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center min-w-0">
+                                                    <div class="ml-3">
+                                                        <p class="font-medium text-gray-900 truncate dark:text-white">
+                                                            Apple Watch SE
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                                    $201,869
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="py-3 sm:py-4">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center min-w-0">
+                                                    <div class="ml-3">
+                                                        <p class="font-medium text-gray-900 truncate dark:text-white">
+                                                            Apple iPad Air
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                                    $103,967
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="py-3 sm:py-4">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center min-w-0">
+                                                    <div class="ml-3">
+                                                        <p class="font-medium text-gray-900 truncate dark:text-white">
+                                                            Apple iMac 24"
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                                    $98,543
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Card Footer -->
+                            <div
+                                class="flex items-center justify-between pt-3 mt-5 border-t border-gray-200 sm:pt-6 dark:border-gray-700">
+                                <div class="flex-shrink-0">
+                                    <a href="#"
+                                        class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-primary-700 sm:text-sm hover:bg-gray-100 dark:text-primary-500 dark:hover:bg-gray-700">
+                                        Full Report
+                                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
 

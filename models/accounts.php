@@ -4,16 +4,17 @@
 //     `id` int(11) NOT NULL AUTO_INCREMENT, `username` varchar(20) NOT NULL, `password` varchar(20) NOT NULL, `email` varchar(50) NOT NULL, `created_at` timestamp NOT NULL DEFAULT current_timestamp(), `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(), PRIMARY KEY (`id`)
 // ) ENGINE = InnoDB AUTO_INCREMENT = 15 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci
 
-$db1 = new MysqliDb($conn);
+require_once 'userActivityLogs.php';
 
 // Make a Accounts Model that uses the Accounts Table to get data
 class Accounts extends MysqliDb {
 
         protected $tableName = 'Accounts';
         protected $primaryKey = 'id';
-    
+        protected $activityLogger;
         public function __construct($conn) {
             parent::__construct($conn);
+            $this->activityLogger = new UserActivityLogs($conn);
         }
     
         public function registerUser($username, $password, $repeatPassword, $email) {
@@ -70,6 +71,7 @@ class Accounts extends MysqliDb {
                     // Set a success message
                     $_SESSION['success_message'] = "You have successfully logged in!";
                     // Redirect to the dashboard or home page
+                    $this->activityLogger->logActivity($user['id'], "User logged in");
                     header("Location: /admin/home.php");
                     exit();
                 } else {
@@ -94,6 +96,14 @@ class Accounts extends MysqliDb {
             } else {
                 return false;
             }
+            
+        }
+        public function logoutUser($userId) {
+            // Clear the session or perform other logout operations
+            $this->activityLogger->logActivity($userId, "User logged out");
+            session_destroy();
+            header('Location: ../index.php');
+            // Log the logout activity
             
         }
         

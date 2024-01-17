@@ -3,37 +3,43 @@
 
 class UserActivityLogs extends MysqliDb {
     protected $tableName = 'UserActivityLogs';
+    protected $logFilePath = '/cache/history/user_activities.json'; // Default path
 
     public function __construct($conn) {
         parent::__construct($conn);
     }
 
+    public function setLogFilePath($path) {
+        $this->logFilePath = $path;
+    }
+
     public function logActivity($userId, $activity) {
         // Log in the database
-        $data = Array(
+        $data = [
             "user_id" => $userId,
             "activity" => $activity
-        );
+        ];
         $id = $this->insert($this->tableName, $data);
 
-        // Log in a JSON file
-        $logEntry = array(
+        // Prepare log entry
+        $logEntry = [
             "user_id" => $userId,
             "activity" => $activity,
             "timestamp" => date('Y-m-d H:i:s')
-        );
-        $logFile = 'user_activities.json';
-        if (!file_exists($logFile)) {
-            $logs = array();
-        } else {
-            $logs = json_decode(file_get_contents($logFile), true);
+        ];
+
+        // Ensure the directory exists
+        $logDirectory = dirname($this->logFilePath);
+        if (!is_dir($logDirectory)) {
+            mkdir($logDirectory, 0755, true);
         }
-        $logs[] = $logEntry;
-        file_put_contents($logFile, json_encode($logs, JSON_PRETTY_PRINT));
+
+        // Append log entry to the JSON file
+        $logData = json_encode($logEntry, JSON_PRETTY_PRINT);
+        file_put_contents($this->logFilePath, $logData . ",\n", FILE_APPEND | LOCK_EX);
 
         return $id;
     }
 }
-
 
 ?>

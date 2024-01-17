@@ -1,10 +1,6 @@
 <?php 
 require_once '../includes/components/header.php';
-
-
 ?>
-
-
 <body>
 
 
@@ -29,7 +25,7 @@ require_once '../includes/components/header.php';
           
                             </style>
 
-        <div class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 mb-10 dark:bg-gray-900">
+        <div class="relative w-full h-full mb-10 overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
             <main>
                 <div class="px-4 pt-6">
                     <div class="mb-4">
@@ -80,10 +76,7 @@ require_once '../includes/components/header.php';
 
 
                     <div class="relative shadow-md sm:rounded-lg h-[70rem]">
-                        <button id="exportButton"
-                            class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-                            Export to CSV
-                        </button>
+                        
                         <table id="SurveyData"
                             class="w-full overflow-x-auto text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
                             <thead
@@ -192,6 +185,9 @@ require_once '../includes/components/header.php';
                     </div>
 
                 </div>
+                <?php 
+                    require_once "../includes/components/footer.php";
+                    ?>
             </main>
             <!-- report title -->
 

@@ -2,6 +2,7 @@
 require_once 'config.php';
 require_once 'vendor/autoload.php';
 require_once 'models/accounts.php';
+require_once 'models/userActivityLogs.php';
 session_start();
 
 $account = new Accounts($conn);
@@ -28,12 +29,13 @@ if (isset($_POST['login'])) {
     $result = $account->loginUser($email, $password);
     if (is_string($result)) {
         // Handle the error, maybe display the message to the user
+     
         echo $result;
     }
 }
 if(isset($_GET['logout'])){
-    session_destroy();
-    header('Location: ../index.php');
+    $account->logoutUser($_SESSION['user_id']);
+    
 
 }
 ?>
