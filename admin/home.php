@@ -13,10 +13,10 @@ require_once '../includes/components/header.php';
 
             <main>
                 <div class="px-4 pt-6 pr-4">
-                    <div class="grid w-full grid-cols-4 gap-3 mx-4 md:grid-cols-4">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <!-- Widgets for dashboard-->
-                        <div class="col-span-2 lg:col-span-1">
-                            <div class="relative p-4 bg-gray-100 shadow-lg rounded-2xl">
+                        <div class="col-span-2 lg:col-span-1 p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                            <div class="relative">
                                 <svg viewBox="0 -9 1042 1042" fill="currentColor"
                                     class="absolute text-blue-500 h-14 w-14 bottom-4 right-3" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -46,8 +46,8 @@ require_once '../includes/components/header.php';
 
                         </div>
 
-                        <div class="col-span-2 lg:col-span-1">
-                            <div class="relative p-4 bg-gray-100 shadow-lg rounded-2xl">
+                        <div class="col-span-2 lg:col-span-1 p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                            <div class="relative ">
                                 <svg viewBox="0 -9 1042 1042" fill="currentColor"
                                     class="absolute text-blue-500 h-14 w-14 bottom-4 right-3" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -74,8 +74,8 @@ require_once '../includes/components/header.php';
                                 <div class="text-sm text-gray-700">Female Residents</div>
                             </div>
                         </div>
-                        <div class="col-span-2 lg:col-span-1">
-                            <div class="relative p-4 bg-gray-100 shadow-lg rounded-2xl">
+                        <div class="col-span-2 lg:col-span-1 p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                            <div class="relative ">
                                 <svg viewBox="0 -9 1042 1042" fill="currentColor"
                                     class="absolute text-blue-500 h-14 w-14 bottom-4 right-3" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -102,8 +102,8 @@ require_once '../includes/components/header.php';
                                 <div class="text-sm text-gray-700">Male Residents</div>
                             </div>
                         </div>
-                        <div class="col-span-2 lg:col-span-1">
-                            <div class="relative p-4 bg-gray-100 shadow-lg rounded-2xl">
+                        <div class="col-span-2 lg:col-span-1 p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                            <div class="relative ">
                                 <svg viewBox="0 -9 1042 1042" fill="currentColor"
                                     class="absolute text-blue-500 h-14 w-14 bottom-4 right-3" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -134,7 +134,7 @@ require_once '../includes/components/header.php';
                     </div>
                     <div class="grid gap-4 mt-4 xl:grid-cols-2 2xl:grid-cols-2">
                         <div
-                            class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                            class="p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <div
                                 class="flex items-center justify-between pb-4 mb-4 border-b border-gray-200 dark:border-gray-700">
                                 <div>
@@ -160,11 +160,11 @@ require_once '../includes/components/header.php';
 
                         </div>
                         <div
-                            class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                            class="p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <h3 class="flex items-center mb-4 text-lg font-semibold text-gray-900 dark:text-white">
                                 Current Barangy Official</h3>
                             <div data-popover="" id="popover-description" role="tooltip"
-                                class="absolute z-10 invisible inline-block text-sm font-light text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400"
+                                class="absolute z-10 invisible inline-block text-sm font-light text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-md opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400"
                                 style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(221px, 731px);"
                                 data-popper-placement="bottom-start">
                                 <div data-popper-arrow=""
