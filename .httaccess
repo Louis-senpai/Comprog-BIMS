@@ -1,0 +1,19 @@
+
+RewriteEngine On
+
+# Check if mod_rewrite is enabled
+<IfModule mod_rewrite.c>
+
+    # Rewrite only if the requested file is not a directory
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Rewrite only if the requested file is not a regular file
+    RewriteCond %{REQUEST_FILENAME} !-f
+
+    # Handle /login/ and redirect to index.php
+    RewriteRule ^login/?$ index.php [NC,L]
+
+    # Handle /signup/ and redirect to signup.php
+    RewriteRule ^signup/?$ signup.php [NC,L]
+
+</IfModule>

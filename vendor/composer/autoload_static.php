@@ -17,6 +17,7 @@ class ComposerStaticInit10b28516f81d5eda89055c27ffb0b913
             'Psr\\SimpleCache\\' => 16,
             'Psr\\Cache\\' => 10,
             'Phpfastcache\\' => 13,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
     );
 
@@ -32,6 +33,10 @@ class ComposerStaticInit10b28516f81d5eda89055c27ffb0b913
         'Phpfastcache\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpfastcache/phpfastcache/lib/Phpfastcache',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
     );
 

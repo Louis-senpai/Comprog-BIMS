@@ -1,4 +1,4 @@
-<nav class="fixed z-30 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+<nav class="fixed z-30 w-full bg-lime-100 border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
         <div class="flex items-center justify-between">
             <div class="flex items-center justify-start">
@@ -18,7 +18,7 @@
                     </svg>
                 </button>
                 <a href="https://flowbite-admin-dashboard.vercel.app/" class="flex ml-2 md:mr-24">
-                    <img src="https://flowbite-admin-dashboard.vercel.app/images/logo.svg" class="h-8 mr-3"
+                    <img src="../includes/images/logo1.png" class="h-8 mr-3"
                         alt="FlowBite Logo">
                     <span
                         class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Barangay
@@ -364,10 +364,10 @@
                         data-popper-placement="bottom">
                         <div class="px-4 py-3" role="none">
                             <p class="text-sm text-gray-900 dark:text-white" role="none">
-                                Neil Sims
+                                <?php echo $_SESSION['username'];?>
                             </p>
                             <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                                neil.sims@flowbite.com
+                                <?php echo $_SESSION['email'];?>
                             </p>
                         </div>
                         <ul class="py-1" role="none">
@@ -387,7 +387,7 @@
                                     role="menuitem">Earnings</a>
                             </li>
                             <li>
-                                <a href="#"
+                                <a href="../Authentication.php?logout=true"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                     role="menuitem">Sign out</a>
                             </li>

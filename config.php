@@ -1,9 +1,9 @@
 <?php 
 define('ROOT_DIR', realpath(__DIR__));
 // $host = "aws.connect.psdb.cloud";
-// $user = "czm65xx2cd3zqlrfqrnh";
+// $user = "is7vo0mrx8w5n69nyvv1";
 // $name = "student";
-// $pass = "pscale_pw_lQDV8n86R55Ul3CjYFbzT6m5BkochiFY5kyz8z2Z2ti";
+// $pass = "pscale_pw_l5WNkeR6upzDiFbH82REGPYL0DSk58eVINnZGp9LJ9s";
 // $port = "3306";
 // $ca_path = 'cacert-2023-12-12.pem';
 

@@ -1,6 +1,7 @@
 {
     "require": {
         "thingengineer/mysqli-database-class": "dev-master",
-        "phpfastcache/phpfastcache": "^9.2"
+        "phpfastcache/phpfastcache": "^9.2",
+        "phpmailer/phpmailer": "^6.9"
     }
 }
