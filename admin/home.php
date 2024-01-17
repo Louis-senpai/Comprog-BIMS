@@ -29,7 +29,7 @@ require_once '../includes/components/header.php';
                                 <div class="flex items-center justify-between ">
                                     <i class="text-xl text-gray-400 fab fa-behance"></i>
                                 </div>
-                                <div class="mt-5 text-2xl font-medium leading-8 text-gray-900">
+                                <div class="mt-5 text-2xl font-medium leading-8 text-gray-900 dark:text-gray-200">
                                     <?php
                                     $sql = "SELECT COUNT(*) AS total FROM Survey";
 
@@ -41,7 +41,7 @@ require_once '../includes/components/header.php';
                                     }
                                     ?>
                                 </div>
-                                <div class="text-sm text-gray-700">Total Residents</div>
+                                <div class="text-sm text-gray-700 dark:text-gray-500">Total Residents</div>
                             </div>
 
                         </div>
@@ -60,7 +60,7 @@ require_once '../includes/components/header.php';
                                 <div class="flex items-center justify-between ">
                                     <i class="text-xl text-gray-400 fab fa-behance"></i>
                                 </div>
-                                <div class="mt-5 text-2xl font-medium leading-8 text-gray-900">
+                                <div class="mt-5 text-2xl font-medium leading-8 text-gray-900 dark:text-gray-200">
                                     <?php
                                     $sql1 = "SELECT COUNT(*) AS total FROM Survey WHERE `Gender`='female'";
 
@@ -71,7 +71,7 @@ require_once '../includes/components/header.php';
                                     }
                                     ?>
                                 </div>
-                                <div class="text-sm text-gray-700">Female Residents</div>
+                                <div class="text-sm text-gray-700 dark:text-gray-500">Female Residents</div>
                             </div>
                         </div>
                         <div class="col-span-2 lg:col-span-1 p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:border-gray-700 sm:p-6 dark:bg-gray-800">
@@ -88,7 +88,7 @@ require_once '../includes/components/header.php';
                                 <div class="flex items-center justify-between ">
                                     <i class="text-xl text-gray-400 fab fa-behance"></i>
                                 </div>
-                                <div class="mt-5 text-2xl font-medium leading-8 text-gray-900">
+                                <div class="mt-5 text-2xl font-medium leading-8 text-gray-900 dark:text-gray-200">
                                     <?php
                                     $sql1 = "SELECT COUNT(*) AS total FROM Survey WHERE `Gender`='male'";
 
@@ -99,7 +99,7 @@ require_once '../includes/components/header.php';
                                     }
                                     ?>
                                 </div>
-                                <div class="text-sm text-gray-700">Male Residents</div>
+                                <div class="text-sm text-gray-700 dark:text-gray-500">Male Residents</div>
                             </div>
                         </div>
                         <div class="col-span-2 lg:col-span-1 p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:border-gray-700 sm:p-6 dark:bg-gray-800">
@@ -116,7 +116,7 @@ require_once '../includes/components/header.php';
                                 <div class="flex items-center justify-between ">
                                     <i class="text-xl text-gray-400 fab fa-behance"></i>
                                 </div>
-                                <div class="mt-5 text-2xl font-medium leading-8 text-gray-900">
+                                <div class="mt-5 text-2xl font-medium leading-8 text-gray-900 dark:text-gray-200">
                                     <?php
                                     $sql1 = "SELECT COUNT(*) AS total FROM Survey WHERE `Age`<='60'";
 
@@ -127,7 +127,7 @@ require_once '../includes/components/header.php';
                                     }
                                     ?>
                                 </div>
-                                <div class="text-sm text-gray-700">Senior Citizen</div>
+                                <div class="text-sm text-gray-700 dark:text-gray-500">Senior Citizen</div>
                             </div>
                         </div>
 
