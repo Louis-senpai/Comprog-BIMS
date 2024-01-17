@@ -23,13 +23,13 @@ if (isset($_SESSION['logged_in'])) {
     <!-- Include Tailwind CSS -->
     <script src="js/tailwind.config.js"></script>
     <script src="js/tailwindcss.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 
 </head>
 
 <body class="bg-gray-50 dark:bg-gray-800">
 
-    <main class="bg-gray-50 dark:bg-gray-900">
+    <main class="bg-gray-200 dark:bg-gray-900">
 
         <div class="flex flex-col items-center justify-center px-6 pt-8 mx-auto md:h-screen pt:mt-0 dark:bg-gray-900">
 
@@ -37,7 +37,7 @@ if (isset($_SESSION['logged_in'])) {
             <section class="">
                 <div class="grid grid-cols-1 lg:grid-cols-2">
                     <div
-                        class="flex items-center justify-center px-4 py-10 bg-gray-100 rounded-l-lg dark:bg-slate-800 sm:px-6 lg:px-8 sm:py-16 lg:py-24">
+                        class="flex items-center justify-center px-4 py-10 rounded-l-lg shadow-lg bg-gray-50 dark:bg-slate-800 sm:px-6 lg:px-8 sm:py-16 lg:py-24">
                         <div class="xl:w-full xl:max-w-sm 2xl:max-w-md xl:mx-auto">
                             <?php
                             if (isset($_SESSION['error_message'])) {
@@ -122,7 +122,7 @@ if (isset($_SESSION['logged_in'])) {
                     </div>
 
                     <div
-                        class="flex items-center justify-center px-4 py-10 rounded-r-lg dark:bg-slate-800 sm:py-16 lg:py-24 bg-gray-50 sm:px-6 lg:px-8">
+                        class="flex items-center justify-center px-4 py-10 rounded-r-lg shadow-lg bg-sky-400 dark:bg-slate-800 sm:py-16 lg:py-24 bg-gray-50 sm:px-6 lg:px-8">
                         <div>
                             <img class="w-[20rem] mx-auto" src="includes/images/logo1.png" alt="" />
 
@@ -136,7 +136,7 @@ if (isset($_SESSION['logged_in'])) {
                                 </p>
 
                                 <div class="flex items-center justify-center mt-10 space-x-3">
-                                    <div class="bg-orange-500 rounded-full w-20 h-1.5"></div>
+                                    <div class="bg-lime-500 rounded-full w-20 h-1.5"></div>
 
                                     <div class="bg-gray-200 rounded-full w-12 h-1.5"></div>
 

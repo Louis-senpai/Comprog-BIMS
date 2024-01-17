@@ -119,31 +119,37 @@ function verifyCode(){
         header("Location: forgot.php");
     }
 }
+$filename = basename($_SERVER['PHP_SELF']);
+$filename = substr($filename, 0, -4);
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>BIMS | <?php echo $filename;?></title>
     <script src="js/tailwind.config.js"></script>
     <script src="js/tailwindcss.js"></script>
 </head>
 <body class="">
-<section class="bg-gray-50 dark:bg-gray-900">
+<section class="bg-gray-200 dark:bg-gray-900">
   <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
       <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-          <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
-          Flowbite    
+          <img class="w-16 mr-2" src="includes/images/logo1.png" alt="logo">
+          BIMS    
       </a>
       <?php 
       if (!isset($_POST['forgot'])){
       ?>
-      <div class="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
-          <h2 class="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-              Enter the Email you want to reset password
-          </h2>
+      <div class="w-full p-6 bg-white rounded-lg shadow-lg dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
+      <h2 class="mb-3 text-2xl font-bold text-gray-900 dark:text-white">
+                Forgot your password?
+            </h2>
+            <p class="text-base font-normal text-gray-500 dark:text-gray-400">
+                Don't fret! Just type in your email and we will send you a code to reset your password!
+            </p>
           <?php if (isset($_SESSION['email_error'])) {
         echo '<div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
         <span class="font-medium"> alert!</span> '.$_SESSION['email_error'].'

@@ -3,6 +3,7 @@ require_once 'config.php';
 require_once 'vendor/autoload.php';
 require_once 'models/accounts.php';
 session_start();
+
 $account = new Accounts($conn);
 //  Signup Handler
  if (isset($_POST['create_account'])) {
