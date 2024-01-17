@@ -168,7 +168,7 @@ require_once '../includes/components/header.php';
                                                                 echo "</form>";
                                                                 
                                                                 // Delete button
-                                                                echo "<form method='post' action='delete_user.php'>";
+                                                                echo "<form method='post' action='delete_account.php'>";
                                                                 echo "<input type='hidden' name='user_id' value='" . $row['id'] . "'>";
                                                                 echo "<button type='submit' class='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900'>";
                                                                 echo "<svg class='w-4 h-4 mr-2' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>";
