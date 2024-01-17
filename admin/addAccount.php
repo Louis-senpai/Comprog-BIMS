@@ -15,7 +15,7 @@ require_once '../includes/components/header.php';
                 <div class="px-4 pt-6 pr-4">
                     
             <?php 
-            require_once '../signup.php';
+            require_once '../includes/components/addaccountform.php';
             ?>
 
                 </div>
