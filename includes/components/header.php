@@ -1,7 +1,8 @@
 <?php
 session_start();
 require_once "../config.php";
-
+require_once "../vendor/autoload.php";
+require_once "../models/userActivityLogs.php";
 if(!isset($_SESSION['logged_in'])){
     $_SESSION['error_message'] = "You must be logged in to view this page!";
     header("Location:../index.php");
@@ -11,10 +12,10 @@ if(!isset($_SESSION['logged_in'])){
 $filename = basename($_SERVER['PHP_SELF']);
 $filename = substr($filename, 0, -4);
 
-
+$logs = new UserActivityLogs($conn);
 ?>
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en" class="dark">
 
 <head>
     <meta charset="UTF-8">
