@@ -3,6 +3,8 @@ session_start();
 require_once "../config.php";
 require_once "../vendor/autoload.php";
 require_once "../models/userActivityLogs.php";
+require_once "../models/accounts.php";
+
 if(!isset($_SESSION['logged_in'])){
     $_SESSION['error_message'] = "You must be logged in to view this page!";
     header("Location:../index.php");

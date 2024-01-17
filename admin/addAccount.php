@@ -1,6 +1,15 @@
 <?php
 
 require_once '../includes/components/header.php';
+
+$account = new Accounts($conn);
+
+if (isset($_POST['submit'])){
+
+
+$username = $_POST[];
+    $result = $account->registerUser();
+}
 ?>
 
 <body class="bg-gray-50 dark:bg-gray-800">
