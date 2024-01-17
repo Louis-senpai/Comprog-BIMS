@@ -1,15 +1,23 @@
 <?php 
-    // give a birthdate and get the age 
-    
-    $birthDate = '01/01/2002';
-    
-    $birthDate = explode("/", $birthDate);
-    $birthDate = $birthDate[2]. "-". $birthDate[0]. "-". $birthDate[1];
-    $birthDate = new DateTime($birthDate);
-    $today = new DateTime("today");
-    $age = $today->diff($birthDate)->y;
-   
-    $age = (int)$age;
-    echo $age;
+require 'models/Components.php';
 
 ?>
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/tailwind.config.js"></script>
+</head>
+<body>
+<?php 
+
+$Components = new Tailwind();
+
+ echo $Components->AlertDiv('Hellow World', 'success');
+
+?>
+</body>
+</html>

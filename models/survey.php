@@ -139,6 +139,14 @@ class Survey extends MysqliDb {
         }
         return $result;
     }
+    public function deleteSurvey($id) {
+        $this->where('ID', $id);
+        $result = $this->delete($this->tableName);
+        if ($result) {
+            $this->cacheSurveys();
+        }
+        return $result;
+    }
     
 }
 

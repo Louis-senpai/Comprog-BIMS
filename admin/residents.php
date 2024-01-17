@@ -18,13 +18,12 @@ require_once '../includes/components/header.php';
         <div id="main-content" class="relative w-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
 
             <main>
-        <!----------------1div------------------------------------->
+                <!----------------1div------------------------------------->
                 <div class="px-4 pt-6 pr-4">
-                    <div
-                        class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
+                    
                         <div class="w-full mb-1">
 
-                    <!----------------nav1 home------------------------------------->
+                            <!----------------nav1 home------------------------------------->
                             <div class="mb-4">
                                 <nav class="flex mb-5" aria-label="Breadcrumb">
                                     <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
@@ -41,7 +40,7 @@ require_once '../includes/components/header.php';
                                             </a>
                                         </li>
                                         <li>
-                                          
+
                                         </li>
                                         <li>
                                             <div class="flex items-center">
@@ -57,25 +56,27 @@ require_once '../includes/components/header.php';
                                         </li>
                                     </ol>
                                 </nav>
-                       
-                                <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white"> Manage Residents
+
+                                <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white"> Manage
+                                    Residents
                                 </h1>
+                                <div id="alert_message"> </div>
                             </div>
-                    <!---------------------------search side-------------------------------------> 
-                           <div class="sm:flex">
+                            <!---------------------------search side------------------------------------->
+                            <div class="sm:flex">
                                 <div
                                     class="items-center hidden mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700">
-                          
-                               <form class="lg:pr-3" action="search_users.php" method="GET">
-                                    <label for="users-search" class="sr-only">Search</label>
-                                    <div class="relative mt-1 lg:w-64 xl:w-96">
-                                        <input type="text" name="name" id="users-search"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="Search for users by name">
-                                    </div>
-                                </form>
+
+                                    <form class="lg:pr-3" action="search_users.php" method="GET">
+                                        <label for="users-search" class="sr-only">Search</label>
+                                        <div class="relative mt-1 lg:w-64 xl:w-96">
+                                            <input type="text" name="name" id="users-search"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                placeholder="Search for users by name">
+                                        </div>
+                                    </form>
                                     <div class="flex pl-0 mt-3 space-x-1 sm:pl-2 sm:mt-0">
-                                       
+
                                         <a href="#"
                                             class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
@@ -85,7 +86,7 @@ require_once '../includes/components/header.php';
                                                     clip-rule="evenodd"></path>
                                             </svg>
                                         </a>
-                                        
+
                                         <a href="#"
                                             class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
@@ -120,38 +121,44 @@ require_once '../includes/components/header.php';
                                     </a>
                                 </div>
                             </div>
-            <!---------------------------search side-------------------------------------> 
+                            <!---------------------------search side------------------------------------->
                         </div>
                     </div>
-    <!----------------1div table------------------------------------->
+                    <!----------------1div table------------------------------------->
                     <div class="flex flex-col">
                         <div class="overflow-x-auto">
                             <div class="inline-block min-w-full align-middle">
                                 <div class="overflow-hidden shadow">
                                     <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
                                         <thead class="bg-gray-100 dark:bg-gray-700">
-                                               <tr>
-                                                    <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                                        ID
-                                                    </th>
-                                                    <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                                        Name
-                                                    </th>
-                                                    <th scope="col" class="w-10 p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                                        Sex
-                                                    </th>
-                                                    <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                                        Age
-                                                    </th>
-                                                    
-                                                    <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                                       Email
-                                                    </th>
-                                                    <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                                        Actions
-                                                    </th>
-                                                </tr>
-                                          </thead>
+                                            <tr>
+                                                <th scope="col"
+                                                    class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                                    ID
+                                                </th>
+                                                <th scope="col"
+                                                    class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                                    Name
+                                                </th>
+                                                <th scope="col"
+                                                    class="w-10 p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                                    Sex
+                                                </th>
+                                                <th scope="col"
+                                                    class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                                    Age
+                                                </th>
+
+                                                <th scope="col"
+                                                    class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                                    Email
+                                                </th>
+                                                <th scope="col"
+                                                    class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                                    Actions
+                                                </th>
+                                            </tr>
+                                        </thead>
                                         <tbody
                                             class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                                             <?php
@@ -178,14 +185,12 @@ require_once '../includes/components/header.php';
                                                                 echo "</svg>Edit user</button>";
                                                                 echo "</form>";
                                                                 
-                                                                // Delete button
-                                                                echo "<form method='post' action='delete_user.php'>";
-                                                                echo "<input type='hidden' name='user_id' value='" . $row['ID'] . "'>";
-                                                                echo "<button type='submit' class='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900'>";
+                                                               
+                                                                echo "<button type='submit' hx-get='/api/DeleteResidentData.php?id={$row['ID']}' hx-target='#alert_message' hx-trigger='click' class='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900'>";
                                                                 echo "<svg class='w-4 h-4 mr-2' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>";
                                                                 echo "<path fill-rule='evenodd' d='M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z' clip-rule='evenodd'></path>";
                                                                 echo "</svg>Delete user</button>";
-                                                                echo "</form>";
+
                                                                 echo "</div>";
                                                                 
 
@@ -196,10 +201,10 @@ require_once '../includes/components/header.php';
                                                             echo "<tr><td colspan='5'>No records found</td></tr>";
                                                         }
                                                         ?>
-                                                      
-                                              
 
-                                            
+
+
+
 
 
                                         </tbody>
@@ -207,7 +212,7 @@ require_once '../includes/components/header.php';
                                 </div>
                             </div>
                         </div>
-                    </div>
+                   
 
 
                 </div>
