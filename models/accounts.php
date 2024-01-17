@@ -71,7 +71,7 @@ class Accounts extends MysqliDb {
                     // Set a success message
                     $_SESSION['success_message'] = "You have successfully logged in!";
                     // Redirect to the dashboard or home page
-                    $this->activityLogger->logActivity($user['id'], "User logged in");
+                    $this->activityLogger->logActivity($user['id'], "User {$user['username']} has loged in logged in");
                     header("Location: /admin/home.php");
                     exit();
                 } else {
@@ -82,7 +82,7 @@ class Accounts extends MysqliDb {
                 } 
             } else {
                 // Email does not exist, set an error message
-                $_SESSION['error_message'] = "Email does not exist!";
+                $_SESSION['error_message'] = "Email does not exist! Please register.";;
                 header("Location: index.php");
                 exit();
             }
@@ -98,9 +98,9 @@ class Accounts extends MysqliDb {
             }
             
         }
-        public function logoutUser($userId) {
+        public function logoutUser($userId, $username) {
             // Clear the session or perform other logout operations
-            $this->activityLogger->logActivity($userId, "User logged out");
+            $this->activityLogger->logActivity($userId, "User $username has logged out");
             session_destroy();
             header('Location: ../index.php');
             // Log the logout activity
