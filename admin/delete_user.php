@@ -8,10 +8,7 @@ $port = "3306";
 
 $conn = mysqli_connect($host, $user, $pass, $name, $port);
 
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+
 
 // Get user ID from the POST data
 $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : null;
