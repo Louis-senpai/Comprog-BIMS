@@ -3,6 +3,7 @@ require_once 'config.php';
 require_once 'vendor/autoload.php';
 require_once 'models/accounts.php';
 require_once 'models/userActivityLogs.php';
+
 session_start();
 
 $account = new Accounts($conn);

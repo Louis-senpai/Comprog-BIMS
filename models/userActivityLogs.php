@@ -13,6 +13,11 @@ class UserActivityLogs extends MysqliDb {
         $this->logFilePath = $path;
     }
 
+    public function getActivityLog() {
+       
+        return  $this->rawQuery("SELECT * FROM ". $this->tableName." ORDER BY timestamp DESC limit 5 ");
+    }
+
     public function logActivity($userId, $activity) {
         // Log in the database
         $data = [
