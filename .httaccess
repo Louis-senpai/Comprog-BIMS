@@ -1,4 +1,3 @@
-To achieve clean URLs and hide file extensions using .htaccess, you can use mod_rewrite in Apache to rewrite the URLs. Here's an example of what your .htaccess file might look like to achieve the desired result:
 
 RewriteEngine On
 
@@ -16,9 +15,5 @@ RewriteEngine On
 
     # Handle /signup/ and redirect to signup.php
     RewriteRule ^signup/?$ signup.php [NC,L]
-
-    # Optionally, hide .php extension for all files
-    RewriteCond %{REQUEST_FILENAME}.php -f
-    RewriteRule ^(.+?)/?$ $1.php [NC,L]
 
 </IfModule>

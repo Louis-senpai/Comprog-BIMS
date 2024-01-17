@@ -74,7 +74,7 @@ class Accounts extends MysqliDb {
                     exit();
                 } else {
                     // Password is incorrect, set an error message
-                    $_SESSION['error_message'] = "Incorrect password! $hashedPassword";
+                    $_SESSION['error_message'] = "Incorrect password!";
                     header("Location: index.php");
                     exit();
                 } 
@@ -84,6 +84,17 @@ class Accounts extends MysqliDb {
                 header("Location: index.php");
                 exit();
             }
+        }
+
+        public function UpdatePassword($id, $password){
+            $hashedPassword = md5($password);
+            $this->where('id', $id);
+            if ($this->update('Accounts', ['password' => $hashedPassword])){
+                return true;
+            } else {
+                return false;
+            }
+            
         }
         
     }
