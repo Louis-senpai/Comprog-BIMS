@@ -6,9 +6,16 @@ $account = new Accounts($conn);
 
 if (isset($_POST['submit'])){
 
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
+    $repassword = $_POST['repassword'];
 
-$username = $_POST[];
-    $result = $account->registerUser();
+    $result = $account->registerUser($username, $password, $repassword, $email);
+    if (is_string($result)) {
+        // Handle the error, maybe display the message to the user
+        echo $result;
+    }
 }
 ?>
 
