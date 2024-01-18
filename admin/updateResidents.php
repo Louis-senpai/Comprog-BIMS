@@ -1,6 +1,12 @@
 <?php
 
 require_once '../includes/components/header.php';
+
+if(isset($_GET['edit'])) {
+    $result = $surveyModel->getSurveyById($_GET['edit']);
+}
+
+
 ?>
 
 <body class="bg-gray-50 dark:bg-gray-800">
@@ -12,7 +18,7 @@ require_once '../includes/components/header.php';
         <div id="main-content" class="relative w-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
 
             <main>
-                <div class="px-4 pt-6 pr-4">
+            <div class="px-4 pt-6 pr-4">
                     <div class="mb-4">
                         <nav class="flex mb-5" aria-label="Breadcrumb">
                             <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
@@ -54,28 +60,30 @@ require_once '../includes/components/header.php';
                                 </li>
                             </ol>
                         </nav>
-                        <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Add Residents
+                        <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">Update / Edit Residents
                         </h1>
                     </div>
                     <div id="response"></div>
                     <section class="bg-white dark:bg-gray-900">
                         <div class="py-8 px-4 mx-auto max-w-1xl lg:py-16">
 
-                            <form action="#" hx-post="/api/AddSurveyData.php" hx-target="#response" hx-trigger="submit">
+                            <form action="#" hx-post="/api/UpdateSurveyData.php" hx-target="#response" hx-trigger="submit">
+
+                                <input type="text" value="<?php echo $result['ID'];?>" name="id" hidden> 
                                 <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 sm:gap-6">
                                     <div class="w-full">
                                         <label for="FirstName"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">FirstName</label>
                                         <input type="text" name="FirstName" id="FirstName"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder=" FirstName" required="">
+                                            placeholder=" FirstName" required="" value="<?php echo $result['FirstName'];?>" >
                                     </div>
                                     <div class="w-full">
                                         <label for="LastName"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">LastName</label>
                                         <input type="text" name="LastName" id="LastName"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="LastName" required="">
+                                            placeholder="LastName" required="" value="<?php echo $result['LastName'];?>" >
                                     </div>
                                     <div class="w-full">
                                         <label for="MiddleInitial"
@@ -83,7 +91,7 @@ require_once '../includes/components/header.php';
                                             Initial</label>
                                         <input type="text" name="MiddleInitial" id="MiddleInitial"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder=" MiddleInitial" required="">
+                                            placeholder=" MiddleInitial" required="" value="<?php echo $result['MiddleInitial'];?>">
                                     </div>
                                     <div class="w-full col-span-2">
                                         <label for="BirthPlace"
@@ -91,7 +99,7 @@ require_once '../includes/components/header.php';
                                             Place</label>
                                         <input type="text" name="BirthPlace" id="BirthPlace"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Birth Place" required="">
+                                            placeholder="Birth Place" required="" value="<?php echo $result['BirthPLace'];?>">
                                     </div>
                                     <div>
                                         <label for="category"
@@ -99,7 +107,7 @@ require_once '../includes/components/header.php';
                                             Date</label>
                                         <input type="date" name="BirthDate" id="BirthDate"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Birth Place" required="">
+                                            placeholder="Birth Place" required="" value="<?php echo $result['BirthDate'];?>">
                                     </div>
 
                                     <div>
@@ -108,6 +116,7 @@ require_once '../includes/components/header.php';
                                             Gender</label>
                                         <select name="Gender" id="Gender"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                            <option selected value="<?php echo $result['Gender'];?>" > <?php echo $result['Gender']?> </option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                             <option value="Other">Other</option>
@@ -119,6 +128,7 @@ require_once '../includes/components/header.php';
                                             Civil Status</label>
                                         <select name="CivilStatus" id="CivilStatus"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                            <option selected value="<?php echo $result['CivilStatus'];?>" > <?php echo $result['CivilStatus']?> </option>
                                             <option value="Single">Single</option>
                                             <option value="Married">Married</option>
                                             <option value="Widowed">Widowed</option>
@@ -135,7 +145,7 @@ require_once '../includes/components/header.php';
                                             Religion</label>
                                         <input type="text" name="Religion" id="Religion"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Religion" required="">
+                                            placeholder="Religion" required="" value="<?php echo $result['Religion'];?>">
                                     </div>
                                     <div>
                                         <label for="Dialect"
@@ -143,7 +153,7 @@ require_once '../includes/components/header.php';
                                             Dialect</label>
                                         <input type="text" name="Dialect" id="Dialect"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Your Dialect" required="">
+                                            placeholder="Your Dialect" required="" value="<?php echo $result['Dialect'];?>">
                                     </div>
                                     <div>
                                         <label for="Education"
@@ -151,7 +161,7 @@ require_once '../includes/components/header.php';
                                             Education</label>
                                         <input type="text" name="Education" id="Education"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Your Highest Education" required="">
+                                            placeholder="Your Highest Education" required="" value="<?php echo $result['Education'];?>">
                                     </div>
 
                                     <div>
@@ -160,7 +170,7 @@ require_once '../includes/components/header.php';
                                             Job</label>
                                         <input type="text" name="Job" id="Job"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Your Job" required="">
+                                            placeholder="Your Job" required="" value="<?php echo $result['Job'];?>">
                                     </div>
 
                                     <div>
@@ -169,7 +179,7 @@ require_once '../includes/components/header.php';
                                             Monthly Income</label>
                                         <input type="text" name="MonthLyIncome" id="MonthlyIncome"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Your Monthly Income" required="">
+                                            placeholder="Your Monthly Income" required="" value="<?php echo $result['MonthLyIncome'];?>">
                                     </div>
                                     <div>
                                         <label for="PhoneNumber"
@@ -177,7 +187,7 @@ require_once '../includes/components/header.php';
                                             Phone Number</label>
                                         <input type="text" name="PhoneNumber" id="PhoneNumber"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="YOur Phone Number" required="">
+                                            placeholder="YOur Phone Number" required="" value="<?php echo $result['PhoneNumber'];?>">
                                     </div>
                                     <div>
                                         <label for="Email"
@@ -185,7 +195,7 @@ require_once '../includes/components/header.php';
                                             Email</label>
                                         <input type="email" name="Email" id="Email"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Your Email" required="">
+                                            placeholder="Your Email" required="" value="<?php echo $result['Email'];?>">
                                     </div>
 
 
@@ -195,25 +205,31 @@ require_once '../includes/components/header.php';
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Remarks</label>
                                         <textarea id="Remarks" rows="8" name="Remarks"
                                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Your Remarks here"></textarea>
+                                            placeholder="Your Remarks here"> <?php echo $result['Remarks'];?></textarea>
+                                    </div>
+                                    <div>
+                                        <label for="YearAdded"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            Year Added</label>
+                                        <input type="YearAdded" name="YearAdded" id="YearAdded"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="Your YearAdded" disabled value="<?php echo $result['year_added'];?>">
                                     </div>
                                 </div>
                                 <button type="submit" name="Add_resident"
                                     class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
-                                    Add resident
+                                    Update resident
                                 </button>
                             </form>
                         </div>
                     </section>
                 </div>
-
-
-        <!-- Included Footer.php -->
-        <?php 
+                <!-- Included Footer.php -->
+                <?php 
                     require_once "../includes/components/footer.php";
                     ?>
-        </main>
-    </div>
+            </main>
+        </div>
     </div>
 
     </div>
