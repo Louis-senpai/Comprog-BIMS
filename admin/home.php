@@ -18,7 +18,7 @@ $responseData = $surveyModel->getYearAddedDistribution();
     function deleteOfficer(id) {
         // Implement your logic to confirm deletion and send a request to delete the officer
         var confirmDelete = confirm('Are you sure you want to delete this officer?');
-        
+
         if (confirmDelete) {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
@@ -42,9 +42,9 @@ $responseData = $surveyModel->getYearAddedDistribution();
 
 <body class="bg-gray-50 dark:bg-gray-800">
 
-    <?php require_once "../includes/components/nav.php";?>
+    <?php require_once "../includes/components/nav.php"; ?>
     <div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
-        <?php require_once '../includes/components/sidebar.php';?>
+        <?php require_once '../includes/components/sidebar.php'; ?>
 
         <div id="main-content" class="relative w-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
 
@@ -165,106 +165,44 @@ $responseData = $surveyModel->getYearAddedDistribution();
                                 </a>
                             </div>
                             <div class="col-span-4 py-6 lg:col-span-2" id="pie-chart"></div>
-
-                            <!-- Card Footer -->
                         </div>
-                        <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-    <h3 class="flex items-center mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-        Current Barangay Official
-    </h3>
+                        <div
+                            class="p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                            <h2 class="flex items-center mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+                                Current Barangay Official
+                            </h2>
+                            <div id="popUp"
+                                class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 justify-center items-center">
+                                <div class="bg-white p-4 w-1/2 rounded-lg">
+                                    <form onsubmit="addOrUpdateOfficer(); return false;">
+                                        <label for="officerName"
+                                            class="block text-sm font-medium text-gray-700">Name:</label>
+                                        <input type="text" id="officerName" class="mt-1 p-2 border rounded-md w-full"
+                                            required>
 
-    <!-- Button to trigger the pop-up -->
-    <button onclick="openPopUp()" class="mb-4 px-4 py-2 bg-blue-600 text-white rounded-md">Add Barangay Officer</button>
+                                        <label for="officerPosition"
+                                            class="block mt-4 text-sm font-medium text-gray-700">Position:</label>
+                                        <input type="text" id="officerPosition"
+                                            class="mt-1 p-2 border rounded-md w-full" required>
 
-    <!-- Pop-up for adding new or updating officer -->
-    <div id="popUp" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 justify-center items-center">
-        <div class="bg-white p-4 w-1/2 rounded-lg">
-            <h4 class="text-lg font-semibold mb-2">Add/Update Barangay Officer</h4>
-            <form onsubmit="addOrUpdateOfficer(); return false;">
-                <label for="officerName" class="block text-sm font-medium text-gray-700">Name:</label>
-                <input type="text" id="officerName" class="mt-1 p-2 border rounded-md w-full" required>
+                                        <input type="hidden" id="officerId" name="officerId">
+                                        <input type="hidden" id="action" name="action" value="add">
+                                    </form>
+                                </div>
+                            </div>
 
-                <label for="officerPosition" class="block mt-4 text-sm font-medium text-gray-700">Position:</label>
-                <input type="text" id="officerPosition" class="mt-1 p-2 border rounded-md w-full" required>
-
-                <input type="hidden" id="officerId" name="officerId">
-                <input type="hidden" id="action" name="action" value="add">
-
-                <button type="submit" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md">Add/Update Officer</button>
-            </form>
-            <button onclick="closePopUp()" class="mt-2 px-4 py-2 bg-gray-300 text-gray-800 rounded-md">Cancel</button>
-        </div>
-    </div>
-
-    <table border="1" class="border-collapse w-full">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php include 'display_officers.php'; ?>
-        </tbody>
-    </table>
-
-    <!-- Card Footer -->
-    <div class="flex items-center justify-between pt-3 mt-5 border-t border-gray-200 sm:pt-6 dark:border-gray-700">
-        <div class="flex-shrink-0">
-            <a href="#" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-primary-700 sm:text-sm hover:bg-gray-100 dark:text-primary-500 dark:hover:bg-gray-700">
-                Full Report
-                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                </svg>
-            </a>
-        </div>
-    </div>
-
-    <script>
-        function openPopUp() {
-            document.getElementById('popUp').style.display = 'flex';
-        }
-
-        function closePopUp() {
-            document.getElementById('popUp').style.display = 'none';
-        }
-
-        function addOrUpdateOfficer() {
-            var id = document.getElementById('officerId').value;
-            var name = document.getElementById('officerName').value;
-            var position = document.getElementById('officerPosition').value;
-            var action = document.getElementById('action').value;
-
-            // Send data to the PHP script using AJAX
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        // Successfully added or updated officer, update the list
-                        document.getElementById('officerList').innerHTML = xhr.responseText;
-                    } else {
-                        console.error('Error adding or updating officer:', xhr.statusText);
-                    }
-                }
-            };
-
-            xhr.open('POST', 'add_officer.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            xhr.send('action=' + action + '&id=' + id + '&name=' + encodeURIComponent(name) + '&position=' + encodeURIComponent(position));
-
-            // Clear input fields
-            document.getElementById('officerId').value = '';
-            document.getElementById('officerName').value = '';
-            document.getElementById('officerPosition').value = '';
-            document.getElementById('action').value = 'add';
-
-            // Close the pop-up
-            closePopUp();
-        }
-    </script>
-</div>
-
+                            <table class="border-collapse w-full mt-4">
+                                <thead>
+                                    <tr>
+                                        <th class="border border-gray-300 p-2">Name</th>
+                                        <th class="border border-gray-300 p-2">Position</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php include 'display_officers.php'; ?>
+                                </tbody>
+                            </table>
+                        </div>
 
                     </div>
                     <div class="grid gap-4 mt-4 xl:grid-cols-2 2xl:grid-cols-2">
@@ -273,30 +211,31 @@ $responseData = $surveyModel->getYearAddedDistribution();
                             <div class="flex justify-between p-4 md:p-6 pb-0 md:pb-0">
                                 <div>
                                     <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">
-                                <?php 
-                               
-                                $lastData = end($responseData);
-                                $responseCount = $lastData['response_count'];
-                                echo json_encode($responseCount);
-                                
-                                ?>      
-                                
-                                </h5>
-                                    <p class="text-base font-normal text-gray-500 dark:text-gray-400">Registered Residents this Year
+                                        <?php
+
+                                        $lastData = end($responseData);
+                                        $responseCount = $lastData['response_count'];
+                                        echo json_encode($responseCount);
+
+                                        ?>
+
+                                    </h5>
+                                    <p class="text-base font-normal text-gray-500 dark:text-gray-400">Registered
+                                        Residents this Year
                                     </p>
                                 </div>
                                 <div
                                     class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">
-                                    <?php 
+                                    <?php
                                     // caclulate the percentage of responses that between the last 1 year and echo it 
                                     $lastYear = date('Y') - 1;
                                     $percentage = ($responseCount / $lastYear) * 100;
                                     // but round it off to 2 decimal places
                                     $percentage = round($percentage, 2);
-                                    echo $percentage.'%';
-                                    
+                                    echo $percentage . '%';
+
                                     ?>
-                                    
+
 
                                     <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                         fill="none" viewBox="0 0 10 14">
@@ -306,93 +245,93 @@ $responseData = $surveyModel->getYearAddedDistribution();
                                 </div>
                             </div>
                             <div id="labels-chart" class="px-2.5"></div>
-                            
+
                         </div>
 
                         <script>
-                        let responseData = <?php echo json_encode($responseData); ?>;
-                        // ApexCharts options and config
-                        window.addEventListener("load", function() {
-                            let options = {
-                                // set the labels option to true to show the labels on the X and Y axis
-                                xaxis: {
-                                    show: true,
-                                    categories: responseData.map(item => item.year_added),
-                                    title: {
-                                        text: 'Year'
-                                    },
-                                    labels: {
+                            let responseData = <?php echo json_encode($responseData); ?>;
+                            // ApexCharts options and config
+                            window.addEventListener("load", function () {
+                                let options = {
+                                    // set the labels option to true to show the labels on the X and Y axis
+                                    xaxis: {
                                         show: true,
-                                        style: {
-                                            fontFamily: "Inter, sans-serif",
-                                            cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
-                                        }
+                                        categories: responseData.map(item => item.year_added),
+                                        title: {
+                                            text: 'Year'
+                                        },
+                                        labels: {
+                                            show: true,
+                                            style: {
+                                                fontFamily: "Inter, sans-serif",
+                                                cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
+                                            }
+                                        },
+                                        axisBorder: {
+                                            show: false,
+                                        },
+                                        axisTicks: {
+                                            show: false,
+                                        },
                                     },
-                                    axisBorder: {
-                                        show: false,
+                                    yaxis: {
+                                        show: true,
+                                        categories: responseData.map(item => item.response_count),
                                     },
-                                    axisTicks: {
-                                        show: false,
+                                    series: [{
+                                        name: "Survey Responses",
+                                        data: responseData.map(item => item.response_count),
+                                        color: "#1A56DB",
+                                    },],
+                                    chart: {
+                                        sparkline: {
+                                            enabled: false
+                                        },
+                                        height: "100%",
+                                        width: "100%",
+                                        type: "area",
+                                        fontFamily: "Inter, sans-serif",
+                                        dropShadow: {
+                                            enabled: false,
+                                        },
+                                        toolbar: {
+                                            show: false,
+                                        },
                                     },
-                                },
-                                yaxis: {
-                                    show: true,
-                                    categories: responseData.map(item => item.response_count),
-                                },
-                                series: [{
-                                    name: "Survey Responses",
-                                    data: responseData.map(item => item.response_count),
-                                    color: "#1A56DB",
-                                }, ],
-                                chart: {
-                                    sparkline: {
-                                        enabled: false
+                                    tooltip: {
+                                        enabled: true,
+                                        x: {
+                                            show: false,
+                                        },
                                     },
-                                    height: "100%",
-                                    width: "100%",
-                                    type: "area",
-                                    fontFamily: "Inter, sans-serif",
-                                    dropShadow: {
+                                    fill: {
+                                        type: "gradient",
+                                        gradient: {
+                                            opacityFrom: 0.55,
+                                            opacityTo: 0,
+                                            shade: "#1C64F2",
+                                            gradientToColors: ["#1C64F2"],
+                                        },
+                                    },
+                                    dataLabels: {
                                         enabled: false,
                                     },
-                                    toolbar: {
+                                    stroke: {
+                                        width: 6,
+                                    },
+                                    legend: {
+                                        show: false
+                                    },
+                                    grid: {
                                         show: false,
                                     },
-                                },
-                                tooltip: {
-                                    enabled: true,
-                                    x: {
-                                        show: false,
-                                    },
-                                },
-                                fill: {
-                                    type: "gradient",
-                                    gradient: {
-                                        opacityFrom: 0.55,
-                                        opacityTo: 0,
-                                        shade: "#1C64F2",
-                                        gradientToColors: ["#1C64F2"],
-                                    },
-                                },
-                                dataLabels: {
-                                    enabled: false,
-                                },
-                                stroke: {
-                                    width: 6,
-                                },
-                                legend: {
-                                    show: false
-                                },
-                                grid: {
-                                    show: false,
-                                },
-                            }
+                                }
 
-                            if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined') {
-                                const chart = new ApexCharts(document.getElementById("labels-chart"), options);
-                                chart.render();
-                            }
-                        });
+                                if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined') {
+                                    const chart = new ApexCharts(document.getElementById("labels-chart"), options);
+                                    chart.render();
+                                }
+                            });
                         </script>
 
 
@@ -400,9 +339,9 @@ $responseData = $surveyModel->getYearAddedDistribution();
 
                 </div>
                 <!-- Included Footer.php -->
-                <?php 
-                    require_once "../includes/components/footer.php";
-                    ?>
+                <?php
+                require_once "../includes/components/footer.php";
+                ?>
             </main>
         </div>
     </div>
