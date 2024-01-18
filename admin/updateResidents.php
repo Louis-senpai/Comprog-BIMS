@@ -42,8 +42,8 @@ if(isset($_GET['edit'])) {
                                                 d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                                 clip-rule="evenodd"></path>
                                         </svg>
-                                        <a href="#"
-                                            class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Admin</a>
+                                        <a href="residents.php"
+                                            class="ml-1 text-gray-700 hover:text-primary-600 md:ml-2 dark:text-gray-300 dark:hover:text-white">Manage Residents</a>
                                     </div>
                                 </li>
                                 <li>
@@ -65,7 +65,7 @@ if(isset($_GET['edit'])) {
                     </div>
                     <div id="response"></div>
                     <section class="bg-white dark:bg-gray-900">
-                        <div class="py-8 px-4 mx-auto max-w-1xl lg:py-16">
+                        <div class="px-4 py-8 mx-auto max-w-1xl lg:py-16">
 
                             <form action="#" hx-post="/api/UpdateSurveyData.php" hx-target="#response" hx-trigger="submit">
 

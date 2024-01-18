@@ -18,5 +18,5 @@ while ($row = $result->fetch_assoc()) {
           </li>';
 }
 
-$conn->close();
+
 ?>

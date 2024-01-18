@@ -28,5 +28,5 @@ if (isset($_POST['action'])) {
     include 'get_officers.php';
 }
 
-$conn->close();
+
 ?>
