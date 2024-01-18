@@ -52,6 +52,41 @@ class Accounts extends MysqliDb {
                 return "Registration failed: " + $this->getLastError();
             }
         }
+        public function registerAdmin($username, $password, $repeatPassword, $email) {
+            // Check if the passwords match
+            if ($password !== $repeatPassword) {
+                return "Passwords do not match.";
+            }
+    
+            // Check if the email is already used
+            $this->where('email', $email);
+            if ($this->has($this->tableName)) {
+                return "Email is already in use.";
+            }
+    
+            // Hash the password for security
+            $hashedPassword = md5($password);
+    
+            // Prepare the user data
+            $data = Array (
+                "username" => $username,
+                "password" => $hashedPassword,
+                "email" => $email
+            );
+    
+            // Insert the user data into the database
+            $id = $this->insert($this->tableName, $data);
+    
+            if ($id) {
+                // If the insert was successful, redirect to the addAccount page with a success message
+                $_SESSION['success_message'] = "Account successfully created!";
+                header("Location: addAccount.php");
+                exit();
+            } else {
+                // Handle error case
+                return "Registration failed: " + $this->getLastError();
+            }
+        }
         public function loginUser($email, $password) {
             // Check if the email exists in the database
             $this->where('email', $email);
