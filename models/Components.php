@@ -16,6 +16,9 @@ Class Tailwind {
       </div>';
         return $alert;
     }
+    public function EditModal($id, $data) {
+
+    }
 
 }
 

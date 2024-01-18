@@ -13,9 +13,9 @@ require_once '../includes/components/header.php';
 
             <main>
                 <div class="px-4 pt-6 pr-4">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div id="total-residents-widget" hx-get="/api/total_residents_endpoint.php" hx-trigger="load" hx-swap="outerHTMTL" class="grid grid-cols-1 gap-4 md:grid-cols-4">
                         <!-- Widgets for dashboard-->
-                        <div class="col-span-2 lg:col-span-1 p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                        <div  class="col-span-2 p-4 bg-white border border-gray-200 rounded-lg shadow-md lg:col-span-1 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <div class="relative">
                                 <svg viewBox="0 -9 1042 1042" fill="currentColor"
                                     class="absolute text-blue-500 h-14 w-14 bottom-4 right-3" version="1.1"
@@ -30,23 +30,15 @@ require_once '../includes/components/header.php';
                                     <i class="text-xl text-gray-400 fab fa-behance"></i>
                                 </div>
                                 <div class="mt-5 text-2xl font-medium leading-8 text-gray-900 dark:text-gray-200">
-                                    <?php
-                                    $sql = "SELECT COUNT(*) AS total FROM Survey";
-
-                                    $result = mysqli_query($conn, $sql);
-
-                                    if ($result) {
-                                        $row = mysqli_fetch_assoc($result);
-                                        echo $row['total'];
-                                    }
-                                    ?>
+                                   
+                                    Loading...
                                 </div>
                                 <div class="text-sm text-gray-700 dark:text-gray-500">Total Residents</div>
                             </div>
 
                         </div>
 
-                        <div class="col-span-2 lg:col-span-1 p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                        <div class="col-span-2 p-4 bg-white border border-gray-200 rounded-lg shadow-md lg:col-span-1 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <div class="relative ">
                                 <svg viewBox="0 -9 1042 1042" fill="currentColor"
                                     class="absolute text-blue-500 h-14 w-14 bottom-4 right-3" version="1.1"
@@ -61,20 +53,12 @@ require_once '../includes/components/header.php';
                                     <i class="text-xl text-gray-400 fab fa-behance"></i>
                                 </div>
                                 <div class="mt-5 text-2xl font-medium leading-8 text-gray-900 dark:text-gray-200">
-                                    <?php
-                                    $sql1 = "SELECT COUNT(*) AS total FROM Survey WHERE `Gender`='female'";
-
-                                    $result1 = mysqli_query($conn, $sql1);
-                                    if ($result1) {
-                                        $row = mysqli_fetch_assoc($result1);
-                                        echo $row['total'];
-                                    }
-                                    ?>
+                                Loading...
                                 </div>
                                 <div class="text-sm text-gray-700 dark:text-gray-500">Female Residents</div>
                             </div>
                         </div>
-                        <div class="col-span-2 lg:col-span-1 p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                        <div class="col-span-2 p-4 bg-white border border-gray-200 rounded-lg shadow-md lg:col-span-1 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <div class="relative ">
                                 <svg viewBox="0 -9 1042 1042" fill="currentColor"
                                     class="absolute text-blue-500 h-14 w-14 bottom-4 right-3" version="1.1"
@@ -89,20 +73,12 @@ require_once '../includes/components/header.php';
                                     <i class="text-xl text-gray-400 fab fa-behance"></i>
                                 </div>
                                 <div class="mt-5 text-2xl font-medium leading-8 text-gray-900 dark:text-gray-200">
-                                    <?php
-                                    $sql1 = "SELECT COUNT(*) AS total FROM Survey WHERE `Gender`='male'";
-
-                                    $result1 = mysqli_query($conn, $sql1);
-                                    if ($result1) {
-                                        $row = mysqli_fetch_assoc($result1);
-                                        echo $row['total'];
-                                    }
-                                    ?>
+                                Loading...
                                 </div>
                                 <div class="text-sm text-gray-700 dark:text-gray-500">Male Residents</div>
                             </div>
                         </div>
-                        <div class="col-span-2 lg:col-span-1 p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                        <div class="col-span-2 p-4 bg-white border border-gray-200 rounded-lg shadow-md lg:col-span-1 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <div class="relative ">
                                 <svg viewBox="0 -9 1042 1042" fill="currentColor"
                                     class="absolute text-blue-500 h-14 w-14 bottom-4 right-3" version="1.1"
@@ -117,15 +93,8 @@ require_once '../includes/components/header.php';
                                     <i class="text-xl text-gray-400 fab fa-behance"></i>
                                 </div>
                                 <div class="mt-5 text-2xl font-medium leading-8 text-gray-900 dark:text-gray-200">
-                                    <?php
-                                    $sql1 = "SELECT COUNT(*) AS total FROM Survey WHERE `Age`<='60'";
-
-                                    $result1 = mysqli_query($conn, $sql1);
-                                    if ($result1) {
-                                        $row = mysqli_fetch_assoc($result1);
-                                        echo $row['total'];
-                                    }
-                                    ?>
+                                Loading...
+                                   
                                 </div>
                                 <div class="text-sm text-gray-700 dark:text-gray-500">Senior Citizen</div>
                             </div>
@@ -347,6 +316,7 @@ require_once '../includes/components/header.php';
                         style: {
                             fontFamily: "Inter, sans-serif",
                         },
+                        className: "text-gray-900 dark:",
                     },
                     legend: {
                         position: "bottom",

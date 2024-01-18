@@ -147,7 +147,80 @@ class Survey extends MysqliDb {
         }
         return $result;
     }
-    
+
+    // count total numbers of Surveys using thier id 
+    public function countSurveys() {
+        return $this->getValue($this->tableName, "count(*)");
+    }
+    public function getTotalMales() {
+        $this->where('Gender', 'Male');
+        return $this->getValue($this->tableName, 'count(*)');
+    }
+
+    public function getTotalFemales() {
+        $this->where('Gender', 'Female');
+        return $this->getValue($this->tableName, 'count(*)');
+    }
+
+    public function getTotalSeniors() {
+        $this->where('Age', 60, '>=');
+        return $this->getValue($this->tableName, 'count(*)');
+    }
+    public function getEducationLevels() {
+        $this->groupBy('Education');
+        $this->orderBy('Education', 'asc');
+        return $this->get($this->tableName, null, 'Education, COUNT(*) as Count');
+    }
+
+    public function getMonthlyIncomeRanges() {
+        // Assuming MonthLyIncome is a string like '<$1000', '$1000-$2000', '>$2000'
+        $this->groupBy('MonthLyIncome');
+        $this->orderBy('MonthLyIncome', 'asc');
+        return $this->get($this->tableName, null, 'MonthLyIncome, COUNT(*) as Count');
+    }
+
+    public function getJobCategories() {
+        $this->groupBy('Job');
+        $this->orderBy('Job', 'asc');
+        return $this->get($this->tableName, null, 'Job, COUNT(*) as Count');
+    }
+
+    public function getReligionDistribution() {
+        $this->groupBy('Religion');
+        $this->orderBy('Religion', 'asc');
+        return $this->get($this->tableName, null, 'Religion, COUNT(*) as Count');
+    }
+
+    public function getBirthplaceDistribution() {
+        $this->groupBy('BirthPLace');
+        $this->orderBy('BirthPLace', 'asc');
+        return $this->get($this->tableName, null, 'BirthPLace, COUNT(*) as Count');
+    }
+
+    public function getSurveyResponsesOverTime() {
+        $this->groupBy('year_added');
+        $this->orderBy('year_added', 'asc');
+        return $this->get($this->tableName, null, 'year_added, COUNT(*) as Count');
+    }
+
+    public function getPhoneNumberAreaCodeDistribution() {
+        // Assuming PhoneNumber format includes area code like '(123) 456-7890'
+        $this->groupBy('LEFT(PhoneNumber, 5)'); // Adjust according to your format
+        $this->orderBy('LEFT(PhoneNumber, 5)', 'asc');
+        return $this->get($this->tableName, null, 'LEFT(PhoneNumber, 5) as AreaCode, COUNT(*) as Count');
+    }
+
+    public function getDialectDistribution() {
+        $this->groupBy('Dialect');
+        $this->orderBy('Dialect', 'asc');
+        return $this->get($this->tableName, null, 'Dialect, COUNT(*) as Count');
+    }
+// getCivilStatusCounts()
+    public function getCivilStatusCounts() {
+        // $this->groupBy('CivilStatus');
+        // $this->orderBy('CivilStatus', 'asc');
+        return $this->rawQuery('SELECT CivilStatus, COUNT(*) AS count FROM Survey GROUP BY CivilStatus');
+    }
 }
 
 

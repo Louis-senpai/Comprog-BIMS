@@ -9,21 +9,7 @@ require_once '../includes/components/header.php';
     <div class="flex h-screen pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
         <?php require_once '../includes/components/sidebar.php';?>
 
-        <style type="text/tailwindcss">
-
-            @layer components{
-                .dt-button-collection {
-               @apply p-4 rounded-lg h-full;
-                }
-                .dtb-popover-close{
-                    @apply inline-flex items-center px-2 py-1 me-2 text-sm font-medium text-red-800 bg-red-100 rounded dark:bg-red-900 dark:text-red-300;
-                }
-                .selected{
-                    @apply bg-blue-400 dark:bg-blue-500 duration-500 ease-in-out;
-                }
-            }
-          
-                            </style>
+       
 
         <div class="relative w-full h-full mb-10 overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
             <main>
