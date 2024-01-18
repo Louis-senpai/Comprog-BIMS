@@ -197,10 +197,11 @@ class Survey extends MysqliDb {
         return $this->get($this->tableName, null, 'BirthPLace, COUNT(*) as Count');
     }
 
-    public function getSurveyResponsesOverTime() {
+//SELECT year_added, COUNT(*) as response_count FROM surveys GROUP BY year_added ORDER BY year_added ASC
+    public function getYearAddedDistribution() {
         $this->groupBy('year_added');
         $this->orderBy('year_added', 'asc');
-        return $this->get($this->tableName, null, 'year_added, COUNT(*) as Count');
+        return $this->get($this->tableName, null, 'year_added, COUNT(*) as response_count');
     }
 
     public function getPhoneNumberAreaCodeDistribution() {
@@ -221,6 +222,9 @@ class Survey extends MysqliDb {
         // $this->orderBy('CivilStatus', 'asc');
         return $this->rawQuery('SELECT CivilStatus, COUNT(*) AS count FROM Survey GROUP BY CivilStatus');
     }
+
+    // SELECT year_added, COUNT(*) as response_count FROM surveys GROUP BY year_added ORDER BY year_added ASC
+    
 }
 
 
