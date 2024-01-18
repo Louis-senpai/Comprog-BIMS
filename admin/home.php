@@ -4,6 +4,42 @@ require_once '../includes/components/header.php';
 $responseData = $surveyModel->getYearAddedDistribution();
 ?>
 
+<script>
+    function editOfficer(id, name, position) {
+        // Implement your logic to populate the form fields for editing
+        document.getElementById('officerId').value = id;
+        document.getElementById('officerName').value = name;
+        document.getElementById('officerPosition').value = position;
+        document.getElementById('action').value = 'update';
+
+        openPopUp();
+    }
+
+    function deleteOfficer(id) {
+        // Implement your logic to confirm deletion and send a request to delete the officer
+        var confirmDelete = confirm('Are you sure you want to delete this officer?');
+        
+        if (confirmDelete) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Successfully deleted officer, update the list
+                        document.getElementById('officerList').innerHTML = xhr.responseText;
+                    } else {
+                        console.error('Error deleting officer:', xhr.statusText);
+                    }
+                }
+            };
+
+            xhr.open('POST', 'add_officer.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send('action=delete&id=' + id);
+        }
+    }
+</script>
+
+
 <body class="bg-gray-50 dark:bg-gray-800">
 
     <?php require_once "../includes/components/nav.php";?>
@@ -131,125 +167,104 @@ $responseData = $surveyModel->getYearAddedDistribution();
                             <div class="col-span-4 py-6 lg:col-span-2" id="pie-chart"></div>
 
                             <!-- Card Footer -->
+                        </div>
+                        <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+    <h3 class="flex items-center mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+        Current Barangay Official
+    </h3>
 
-                        </div>
-                        <div
-                            class="p-4 bg-white border border-gray-200 rounded-lg shadow-md dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                            <h3 class="flex items-center mb-4 text-lg font-semibold text-gray-900 dark:text-white">
-                                Current Barangy Official</h3>
-                            <div data-popover="" id="popover-description" role="tooltip"
-                                class="absolute z-10 invisible inline-block text-sm font-light text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-md opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400"
-                                style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(221px, 731px);"
-                                data-popper-placement="bottom-start">
-                                <div data-popper-arrow=""
-                                    style="position: absolute; left: 0px; transform: translate(7px, 0px);"></div>
-                            </div>
-                            <ul class="hidden text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg sm:flex dark:divide-gray-600 dark:text-gray-400"
-                                id="fullWidthTab" data-tabs-toggle="#fullWidthTabContent" role="tablist">
-                                <li class="w-full">
-                                    <button id="faq-tab" data-tabs-target="#faq" type="button" role="tab"
-                                        aria-controls="faq" aria-selected="true"
-                                        class="inline-block w-full p-4 text-blue-600 border-blue-600 rounded-tl-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 dark:border-blue-500">Top
-                                        products</button>
-                                </li>
-                            </ul>
-                            <div id="fullWidthTabContent" class="border-t border-gray-200 dark:border-gray-600">
-                                <div class="pt-4" id="faq" role="tabpanel" aria-labelledby="faq-tab">
-                                    <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-                                        <li class="py-3 sm:py-4">
-                                            <div class="flex items-center justify-between">
-                                                <div class="flex items-center min-w-0">
-                                                    <div class="ml-3">
-                                                        <p class="font-medium text-gray-900 truncate dark:text-white">
-                                                            iPhone 14 Pro
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                                    $445,467
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="py-3 sm:py-4">
-                                            <div class="flex items-center justify-between">
-                                                <div class="flex items-center min-w-0">
-                                                    <div class="ml-3">
-                                                        <p class="font-medium text-gray-900 truncate dark:text-white">
-                                                            Apple iMac 27"
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                                    $256,982
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="py-3 sm:py-4">
-                                            <div class="flex items-center justify-between">
-                                                <div class="flex items-center min-w-0">
-                                                    <div class="ml-3">
-                                                        <p class="font-medium text-gray-900 truncate dark:text-white">
-                                                            Apple Watch SE
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                                    $201,869
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="py-3 sm:py-4">
-                                            <div class="flex items-center justify-between">
-                                                <div class="flex items-center min-w-0">
-                                                    <div class="ml-3">
-                                                        <p class="font-medium text-gray-900 truncate dark:text-white">
-                                                            Apple iPad Air
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                                    $103,967
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="py-3 sm:py-4">
-                                            <div class="flex items-center justify-between">
-                                                <div class="flex items-center min-w-0">
-                                                    <div class="ml-3">
-                                                        <p class="font-medium text-gray-900 truncate dark:text-white">
-                                                            Apple iMac 24"
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                                    $98,543
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- Card Footer -->
-                            <div
-                                class="flex items-center justify-between pt-3 mt-5 border-t border-gray-200 sm:pt-6 dark:border-gray-700">
-                                <div class="flex-shrink-0">
-                                    <a href="#"
-                                        class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-primary-700 sm:text-sm hover:bg-gray-100 dark:text-primary-500 dark:hover:bg-gray-700">
-                                        Full Report
-                                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M9 5l7 7-7 7"></path>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+    <!-- Button to trigger the pop-up -->
+    <button onclick="openPopUp()" class="mb-4 px-4 py-2 bg-blue-600 text-white rounded-md">Add Barangay Officer</button>
+
+    <!-- Pop-up for adding new or updating officer -->
+    <div id="popUp" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 justify-center items-center">
+        <div class="bg-white p-4 w-1/2 rounded-lg">
+            <h4 class="text-lg font-semibold mb-2">Add/Update Barangay Officer</h4>
+            <form onsubmit="addOrUpdateOfficer(); return false;">
+                <label for="officerName" class="block text-sm font-medium text-gray-700">Name:</label>
+                <input type="text" id="officerName" class="mt-1 p-2 border rounded-md w-full" required>
+
+                <label for="officerPosition" class="block mt-4 text-sm font-medium text-gray-700">Position:</label>
+                <input type="text" id="officerPosition" class="mt-1 p-2 border rounded-md w-full" required>
+
+                <input type="hidden" id="officerId" name="officerId">
+                <input type="hidden" id="action" name="action" value="add">
+
+                <button type="submit" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md">Add/Update Officer</button>
+            </form>
+            <button onclick="closePopUp()" class="mt-2 px-4 py-2 bg-gray-300 text-gray-800 rounded-md">Cancel</button>
+        </div>
+    </div>
+
+    <table border="1" class="border-collapse w-full">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php include 'display_officers.php'; ?>
+        </tbody>
+    </table>
+
+    <!-- Card Footer -->
+    <div class="flex items-center justify-between pt-3 mt-5 border-t border-gray-200 sm:pt-6 dark:border-gray-700">
+        <div class="flex-shrink-0">
+            <a href="#" class="inline-flex items-center p-2 text-xs font-medium uppercase rounded-lg text-primary-700 sm:text-sm hover:bg-gray-100 dark:text-primary-500 dark:hover:bg-gray-700">
+                Full Report
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function openPopUp() {
+            document.getElementById('popUp').style.display = 'flex';
+        }
+
+        function closePopUp() {
+            document.getElementById('popUp').style.display = 'none';
+        }
+
+        function addOrUpdateOfficer() {
+            var id = document.getElementById('officerId').value;
+            var name = document.getElementById('officerName').value;
+            var position = document.getElementById('officerPosition').value;
+            var action = document.getElementById('action').value;
+
+            // Send data to the PHP script using AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Successfully added or updated officer, update the list
+                        document.getElementById('officerList').innerHTML = xhr.responseText;
+                    } else {
+                        console.error('Error adding or updating officer:', xhr.statusText);
+                    }
+                }
+            };
+
+            xhr.open('POST', 'add_officer.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send('action=' + action + '&id=' + id + '&name=' + encodeURIComponent(name) + '&position=' + encodeURIComponent(position));
+
+            // Clear input fields
+            document.getElementById('officerId').value = '';
+            document.getElementById('officerName').value = '';
+            document.getElementById('officerPosition').value = '';
+            document.getElementById('action').value = 'add';
+
+            // Close the pop-up
+            closePopUp();
+        }
+    </script>
+</div>
+
 
                     </div>
                     <div class="grid gap-4 mt-4 xl:grid-cols-2 2xl:grid-cols-2">
