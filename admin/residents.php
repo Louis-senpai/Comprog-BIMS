@@ -163,8 +163,20 @@ require_once '../includes/components/header.php';
                                             class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                                             <?php
                                          // Retrieve data from the database
-                                                         $result = $conn->query("SELECT * FROM Survey LIMIT 20");
+                                                         $start = 0;
+                                                         $rows_per_page = 20;
 
+                                                         $records = $conn->query("SELECT * FROM Survey ");
+                                                         $nr_of_rows = $records->num_rows;
+                                                         $pages = ceil($nr_of_rows / $rows_per_page);
+
+                                                         if(isset($_GET['page-nr'])){
+                                                            $page = $_GET['page-nr'] - 1;
+                                                            $start = $page * $rows_per_page;
+                                                         }
+                                                         
+                                                         $result = $conn->query("SELECT * FROM Survey LIMIT  $start ,  $rows_per_page");
+                                                       
                                                          if ($result->num_rows > 0) {
                                                             while ($row = $result->fetch_assoc()) {
                                                                 echo "<tr class='hover:bg-gray-100 dark:hover:bg-gray-700'>";
@@ -202,7 +214,7 @@ require_once '../includes/components/header.php';
                                                         }
                                                         ?>
 
-
+                                                       
 
 
 
@@ -213,7 +225,17 @@ require_once '../includes/components/header.php';
                             </div>
                         </div>
                    
+                        <div class ="pagination">
+                               <a href="?page-nr=1">First</a>
+                               <a href="">Previous</a>
+  
+                           <div class="page-numbers">
+                            
+                              <a href="">Next</a>
+                              <a href="?page-nr=<?php echo $pages ?>">Last</a>
+                           </div>
 
+                       </div>
 
                 </div>
                 <!-- Included Footer.php -->
