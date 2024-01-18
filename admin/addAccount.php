@@ -2,14 +2,26 @@
 
 require_once '../includes/components/header.php';
 
+require_once '../includes/components/sidebar.php';
+
+
+
 $account = new Accounts($conn);
 
-if (isset($_POST['submit'])){
+if (isset($_POST['create_account'])){
 
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $email = $_POST['email'];
+    $repassword = $_POST['repassword'];
 
-$username = $_POST[];
-    $result = $account->registerUser();
+    $result = $account->registerAdmin($username, $password, $repassword, $email);
+    if ($result) {
+        // Handle the error, maybe display the message to the user
+        echo $result;
+    }
 }
+
 ?>
 
 <body class="bg-gray-50 dark:bg-gray-800">
