@@ -57,6 +57,9 @@ $surveyModel = new Survey($conn);
     .selected{
         @apply bg-blue-400 dark:bg-blue-500 duration-500 ease-in-out;
     }
+    .apexcharts-legend-text{
+        @apply dark:text-gray-300;
+    }
 }
 @layer base {
   :root {

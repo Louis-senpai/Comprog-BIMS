@@ -52,58 +52,28 @@ class Survey extends MysqliDb {
      * @param int $resultsPerPage The number of results per page. Default is 20.
      * @return array The paginated survey results.
      */
-    public function getPaginatedSurveys($page, $resultsPerPage, $searchValue = '', $orderByColumn = 'FirstName', $orderDirection = 'ASC') {
-        $cacheDir = '../cache/';
-        $cacheFile = $cacheDir . 'survey_page_' . $page . '_perpage_' . $resultsPerPage . '_search_' . md5($searchValue) . '_order_' . $orderByColumn . '_' . $orderDirection . '.cache';
-        $cacheTime = 300; // Cache time in seconds
-    
-        // Check if cache file exists and is still valid
-        if (file_exists($cacheFile) && (filemtime($cacheFile) > (time() - $cacheTime))) {
-            // Cache file is valid, return cached data
-            return json_decode(file_get_contents($cacheFile), true);
-        } else {
-            // Cache file is invalid or does not exist, fetch data from database
-            $offset = ($page - 1) * $resultsPerPage;
-    
-            // Get total count without any filters
-            $this->withTotalCount();
-            $totalRecords = $this->getValue($this->tableName, "count(*)");
-    
-            // Apply search filter if provided
-            if (!empty($searchValue)) {
-                $this->where('FirstName', '%' . $searchValue . '%', 'LIKE');
-                $this->orWhere('LastName', '%' . $searchValue . '%', 'LIKE');
-            }
-    
-            // Get total count with filters
-            $this->withTotalCount();
-            $filteredRecords = $this->getValue($this->tableName, "count(*)");
-    
-            // Apply ordering
-            $this->orderBy($orderByColumn, $orderDirection);
-    
-            // Get paginated results
-            $results = $this->get($this->tableName, [$offset, $resultsPerPage]);
-    
-            // Calculate total pages after filtering
-            $totalPages = ceil($filteredRecords / $resultsPerPage);
-    
-            $data = [
-                'draw' => $page,
-                'recordsTotal' => $totalRecords,
-                'recordsFiltered' => $filteredRecords,
-                'data' => $results,
-                'totalPages' => $totalPages
-            ];
-    
-            // Save data to cache file
-            if (!is_dir($cacheDir)) {
-                mkdir($cacheDir, 0755, true);
-            }
-            file_put_contents($cacheFile, json_encode($data));
-    
-            return $data;
+    public function getPaginatedSurveys($limit, $offset, $searchTerm) {
+        if (!empty($searchTerm)) {
+            // Assuming you want to search in the FirstName and LastName columns.
+            // You can add more columns to the search condition as needed.
+            $this->where('FirstName', '%' . $searchTerm . '%', 'LIKE');
+            $this->orWhere('LastName', '%' . $searchTerm . '%', 'LIKE');
         }
+        
+        // Enable pagination with totalCount for the pagination calculation
+        $this->withTotalCount();
+        
+        // Get the results from the database
+        $results = $this->get($this->tableName, [$offset, $limit]);
+        
+        // Return the results and the total count for pagination
+        return [
+            'results' => $results,
+            'totalCount' => $this->totalCount
+        ];
+    }
+    public function getTotalSurveys() {
+        return $this->getValue($this->tableName, "count(ID)");
     }
     public function getAllSurvey(){
         $results = $this->get($this->tableName);
@@ -150,77 +120,77 @@ class Survey extends MysqliDb {
 
     // count total numbers of Surveys using thier id 
     public function countSurveys() {
-        return $this->getValue($this->tableName, "count(*)");
+        return $this->getValue($this->tableName, "count(ID)");
     }
     public function getTotalMales() {
         $this->where('Gender', 'Male');
-        return $this->getValue($this->tableName, 'count(*)');
+        return $this->getValue($this->tableName, 'count(ID)');
     }
 
     public function getTotalFemales() {
         $this->where('Gender', 'Female');
-        return $this->getValue($this->tableName, 'count(*)');
+        return $this->getValue($this->tableName, 'count(ID)');
     }
 
     public function getTotalSeniors() {
         $this->where('Age', 60, '>=');
-        return $this->getValue($this->tableName, 'count(*)');
+        return $this->getValue($this->tableName, 'count(ID)');
     }
     public function getEducationLevels() {
         $this->groupBy('Education');
         $this->orderBy('Education', 'asc');
-        return $this->get($this->tableName, null, 'Education, COUNT(*) as Count');
+        return $this->get($this->tableName, null, 'Education, COUNT(ID) as Count');
     }
 
     public function getMonthlyIncomeRanges() {
         // Assuming MonthLyIncome is a string like '<$1000', '$1000-$2000', '>$2000'
         $this->groupBy('MonthLyIncome');
         $this->orderBy('MonthLyIncome', 'asc');
-        return $this->get($this->tableName, null, 'MonthLyIncome, COUNT(*) as Count');
+        return $this->get($this->tableName, null, 'MonthLyIncome, COUNT(ID) as Count');
     }
 
     public function getJobCategories() {
         $this->groupBy('Job');
         $this->orderBy('Job', 'asc');
-        return $this->get($this->tableName, null, 'Job, COUNT(*) as Count');
+        return $this->get($this->tableName, null, 'Job, COUNT(ID) as Count');
     }
 
     public function getReligionDistribution() {
         $this->groupBy('Religion');
         $this->orderBy('Religion', 'asc');
-        return $this->get($this->tableName, null, 'Religion, COUNT(*) as Count');
+        return $this->get($this->tableName, null, 'Religion, COUNT(ID) as Count');
     }
 
     public function getBirthplaceDistribution() {
         $this->groupBy('BirthPLace');
         $this->orderBy('BirthPLace', 'asc');
-        return $this->get($this->tableName, null, 'BirthPLace, COUNT(*) as Count');
+        return $this->get($this->tableName, null, 'BirthPLace, COUNT(ID) as Count');
     }
 
-//SELECT year_added, COUNT(*) as response_count FROM surveys GROUP BY year_added ORDER BY year_added ASC
+//SELECT year_added, COUNT(ID) as response_count FROM surveys GROUP BY year_added ORDER BY year_added ASC
     public function getYearAddedDistribution() {
         $this->groupBy('year_added');
         $this->orderBy('year_added', 'asc');
-        return $this->get($this->tableName, null, 'year_added, COUNT(*) as response_count');
+        return $this->get($this->tableName, null, 'year_added, COUNT(ID) as response_count');
     }
 
     public function getPhoneNumberAreaCodeDistribution() {
         // Assuming PhoneNumber format includes area code like '(123) 456-7890'
         $this->groupBy('LEFT(PhoneNumber, 5)'); // Adjust according to your format
         $this->orderBy('LEFT(PhoneNumber, 5)', 'asc');
-        return $this->get($this->tableName, null, 'LEFT(PhoneNumber, 5) as AreaCode, COUNT(*) as Count');
+        return $this->get($this->tableName, null, 'LEFT(PhoneNumber, 5) as AreaCode, COUNT(ID) as Count');
     }
 
     public function getDialectDistribution() {
         $this->groupBy('Dialect');
         $this->orderBy('Dialect', 'asc');
-        return $this->get($this->tableName, null, 'Dialect, COUNT(*) as Count');
+        return $this->get($this->tableName, null, 'Dialect, COUNT(ID) as Count');
     }
 // getCivilStatusCounts()
     public function getCivilStatusCounts() {
         // $this->groupBy('CivilStatus');
         // $this->orderBy('CivilStatus', 'asc');
-        return $this->rawQuery('SELECT CivilStatus, COUNT(*) AS count FROM Survey GROUP BY CivilStatus');
+        return $this->rawQuery('SELECT CivilStatus, COUNT(ID) AS count FROM Survey GROUP BY CivilStatus');
     }
 
     // SELECT year_added, COUNT(*) as response_count FROM surveys GROUP BY year_added ORDER BY year_added ASC

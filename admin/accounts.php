@@ -98,7 +98,7 @@ require_once '../includes/components/header.php';
                                 </div>
                                 <div class="flex items-center ml-auto space-x-2 sm:space-x-3">
                                     <button type="button" data-modal-toggle="add-user-modal"
-                                        class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                        class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                         <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd"
@@ -154,13 +154,13 @@ require_once '../includes/components/header.php';
                                                                 echo "<td class='p-4 text-base font-semibold text-gray-900 dark:text-white'>" . $row['username'] .  "</td>";
                                                                 echo "<td class='w-10 p-4 text-base font-medium text-gray-500 whitespace-nowrap dark:text-white'>" . $row['email'] . "</td>";
                                                                 echo "<td class='p-4 text-base font-medium text-gray-500 whitespace-nowrap dark:text-white'>" . $row['created_at'] . "</td>";
-                                                                echo "<td class='p-4 text-base font-medium text-gray-500 whitespace-nowrap dark:text-white'>" . $row['role'] . "</td>";
-                                                                echo "<td class='p-4 space-x-2 whitespace-nowrap pr-4'>"; // Add padding to the right
+                                                                echo "<td class='p-4 text-base font-medium text-gray-500 whitespace-nowrap dark:text-white'>" . $row['role_id'] . "</td>";
+                                                                echo "<td class='p-4 pr-4 space-x-2 whitespace-nowrap'>"; // Add padding to the right
                                                     
                                                                 echo "<div style='display: flex; gap: 10px;'>";
                                                                 // Edit button
                                                                 echo "<form method='post' action='Edit_user.php'>";
-                                                                echo "<button type='button' data-modal-toggle='edit-user-modal' class='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>";
+                                                                echo "<button type='button' data-modal-toggle='edit-user-modal' class='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>";
                                                                 echo "<svg class='w-4 h-4 mr-2' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>";
                                                                 echo "<path d='M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z'></path>";
                                                                 echo "<path fill-rule='evenodd' d='M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z' clip-rule='evenodd'></path>";
@@ -185,12 +185,6 @@ require_once '../includes/components/header.php';
                                                             echo "<tr><td colspan='5'>No records found</td></tr>";
                                                         }
                                                         ?>
-                                                      
-                                              
-
-                                            
-
-
                                         </tbody>
                                     </table>
                                 </div>

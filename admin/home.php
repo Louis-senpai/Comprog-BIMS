@@ -172,18 +172,18 @@ $responseData = $surveyModel->getYearAddedDistribution();
                                 Current Barangay Official
                             </h2>
                             <div id="popUp"
-                                class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 justify-center items-center">
-                                <div class="bg-white p-4 w-1/2 rounded-lg">
+                                class="fixed inset-0 items-center justify-center hidden bg-gray-900 bg-opacity-50">
+                                <div class="w-1/2 p-4 bg-white rounded-lg">
                                     <form onsubmit="addOrUpdateOfficer(); return false;">
                                         <label for="officerName"
                                             class="block text-sm font-medium text-gray-700">Name:</label>
-                                        <input type="text" id="officerName" class="mt-1 p-2 border rounded-md w-full"
+                                        <input type="text" id="officerName" class="w-full p-2 mt-1 border rounded-md"
                                             required>
 
                                         <label for="officerPosition"
                                             class="block mt-4 text-sm font-medium text-gray-700">Position:</label>
                                         <input type="text" id="officerPosition"
-                                            class="mt-1 p-2 border rounded-md w-full" required>
+                                            class="w-full p-2 mt-1 border rounded-md" required>
 
                                         <input type="hidden" id="officerId" name="officerId">
                                         <input type="hidden" id="action" name="action" value="add">
@@ -191,11 +191,11 @@ $responseData = $surveyModel->getYearAddedDistribution();
                                 </div>
                             </div>
 
-                            <table class="border-collapse w-full mt-4">
+                            <table class="w-full mt-4 border-collapse">
                                 <thead>
                                     <tr>
-                                        <th class="border border-gray-300 p-2">Name</th>
-                                        <th class="border border-gray-300 p-2">Position</th>
+                                        <th class="p-2 border border-gray-300">Name</th>
+                                        <th class="p-2 border border-gray-300">Position</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -207,10 +207,10 @@ $responseData = $surveyModel->getYearAddedDistribution();
                     </div>
                     <div class="grid gap-4 mt-4 xl:grid-cols-2 2xl:grid-cols-2">
 
-                        <div class="col-span-2 w-full bg-white rounded-lg shadow-lg dark:bg-gray-800">
-                            <div class="flex justify-between p-4 md:p-6 pb-0 md:pb-0">
+                        <div class="w-full col-span-2 bg-white rounded-lg shadow-lg dark:bg-gray-800">
+                            <div class="flex justify-between p-4 pb-0 md:p-6 md:pb-0">
                                 <div>
-                                    <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">
+                                    <h5 class="pb-2 text-3xl font-bold leading-none text-gray-900 dark:text-white">
                                         <?php
 
                                         $lastData = end($responseData);
@@ -401,11 +401,11 @@ $responseData = $surveyModel->getYearAddedDistribution();
                     },
                     labels: ["Single", "Married", "Divorced", "Widowed"],
                     dataLabels: {
-                        enabled: true,
+                        enabled: false,
                         style: {
                             fontFamily: "Inter, sans-serif",
                         },
-                        className: "text-gray-900 dark:",
+                        class: "text-gray-900 dark:text-white",
                     },
                     legend: {
                         position: "bottom",
