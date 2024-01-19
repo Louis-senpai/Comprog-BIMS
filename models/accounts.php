@@ -73,7 +73,7 @@ class Accounts extends MysqliDb {
                 "password" => $hashedPassword,
                 "email" => $email,
                 "role" => $role,
-                "permission" => $permission
+                "permissions" => $permission
             );
     
             // Insert the user data into the database
@@ -82,8 +82,7 @@ class Accounts extends MysqliDb {
             if ($id) {
                 // If the insert was successful, redirect to the addAccount page with a success message
                 $_SESSION['success_message'] = "Account successfully created!";
-                header("Location: addAccount.php");
-                exit();
+                
             } else {
                 // Handle error case
                 return "Registration failed: " + $this->getLastError();
@@ -160,6 +159,15 @@ class Accounts extends MysqliDb {
                 "permissions" => $permissions
             );
             if ($this->update('Accounts', $data)){
+                return true;
+            } else {
+                return false;
+            }
+        }
+        // delete the account
+        public function deleteAccount($id){
+            $this->where('id', $id);
+            if ($this->delete($this->tableName)){
                 return true;
             } else {
                 return false;

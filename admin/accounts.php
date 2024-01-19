@@ -112,13 +112,13 @@ require_once '../includes/components/header.php';
                             </div>
                             <?php 
                             if(isset($_SESSION['success_message'])){
-                                echo $Components->AlertDiv('Successfully Updates Account', 'success');
+                                echo $Components->AlertDiv($_SESSION['success_message'], 'success');
                                 unset($_SESSION['success_message']);
                                 
                             }
                             ?>
                             <!---------------------------search side------------------------------------->
-                            <div id="success-message" ></div>
+                            <div id="success-message"></div>
                         </div>
                     </div>
                     <!----------------1div table------------------------------------->
@@ -183,13 +183,12 @@ require_once '../includes/components/header.php';
 
                                                                 
                                                                 // Delete button
-                                                                echo "<form method='post' action='delete_account.php'>";
-                                                                echo "<input type='hidden' name='account_id' value='" . $row['id'] . "'>";
-                                                                echo "<button type='submit' class='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900'>";
+                                                                echo "";
+                                                                echo "<a href='../api/deleteAccount.php?id=".$row['id']."' class='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900'>";
                                                                 echo "<svg class='w-4 h-4 mr-2' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>";
                                                                 echo "<path fill-rule='evenodd' d='M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z' clip-rule='evenodd'></path>";
-                                                                echo "</svg>Delete account</button>";
-                                                                echo "</form>";
+                                                                echo "</svg>Delete account</a>";
+                                                                echo "";
                                                                 echo "</div>";
                                                                 
 
@@ -230,36 +229,49 @@ require_once '../includes/components/header.php';
                                     </button>
                                 </div>
                                 <!-- Modal body -->
-                                <form hx-post="/api/createAccount.php" hx-target="#success-message" hx-swap="innserHTML" hx-trigger="submit">
+                                <form hx-post="/api/createAccount.php" hx-target="#success-message" hx-swap="innserHTML"
+                                    hx-trigger="submit">
                                     <div class="grid gap-4 mb-4 sm:grid-cols-2">
                                         <div>
                                             <label for="name"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
-                                            <input type="text" name="name" id="name"
+                                            <input type="text" name="username" id="name"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                placeholder="Type product name" required="">
+                                                placeholder="Username" required="">
                                         </div>
                                         <div>
-                                            <label for="brand"
+                                            <label for="email"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                            <input type="email" name="brand" id="brand"
+                                            <input type="email" name="email" id="email"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                placeholder="Product brand" required="">
+                                                placeholder=" email" required="">
                                         </div>
                                         <div>
-                                            <label for="price"
+                                            <label for="password"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">password</label>
-                                            <input type="password" name="price" id="price"
+                                            <input type="password" name="password" id="password"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 placeholder="******" required="">
                                         </div>
                                         <div>
-                                            <label for="category"
+                                            <label for="repassword"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Re
                                                 Password</label>
-                                            <input type="password" name="price" id="price"
+                                            <input type="password" name="repassword" id="repassword"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 placeholder="*****" required="">
+                                        </div>
+                                        <div>
+                                            <label for="Roles"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select
+                                                a Role</label>
+                                            <select id="Roles" name="role"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                <option selected>Choose a Role</option>
+                                                <option value="admin">Admin</option>
+                                                <option value="others">others</option>
+                                              
+                                            </select>
                                         </div>
                                         <div class="col-span-2">
                                             <label for="category"
@@ -288,7 +300,7 @@ require_once '../includes/components/header.php';
 
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                     <button type="submit"
                                         class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

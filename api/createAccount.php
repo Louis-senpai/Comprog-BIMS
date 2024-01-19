@@ -21,9 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $id = $accountModel->registerWithAdmin($username,$password, $repassword, $permissionsJson, $email, $role);
     $userLog->logActivity($_SESSION['user_id'], "{$_SESSION['username']} has Created Account with ID: ". $id);
-    $_SESSION['success_message'] = "Account Created successfully!";
-    header("Location:../admin/accounts.php");
-
+    header('hx-Refresh: true');
 }
 
 

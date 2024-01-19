@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'Dialect' => $_POST['Dialect'],
         'Education' => $_POST['Education'],
         'Job' => $_POST['Job'],
-        'MonthLyIncome' => $_POST['d'],
+        'MonthLyIncome' => $_POST['MonthLyIncome'],
         'PhoneNumber' => $_POST['PhoneNumber'],
         'Email' => $_POST['Email'],
         'Remarks' => $_POST['Remarks'],

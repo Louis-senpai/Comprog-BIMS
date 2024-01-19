@@ -1,39 +1,39 @@
 <?php 
 define('ROOT_DIR', realpath(__DIR__));
-// $host = "aws.connect.psdb.cloud";
-// $user = "uasfytprg6l8il3x5btb";
-// $name = "student";
-// $pass = "pscale_pw_9DcJdipd4pPVpbFqDMpOxa0HynpqJdl5beS0HifuIuY";
-// $port = "3306";
-// $ca_path = 'cacert-2023-12-12.pem';
+$host = "ap-southeast.connect.psdb.cloud";
+$user = "4lmxglbjx1xgzwdwy21b";
+$name = "student";
+$pass = "pscale_pw_jTACbo64XfZHuXwrwbb103OOxHUqRnWeQOtUVyvzo5e";
+$port = "3306";
+$ca_path = 'cacert-2023-12-12.pem';
 
 
 
-// $conn = mysqli_init();
-// if (!$conn) {
-//     die("mysqli_init failed");
-// }
+$conn = mysqli_init();
+if (!$conn) {
+    die("mysqli_init failed");
+}
 
-// // Set SSL options
-// mysqli_ssl_set($conn, NULL, NULL, $ca_path, NULL, NULL);
+// Set SSL options
+mysqli_ssl_set($conn, NULL, NULL, $ca_path, NULL, NULL);
 
-// // Establish the connection
-// if (!mysqli_real_connect($conn, $host, $user, $pass, $name, NULL, NULL, MYSQLI_CLIENT_SSL)) {
-//     die("Connection failed: " . mysqli_connect_error());
+// Establish the connection
+if (!mysqli_real_connect($conn, $host, $user, $pass, $name, NULL, NULL, MYSQLI_CLIENT_SSL)) {
+    die("Connection failed: " . mysqli_connect_error());
 
-// }
+}
 // else {
 //     echo "Connection to database successful";
 // }
 
 
-$host = "delta.optiklink.com";
-$user = "u126067_6YObtWKgqn";
-$name = "s126067_student";
-$pass = "!yQ4Q2@Da6BB!8VWIhLcKKMw";
-$port = "3306";
+// $host = "delta.optiklink.com";
+// $user = "u126067_6YObtWKgqn";
+// $name = "s126067_student";
+// $pass = "!yQ4Q2@Da6BB!8VWIhLcKKMw";
+// $port = "3306";
 
-$conn = mysqli_connect($host, $user, $pass, $name, $port);
+// $conn = mysqli_connect($host, $user, $pass, $name, $port);
 
 
 
