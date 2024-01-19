@@ -15,7 +15,8 @@ $surveyModel = new Survey($conn); // Make sure $conn is your database connection
 if ($surveyModel->deleteSurvey($id)){
     // if delete success full log it on the user activity log
     $userLog->logActivity($_SESSION['user_id'], "Deleted Survey with ID: ". $id);
-    echo $Components->AlertDiv('Successfully Deleted Data '.$id, 'success');
+    $_SESSION['success_message'] = "Survey Deleted Successfully!";
+   header("Location:../admin/residents.php");
     
 
 }

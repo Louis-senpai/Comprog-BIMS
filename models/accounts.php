@@ -52,7 +52,7 @@ class Accounts extends MysqliDb {
                 return "Registration failed: " + $this->getLastError();
             }
         }
-        public function registerAdmin($username, $password, $repeatPassword, $email) {
+        public function registerWithAdmin($username, $password, $repeatPassword, $permission, $email, $role) {
             // Check if the passwords match
             if ($password !== $repeatPassword) {
                 return "Passwords do not match.";
@@ -71,7 +71,9 @@ class Accounts extends MysqliDb {
             $data = Array (
                 "username" => $username,
                 "password" => $hashedPassword,
-                "email" => $email
+                "email" => $email,
+                "role" => $role,
+                "permission" => $permission
             );
     
             // Insert the user data into the database
@@ -140,6 +142,28 @@ class Accounts extends MysqliDb {
             header('Location: ../index.php');
             // Log the logout activity
             
+        }
+
+        public function getAccount($id) {
+            $this->where('id', $id);
+            $account = $this->getOne($this->tableName);
+            return $account;
+        }
+
+        // a update functions that will update the account from the form and has a array of selected permissions
+        public function updateAccount($id, $username, $email, $permissions, $role){
+            $this->where('id', $id);
+            $data = Array (
+                "username" => $username,
+                "email" => $email,
+                "role" => $role,
+                "permissions" => $permissions
+            );
+            if ($this->update('Accounts', $data)){
+                return true;
+            } else {
+                return false;
+            }
         }
         
 

@@ -17,13 +17,13 @@ require_once '../includes/components/header.php';
         <div id="main-content" class="relative w-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
 
             <main>
-        <!----------------1div------------------------------------->
+                <!----------------1div------------------------------------->
                 <div class="px-4 pt-6 pr-4">
                     <div
                         class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
                         <div class="w-full mb-1">
 
-                    <!----------------nav1 home------------------------------------->
+                            <!----------------nav1 home------------------------------------->
                             <div class="mb-4">
                                 <nav class="flex mb-5" aria-label="Breadcrumb">
                                     <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
@@ -40,7 +40,7 @@ require_once '../includes/components/header.php';
                                             </a>
                                         </li>
                                         <li>
-                                          
+
                                         </li>
                                         <li>
                                             <div class="flex items-center">
@@ -56,25 +56,26 @@ require_once '../includes/components/header.php';
                                         </li>
                                     </ol>
                                 </nav>
-                       
-                                <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white"> Manage Accounts
+
+                                <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white"> Manage
+                                    Accounts
                                 </h1>
                             </div>
-                    <!---------------------------search side-------------------------------------> 
-                           <div class="sm:flex">
+                            <!---------------------------search side------------------------------------->
+                            <div class="sm:flex">
                                 <div
                                     class="items-center hidden mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700">
-                          
-                               <form class="lg:pr-3" action="search_users.php" method="GET">
-                                    <label for="users-search" class="sr-only">Search</label>
-                                    <div class="relative mt-1 lg:w-64 xl:w-96">
-                                        <input type="text" name="name" id="users-search"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="Search for users by name">
-                                    </div>
-                                </form>
+
+                                    <form class="lg:pr-3" action="search_users.php" method="GET">
+                                        <label for="users-search" class="sr-only">Search</label>
+                                        <div class="relative mt-1 lg:w-64 xl:w-96">
+                                            <input type="text" name="name" id="users-search"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                placeholder="Search for users by name">
+                                        </div>
+                                    </form>
                                     <div class="flex pl-0 mt-3 space-x-1 sm:pl-2 sm:mt-0">
-                                       
+
                                         <a href="#"
                                             class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
@@ -84,7 +85,7 @@ require_once '../includes/components/header.php';
                                                     clip-rule="evenodd"></path>
                                             </svg>
                                         </a>
-                                        
+
                                         <a href="#"
                                             class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
@@ -97,7 +98,7 @@ require_once '../includes/components/header.php';
                                     </div>
                                 </div>
                                 <div class="flex items-center ml-auto space-x-2 sm:space-x-3">
-                                    <button type="button" data-modal-toggle="add-user-modal"
+                                    <button type="button" data-modal-toggle="add-account-modal"
                                         class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                         <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -109,38 +110,52 @@ require_once '../includes/components/header.php';
                                     </button>
                                 </div>
                             </div>
-            <!---------------------------search side-------------------------------------> 
+                            <?php 
+                            if(isset($_SESSION['success_message'])){
+                                echo $Components->AlertDiv('Successfully Updates Account', 'success');
+                                unset($_SESSION['success_message']);
+                                
+                            }
+                            ?>
+                            <!---------------------------search side------------------------------------->
+                            <div id="success-message" ></div>
                         </div>
                     </div>
-    <!----------------1div table------------------------------------->
+                    <!----------------1div table------------------------------------->
                     <div class="flex flex-col">
                         <div class="overflow-x-auto">
                             <div class="inline-block min-w-full align-middle">
                                 <div class="overflow-hidden shadow">
                                     <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
                                         <thead class="bg-gray-100 dark:bg-gray-700">
-                                               <tr>
-                                                    <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                                        ID
-                                                    </th>
-                                                    <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                                        Username
-                                                    </th>
-                                                    <th scope="col" class="w-10 p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                                        Email
-                                                    </th>
-                                                    <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                                        Created_at
-                                                    </th>
-                                                    
-                                                    <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                                       Role
-                                                    </th>
-                                                    <th scope="col" class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                                                        Actions
-                                                    </th>
-                                                </tr>
-                                          </thead>
+                                            <tr>
+                                                <th scope="col"
+                                                    class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                                    ID
+                                                </th>
+                                                <th scope="col"
+                                                    class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                                    Username
+                                                </th>
+                                                <th scope="col"
+                                                    class="w-10 p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                                    Email
+                                                </th>
+                                                <th scope="col"
+                                                    class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                                    Created_at
+                                                </th>
+
+                                                <th scope="col"
+                                                    class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                                    Role
+                                                </th>
+                                                <th scope="col"
+                                                    class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                                                    Actions
+                                                </th>
+                                            </tr>
+                                        </thead>
                                         <tbody
                                             class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                                             <?php
@@ -154,26 +169,26 @@ require_once '../includes/components/header.php';
                                                                 echo "<td class='p-4 text-base font-semibold text-gray-900 dark:text-white'>" . $row['username'] .  "</td>";
                                                                 echo "<td class='w-10 p-4 text-base font-medium text-gray-500 whitespace-nowrap dark:text-white'>" . $row['email'] . "</td>";
                                                                 echo "<td class='p-4 text-base font-medium text-gray-500 whitespace-nowrap dark:text-white'>" . $row['created_at'] . "</td>";
-                                                                echo "<td class='p-4 text-base font-medium text-gray-500 whitespace-nowrap dark:text-white'>" . $row['role_id'] . "</td>";
+                                                                echo "<td class='p-4 text-base font-medium text-gray-500 whitespace-nowrap dark:text-white'>" . $row['role'] . "</td>";
                                                                 echo "<td class='p-4 pr-4 space-x-2 whitespace-nowrap'>"; // Add padding to the right
                                                     
                                                                 echo "<div style='display: flex; gap: 10px;'>";
                                                                 // Edit button
-                                                                echo "<form method='post' action='Edit_user.php'>";
-                                                                echo "<button type='button' data-modal-toggle='edit-user-modal' class='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>";
+                
+                                                                echo "<a href='editAccount.php?edit=".$row['id']."' data-modal-toggle='edit-user-modal' class='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>";
                                                                 echo "<svg class='w-4 h-4 mr-2' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>";
                                                                 echo "<path d='M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z'></path>";
                                                                 echo "<path fill-rule='evenodd' d='M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z' clip-rule='evenodd'></path>";
-                                                                echo "</svg>Edit user</button>";
-                                                                echo "</form>";
+                                                                echo "</svg>Edit account</a>";
+
                                                                 
                                                                 // Delete button
                                                                 echo "<form method='post' action='delete_account.php'>";
-                                                                echo "<input type='hidden' name='user_id' value='" . $row['id'] . "'>";
+                                                                echo "<input type='hidden' name='account_id' value='" . $row['id'] . "'>";
                                                                 echo "<button type='submit' class='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900'>";
                                                                 echo "<svg class='w-4 h-4 mr-2' fill='currentColor' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>";
                                                                 echo "<path fill-rule='evenodd' d='M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z' clip-rule='evenodd'></path>";
-                                                                echo "</svg>Delete user</button>";
+                                                                echo "</svg>Delete account</button>";
                                                                 echo "</form>";
                                                                 echo "</div>";
                                                                 
@@ -191,7 +206,104 @@ require_once '../includes/components/header.php';
                             </div>
                         </div>
                     </div>
+                    <div id="add-account-modal" tabindex="-1" aria-hidden="true"
+                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+                        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+                            <!-- Modal content -->
+                            <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+                                <!-- Modal header -->
+                                <div
+                                    class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                                        Add Account
+                                    </h3>
+                                    <button type="button"
+                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                        data-modal-toggle="add-account-modal">
+                                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="sr-only">Close modal</span>
+                                    </button>
+                                </div>
+                                <!-- Modal body -->
+                                <form hx-post="/api/createAccount.php" hx-target="#success-message" hx-swap="innserHTML" hx-trigger="submit">
+                                    <div class="grid gap-4 mb-4 sm:grid-cols-2">
+                                        <div>
+                                            <label for="name"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                                            <input type="text" name="name" id="name"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                placeholder="Type product name" required="">
+                                        </div>
+                                        <div>
+                                            <label for="brand"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                            <input type="email" name="brand" id="brand"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                placeholder="Product brand" required="">
+                                        </div>
+                                        <div>
+                                            <label for="price"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">password</label>
+                                            <input type="password" name="price" id="price"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                placeholder="******" required="">
+                                        </div>
+                                        <div>
+                                            <label for="category"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Re
+                                                Password</label>
+                                            <input type="password" name="price" id="price"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                placeholder="*****" required="">
+                                        </div>
+                                        <div class="col-span-2">
+                                            <label for="category"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Permissions</label>
+                                            <!-- check box permisions for accounts -->
+                                            <div class="flex items-center space-x-4">
+                                                <div
+                                                    class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+                                                    <input id="bordered-checkbox-1" name="permission[]" type="checkbox"
+                                                        value="Manage_Accounts" name="bordered-checkbox"
+                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                    <label for="bordered-checkbox-1"
+                                                        class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                        Manage Accounts</label>
+                                                </div>
 
+                                                <div
+                                                    class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+                                                    <input id="bordered-checkbox-2" name="permission[]" type="checkbox"
+                                                        value="Manage_Residents" name="bordered-checkbox"
+                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                    <label for="bordered-checkbox-2"
+                                                        class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                        Manage Residents</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <button type="submit"
+                                        class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                        <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                        Add new Account
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 <!-- Included Footer.php -->

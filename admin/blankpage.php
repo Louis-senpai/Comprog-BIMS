@@ -1,6 +1,6 @@
 <?php
 require_once '../includes/components/header.php';
-require_once '../config.php'; // Adjust this based on your database connection file
+
 
 // Function to handle adding an officer
 function addOfficer($conn, $name, $position) {

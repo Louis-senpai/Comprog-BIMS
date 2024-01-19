@@ -15,7 +15,7 @@ if (isset($_POST['create_account'])){
     $email = $_POST['email'];
     $repassword = $_POST['repassword'];
 
-    $result = $account->registerAdmin($username, $password, $repassword, $email);
+    // $result = $account->registerAdmin($username, $password, $repassword, $email);
     if ($result) {
         // Handle the error, maybe display the message to the user
         echo $result;
