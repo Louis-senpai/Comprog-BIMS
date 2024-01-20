@@ -36,6 +36,7 @@ if (isset($_POST['login'])) {
 }
 if(isset($_GET['logout'])){
     $account->logoutUser($_SESSION['user_id'], $_SESSION['username']);
+    // session_destroy();
 
 }
 ?>

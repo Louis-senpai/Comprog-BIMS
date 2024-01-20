@@ -46,9 +46,13 @@ $permissionsJson = json_decode($permissions);
                                     <div class="w-full">
                                         <label for="price"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
-                                        <input type="text" name="role" id="Role"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            value="<?php echo $result['role']?>" placeholder="admin, others..." required="">
+                                            <select name="role" id="role"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option selected value="<?php echo $result['role']?>"><?php echo $result['role']?></option>
+                                            <option value="admin">Admin</option>
+                                            <option value="user">User</option>
+                                            </select>
+                                        
                                     </div>
 
                                     <div>
@@ -57,22 +61,22 @@ $permissionsJson = json_decode($permissions);
                                         <!-- check box permisions for accounts -->
                                         <div class="flex items-center space-x-4">
                                             <div
-                                                class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+                                                class="flex items-center border border-gray-200 rounded ps-4 dark:border-gray-700">
                                                 <input id="bordered-checkbox-1" name="permission[]" type="checkbox"  value="Manage_Accounts"
                                                     name="bordered-checkbox"  <?php if(in_array('Manage_Accounts', $permissionsJson)) { echo "checked"; }?>
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                                 <label for="bordered-checkbox-1"
-                                                    class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                    class="w-full py-4 text-sm font-medium text-gray-900 ms-2 dark:text-gray-300">
                                                 Manage Accounts</label>
                                             </div>
                                             
                                             <div
-                                                class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-700">
+                                                class="flex items-center border border-gray-200 rounded ps-4 dark:border-gray-700">
                                                 <input id="bordered-checkbox-2" name="permission[]" type="checkbox"  value="Manage_Residents"
                                                     name="bordered-checkbox"  <?php if(in_array('Manage_Residents', $permissionsJson)) { echo "checked"; }?>
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                                 <label for="bordered-checkbox-2"
-                                                    class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                    class="w-full py-4 text-sm font-medium text-gray-900 ms-2 dark:text-gray-300">
                                                 Manage Residents</label>
                                             </div>
 

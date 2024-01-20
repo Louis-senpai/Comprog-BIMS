@@ -31,12 +31,15 @@ class Accounts extends MysqliDb {
     
             // Hash the password for security
             $hashedPassword = md5($password);
-    
+            $permisions = array();
             // Prepare the user data
             $data = Array (
                 "username" => $username,
                 "password" => $hashedPassword,
-                "email" => $email
+                "email" => $email,
+                "role" => "none",
+                "permissions" => json_encode($permisions),
+                "verified" => 0
             );
     
             // Insert the user data into the database
@@ -73,7 +76,8 @@ class Accounts extends MysqliDb {
                 "password" => $hashedPassword,
                 "email" => $email,
                 "role" => $role,
-                "permissions" => $permission
+                "permissions" => $permission,
+                "verified" => 1
             );
     
             // Insert the user data into the database
@@ -103,6 +107,8 @@ class Accounts extends MysqliDb {
                     $_SESSION['username'] = $user['username'];
                     $_SESSION['email'] = $user['email'];
                     $_SESSION['logged_in'] = true;
+                    $_SESSION['role'] = $user['role'];
+                    $_SESSION['permissions'] = json_decode($user['permissions']);
                     
                     // Set a success message
                     $_SESSION['success_message'] = "You have successfully logged in!";

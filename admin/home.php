@@ -401,7 +401,7 @@ $responseData = $surveyModel->getYearAddedDistribution();
                     },
                     labels: ["Single", "Married", "Divorced", "Widowed"],
                     dataLabels: {
-                        enabled: false,
+                        enabled: true,
                         style: {
                             fontFamily: "Inter, sans-serif",
                         },
