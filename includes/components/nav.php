@@ -17,8 +17,8 @@
                             clip-rule="evenodd"></path>
                     </svg>
                 </button>
-                <a href="https://flowbite-admin-dashboard.vercel.app/" class="flex ml-2 md:mr-24">
-                    <img src="../includes/images/logo1.png" class="h-8 mr-3" alt="FlowBite Logo">
+                <a href="" class="flex ml-2 md:mr-24">
+                    <img src="../includes/images/<?php echo $Settings->getLogo();?>" class="h-8 mr-3">
                     <span
                         class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Barangay
                         Management</span>
@@ -77,13 +77,18 @@
                     </div>
                     <div>
                         <?php 
+                    if($_SESSION['role'] == 'admin'){
                         $notif = $logs->getActivityLog();
+                    }
+                    else{
+                        $notif = $logs->getActivityLog($_SESSION['user_id']);
+                    }
                         foreach($notif as $row){
                         ?>
                         <a href="#"
                             class="flex px-4 py-3 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
                             <div class="flex-shrink-0">
-                                <img class="rounded-full w-11 h-11" src="../includes/images/blank.png" alt="bot.png">
+                                <img class="rounded-full w-11 h-11" src="../includes/images/bot.png" alt="bot.png">
                                 <div
                                     class="absolute flex items-center justify-center w-5 h-5 ml-6 -mt-5 border border-white rounded-full bg-primary-700 dark:border-gray-700">
                                     <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"
@@ -139,14 +144,6 @@
                     </svg>
                 </button>
 
-                <!-- <div id="tooltip-toggle" role="tooltip"
-                    class="absolute z-10 inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm tooltip opacity-0 invisible"
-                    style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(1444px, 63px);"
-                    data-popper-placement="bottom">
-                    Toggle dark mode
-                    <div class="tooltip-arrow" data-popper-arrow=""
-                        style="position: absolute; left: 0px; transform: translate(69px);"></div>
-                </div> -->
 
                 <div class="flex items-center ml-3">
                     <div>
@@ -154,7 +151,7 @@
                             class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                             id="user-menu-button-2" aria-expanded="false" data-dropdown-toggle="dropdown-2">
                             <span class="sr-only">Open user menu</span>
-                            <img class="w-8 h-8 rounded-full" src="../includes/images/blank.png" alt="user photo">
+                            <img class="w-8 h-8 rounded-full" src="../includes/images/<?php echo $_SESSION['image_url'];?>" alt="user photo">
                         </button>
                     </div>
 

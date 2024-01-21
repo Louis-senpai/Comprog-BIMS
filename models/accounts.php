@@ -109,6 +109,7 @@ class Accounts extends MysqliDb {
                     $_SESSION['logged_in'] = true;
                     $_SESSION['role'] = $user['role'];
                     $_SESSION['permissions'] = json_decode($user['permissions']);
+                    $_SESSION['image_url'] = $user['image_url'];
                     
                     // Set a success message
                     $_SESSION['success_message'] = "You have successfully logged in!";

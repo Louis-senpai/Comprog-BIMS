@@ -6,6 +6,7 @@ require_once "../models/userActivityLogs.php";
 require_once "../models/accounts.php";
 require_once "../models/survey.php";
 require_once "../models/Components.php";
+require_once "../models/settings.php";
 
 if(!isset($_SESSION['logged_in'])){
     $_SESSION['error_message'] = "You must be logged in to view this page!";
@@ -21,6 +22,7 @@ $logs = new UserActivityLogs($conn);
 $surveyModel = new Survey($conn);
 $accountModel = new Accounts($conn);
 $Components = new Tailwind();
+$Settings = new Settings();
 ?>
 <!DOCTYPE html>
 <html lang="en" class="dark">
