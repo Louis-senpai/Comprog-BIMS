@@ -233,6 +233,26 @@ class Accounts extends MysqliDb {
                 return false;
             }
         }
+        public function getPaginatedSurveys($limit, $offset, $searchTerm) {
+            if (!empty($searchTerm)) {
+                // Assuming you want to search in the FirstName and LastName columns.
+                // You can add more columns to the search condition as needed.
+                $this->where('username', '%' . $searchTerm . '%', 'LIKE');
+                $this->orWhere('email', '%' . $searchTerm . '%', 'LIKE');
+            }
+            
+            // Enable pagination with totalCount for the pagination calculation
+            $this->withTotalCount();
+            
+            // Get the results from the database
+            $results = $this->get($this->tableName, [$offset, $limit]);
+            
+            // Return the results and the total count for pagination
+            return [
+                'results' => $results,
+                'totalCount' => $this->totalCount
+            ];
+        }
         
 
         
