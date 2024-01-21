@@ -206,6 +206,7 @@ $responseData = $surveyModel->getYearAddedDistribution();
                                     <tr>
                                         <th class="p-2 border border-gray-300">Name</th>
                                         <th class="p-2 border border-gray-300">Position</th>
+                                        <th class="p-2 border border-gray-300">Contact Number</th>
                                     </tr>
                                 </thead>
                                 <tbody>
