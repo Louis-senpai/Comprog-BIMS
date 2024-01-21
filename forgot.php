@@ -2,9 +2,11 @@
 require_once 'config.php';  
 require_once 'vendor/autoload.php';
 require_once 'models/accounts.php';
-
+require_once 'models/settings.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
+$Settings = new Settings('settings.json');
 session_start();
 
 // Function to insert the code into the Codes table
@@ -44,6 +46,8 @@ function findAccountByEmail($email) {
     }
 }
 
+$SMTP = $Settings->getSMTP();
+
 // Check if the email form has been submitted
 if (isset($_POST['forgot'])) {
     $email = $_POST['email'];
@@ -61,15 +65,15 @@ if (isset($_POST['forgot'])) {
             // Server settings
             // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
             $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com'; // Set the SMTP server to send through
+            $mail->Host       =  $SMTP['host'];// Set the SMTP server to send through
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'marianolukkanit17@gmail.com'; // SMTP username
-            $mail->Password   = 'uafb tmsk tydm ywfz '; // SMTP password
+            $mail->Username   = $SMTP['user'];; // SMTP username
+            $mail->Password   = $SMTP['password']; // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port       = 465;
+            $mail->Port       = $SMTP['port'];
             
             // Recipients
-            $mail->setFrom('from@example.com', 'Mailer');
+            $mail->setFrom($Settings->get('websiteEmail'), $Settings->get('name'));
             $mail->addAddress($email); // Add a recipient
             
             // Content

@@ -4,7 +4,8 @@ session_start();
 require_once "../config.php";
 require_once "../vendor/autoload.php";
 require_once "../models/userActivityLogs.php";
-
+require_once "../models/accounts.php";
+$account = new Accounts($conn);
 $userLogs = new UserActivityLogs($conn);
 
 if (isset($_POST['submit_image']) && isset($_FILES['profile_image'])) {
@@ -19,9 +20,11 @@ if (isset($_POST['submit_image']) && isset($_FILES['profile_image'])) {
     if($check !== false) {
         // Attempt to upload the file
         if (move_uploaded_file($image['tmp_name'], $uploadFile)) {
+            // update the accounts table
+            $account->updateProfileImage($userId, $imageName);
             // Update session variable and database if needed
             $_SESSION['image_url'] = $imageName;
-            // Update database code here (if necessary)
+            
             $_SESSION['success_message'] = "Image Updated successfully!";
             
             $userLogs->logActivity($userId, "Updated profile image");
@@ -66,4 +69,3 @@ if (isset($_POST['submit_logo']) && isset($_FILES['system_logo'])) {
         header("Location:../admin/settings.php");
     }
 }
-?>
