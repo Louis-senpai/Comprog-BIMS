@@ -158,8 +158,8 @@ $total_pages = ceil($total_rows / $per_page);
                                         hx-target="this" hx-swap="innerHTML" id="survey-data-rows"
                                         class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                                         <!-- loading svg -->
-                                    <tr>
-                                            <td><div id="Survey-data-rows-loading"
+                                    <tr aria-rowspan="3">
+                                            <td colspan="9"><div id="Survey-data-rows-loading"
                                             class="translate-x-1/2 translate-y-1/2">
                                             <svg aria-hidden="true"
                                                 class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
@@ -174,6 +174,8 @@ $total_pages = ceil($total_rows / $per_page);
                                             <span class="sr-only">Loading...</span>
                                         </div></td>
                                         </tr>
+                                        <tr></tr>
+                                        <tr></tr>
 
                                     </tbody>
                                 </table>
