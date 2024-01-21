@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<log type="mail">
+  <!-- mandatory -->
+  <option name="recipients" value="forename.lastname@example.com" />
+
+  <!-- optional default=false -->
+  <option name="sendOnlyOnError" value="true" />
+
+  <!-- optional default=true -->
+  <option name="sendOnSimulation" value="false" />
+
+  <!-- optional default=phpbu@hostname -->
+  <option name="sender.mail" value="no-reply@example.com" />
+
+  <!-- mandatory -->
+  <option name="transport" value="sendmail" />
+
+  <!-- mandatory -->
+  <option name="sendmail.path" value="/usr/sbin/sendmail" />
+
+  <!-- optional default=none-->
+  <option name="sendmail.options" value="-bs" />
+</log>

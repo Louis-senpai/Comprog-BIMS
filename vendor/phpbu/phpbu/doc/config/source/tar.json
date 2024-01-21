@@ -1,0 +1,13 @@
+{
+  "type": "tar",
+  "option": {
+    "path": "src",
+    "exclude": "foo/bar,fiz/baz",
+    "ignoreFailedRead": false,
+    "compressProgram": "lbzip2",
+    "removeSourceDir": false,
+    "throttle": "5m",
+    "pathToTar": "/path/to/custom/bin",
+    "dereference": false
+  }
+}

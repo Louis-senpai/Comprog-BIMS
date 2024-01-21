@@ -548,7 +548,7 @@ $result = mysqli_query($conn, $sql);
                         </div>
 
                     </div>
-                    <?php if ($_SESSION['role'] === 'admin' ):?>
+                    <?php if ($accountModel->verifyRole('superadmin')):?>
                     <h1 class="col-span-3 text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">System
                         settings</h1>
                     <div class="col-span-full xl:col-auto">
@@ -646,7 +646,7 @@ $result = mysqli_query($conn, $sql);
                                             Port</label>
                                         <input type="number" id="port" name="port"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="" required="" value='<?php echo $smtp['port'];?>' />
+                                            placeholder="465" required="" value='<?php echo $smtp['port'];?>' />
 
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">

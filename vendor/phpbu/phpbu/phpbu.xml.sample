@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpbu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="http://schema.phpbu.de/6.0/phpbu.xsd"
+       verbose="true">
+
+  <logging>
+    <log type="json" target="/tmp/logfile.json"/>
+  </logging>
+
+  <backups>
+    <backup name="myAppDB">
+      <!-- data to backup -->
+      <source type="mysql">
+        <option name="databases" value="dbname"/>
+        <option name="tables" value=""/>
+        <option name="ignoreTables" value=""/>
+        <option name="structureOnly" value="dbname.table1,dbname.table2"/>
+      </source>
+
+      <!-- where should the backup be stored -->
+      <target dirname="/tmp/backup" filename="mysqldump-%Y%m%d-%H%i.sql" compress="bzip2"/>
+
+      <!-- do some sanity checks to make sure everything worked as planned -->
+      <check type="sizemin" value="2M"/>
+
+      <!-- sync backup to some location or service -->
+      <sync type="sftp">
+        <option name="host" value="example.com"/>
+        <option name="user" value="user.name"/>
+        <option name="password" value="topsecret"/>
+        <option name="path" value="some/dir"/>
+      </sync>
+
+      <!-- deletes old backups -->
+      <cleanup type="capacity">
+        <option name="size" value="100M"/>
+      </cleanup>
+    </backup>
+  </backups>
+</phpbu>

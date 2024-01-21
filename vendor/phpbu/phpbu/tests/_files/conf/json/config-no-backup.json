@@ -1,0 +1,22 @@
+{
+  "verbose": false,
+  "colors": true,
+  "bootstrap": "backup/bootstrap.php",
+  "logging": [
+    {
+      "type": "json",
+      "target": "backup/json.log"
+    },
+    {
+      "type": "mail",
+      "options": {
+        "recipients": "forename.lastname@example.com",
+        "sendOnlyOnError": true,
+        "sender.mail": "no-reply@example.com",
+        "transport": "sendmail",
+        "sendmail.path": "/usr/sbin/sendmail",
+        "sendmail.options": "-bs"
+      }
+    }
+  ]
+}

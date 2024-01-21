@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpbu bootstrap="backup/bootstrap.php"
+       verbose="false"
+       colors="true">
+
+  <logging>
+    <log type="json">
+      <option name="target" value="backup/json.log"/>
+    </log>
+  </logging>
+
+  <backups>
+    <backup name="tarball">
+      <source type="tar">
+        <option name="path" value="src"/>
+      </source>
+
+      <target dirname="backup/src" filename="tarball-%Y%m%d-%H%i.tar" compress="bzip2"/>
+
+      <check type="SizeMin" value="10M" />
+
+      <sync type="sftp" skipOnFailure="true">
+        <option name="host" value="example.com"/>
+        <option name="user" value="nobody"/>
+        <option name="password" value="secret"/>
+        <option name="path" value="phpbu-backup/%Y"/>
+      </sync>
+
+      <cleanup type="Capacity">
+        <option name="size" value="50k"/>
+      </cleanup>
+    </backup>
+  </backups>
+</phpbu>

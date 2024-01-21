@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<log type="mail">
+  <!-- mandatory -->
+  <option name="recipients" value="forename.lastname@example.com" />
+
+  <!-- optional default=false -->
+  <option name="sendOnlyOnError" value="true" />
+
+  <!-- optional default=true -->
+  <option name="sendOnSimulation" value="false" />
+
+  <!-- optional default=PHPBU Backup Report from $HOSTNAME -->
+  <option name="subject" value="My Backup Report Subject" />
+
+  <!-- optional default=phpbu@hostname -->
+  <option name="sender.mail" value="no-reply@example.com" />
+
+  <!-- mandatory -->
+  <option name="transport" value="mail" />
+</log>

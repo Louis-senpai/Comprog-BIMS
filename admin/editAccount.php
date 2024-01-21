@@ -1,5 +1,10 @@
 <?php 
 require_once '../includes/components/header.php';
+if ($accountModel->notVerifyRole('Manage_Accounts') && $accountModel->notVerifyRole('superadmin')) {
+    $_SESSION['error_message'] = 'Unauthorized Access!';
+    header("Location: home.php");
+    exit();
+}
 if(isset($_GET['edit'])) {
     $result = $accountModel->getAccount($_GET['edit']);
 }
@@ -46,13 +51,14 @@ $permissionsJson = json_decode($permissions);
                                     <div class="w-full">
                                         <label for="price"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
-                                            <select name="role" id="role"
+                                        <select name="role" id="role"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                            <option selected value="<?php echo $result['role']?>"><?php echo $result['role']?></option>
+                                            <option selected value="<?php echo $result['role']?>">
+                                                <?php echo $result['role']?></option>
                                             <option value="admin">Admin</option>
                                             <option value="user">User</option>
-                                            </select>
-                                        
+                                        </select>
+
                                     </div>
 
                                     <div>
@@ -62,22 +68,43 @@ $permissionsJson = json_decode($permissions);
                                         <div class="flex items-center space-x-4">
                                             <div
                                                 class="flex items-center border border-gray-200 rounded ps-4 dark:border-gray-700">
-                                                <input id="bordered-checkbox-1" name="permission[]" type="checkbox"  value="Manage_Accounts"
-                                                    name="bordered-checkbox"  <?php if(in_array('Manage_Accounts', $permissionsJson)) { echo "checked"; }?>
+                                                <input id="bordered-checkbox-1" name="permission[]" type="checkbox"
+                                                    value="Manage_Accounts" 
+                                                    <?php if(in_array('Manage_Accounts', $permissionsJson)) { echo "checked"; }?>
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                                 <label for="bordered-checkbox-1"
                                                     class="w-full py-4 text-sm font-medium text-gray-900 ms-2 dark:text-gray-300">
-                                                Manage Accounts</label>
+                                                    Manage Accounts</label>
                                             </div>
-                                            
+
                                             <div
                                                 class="flex items-center border border-gray-200 rounded ps-4 dark:border-gray-700">
-                                                <input id="bordered-checkbox-2" name="permission[]" type="checkbox"  value="Manage_Residents"
-                                                    name="bordered-checkbox"  <?php if(in_array('Manage_Residents', $permissionsJson)) { echo "checked"; }?>
+                                                <input id="bordered-checkbox-2" name="permission[]" type="checkbox"
+                                                    value="Manage_Residents" 
+                                                    <?php if(in_array('Manage_Residents', $permissionsJson)) { echo "checked"; }?>
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                                 <label for="bordered-checkbox-2"
                                                     class="w-full py-4 text-sm font-medium text-gray-900 ms-2 dark:text-gray-300">
-                                                Manage Residents</label>
+                                                    Manage Residents</label>
+                                            </div>
+
+                                            <div
+                                                class="flex items-center border border-gray-200 rounded ps-4 dark:border-gray-700">
+                                                <input id="bordered-checkbox-4" name="permission[]" type="checkbox"
+                                                    value="Add_Residents" <?php if(in_array('Add_Residents', $permissionsJson)) { echo "checked"; }?>
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <label for="bordered-checkbox-4"
+                                                    class="w-full py-4 text-sm font-medium text-gray-900 ms-2 dark:text-gray-300">
+                                                    Add Residents</label>
+                                            </div>
+                                            <div
+                                                class="flex items-center border border-gray-200 rounded ps-4 dark:border-gray-700">
+                                                <input id="bordered-checkbox-3" name="permission[]" type="checkbox"
+                                                    value="View_Reports" <?php if(in_array('View_Reports', $permissionsJson)) { echo "checked"; }?>
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <label for="bordered-checkbox-3"
+                                                    class="w-full py-4 text-sm font-medium text-gray-900 ms-2 dark:text-gray-300">
+                                                    View Reports</label>
                                             </div>
 
                                         </div>
@@ -107,7 +134,7 @@ $permissionsJson = json_decode($permissions);
                             </form>
                         </div>
                     </section>
-                    <!-- Included Footer.php -->
+
                     <?php 
                     require_once "../includes/components/footer.php";
                 ?>

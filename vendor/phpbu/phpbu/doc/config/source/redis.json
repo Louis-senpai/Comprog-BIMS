@@ -1,0 +1,10 @@
+{
+  "type": "redis",
+  "options": {
+    "pathToRedisData": "/var/lib/redis/6379/dump.rdb",
+    "timeout": "90",
+    "port": "6379",
+    "password": "TopSecret",
+    "pathToRedisCli": "/path/to/custom/bin"
+  }
+}

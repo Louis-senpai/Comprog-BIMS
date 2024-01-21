@@ -1,0 +1,104 @@
+{
+  "name": "phpbu/phpbu",
+  "description": "PHP Backup utility.",
+  "type": "library",
+  "keywords": [
+    "backup",
+    "mysql",
+    "mongodb",
+    "tar",
+    "arangodb",
+    "elasticsearch",
+    "influxdb",
+    "postgres",
+    "cloud",
+    "rsync",
+    "sftp"
+  ],
+  "homepage": "https://phpbu.de/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sebastian Feldmann",
+      "email": "sebastian@phpbu.de",
+      "role": "lead"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/sebastianfeldmann/phpbu/issues"
+  },
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/sebastianfeldmann"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "phpbu\\App\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "phpbu\\App\\": "tests/phpbu/"
+    }
+  },
+  "require": {
+    "php": ">=8.0",
+    "ext-dom": "*",
+    "ext-json": "*",
+    "ext-spl": "*",
+    "sebastian/environment": "^3.0|^4.0|^5.0|^6.0",
+    "sebastianfeldmann/cli": "^3.4",
+    "symfony/process": "^3.0|^4.0|^5.0|^6.0|^7.0"
+  },
+  "require-dev": {
+    "sebastianfeldmann/git": "^3.2",
+    "sebastianfeldmann/ftp": "^0.9",
+    "guzzlehttp/guzzle": "^5.3.4|^6.5.8|^7.5.0",
+    "aws/aws-sdk-php": "^3.10",
+    "kunalvarma05/dropbox-php-sdk": "^0.4",
+    "phpseclib/phpseclib": "^2.0",
+    "softlayer/objectstorage": "dev-master",
+    "vlucas/phpdotenv": "^4.0",
+    "google/apiclient":"^2.7",
+    "php-opencloud/openstack": "^3.0",
+    "arhitector/yandex": "^2.0",
+    "microsoft/azure-storage-blob": "^1.4",
+    "phpmailer/phpmailer": "^6.0"
+  },
+  "suggest": {
+    "sebastianfeldmann/ftp": "Require ^0.9 to sync to an FTP server",
+    "guzzlehttp/guzzle": "Require ^5.3.3|^6.2.1 to write logs to Telegram",
+    "aws/aws-sdk-php": "Require '^3.10' to sync to Amazon S3",
+    "kunalvarma05/dropbox-php-sdk": "Require '^0.2' to sync to Dropbox",
+    "phpseclib/phpseclib": "Require '^2.0' to use SFTP sync",
+    "softlayer/objectstorage": "Require 'dev-master' to sync to Softlayer",
+    "php-opencloud/openstack": "Require ^3.0 to sync to OpenStack",
+    "vlucas/phpdotenv": "Require ^3.0 or ^4.0 or ^5.0 to use the Dotenv adapter",
+    "google/apiclient":"Require ^2.0 to sync to Google Drive",
+    "arhitector/yandex":"Require ^2.0 to sync to Yandex Disk",
+    "microsoft/azure-storage-blob": "Require ^1.4 to sync to Azure Blob Storage",
+    "phpmailer/phpmailer": "Require ^6.0 to receive logs via email"
+  },
+  "bin": [
+    "phpbu"
+  ],
+  "extra": {
+    "branch-alias": {
+      "dev-master": "6.0.x-dev"
+    }
+  },
+  "scripts": {
+    "post-autoload-dump": "tools/captainhook install -f -s",
+    "setup": "phive install",
+    "test": "tools/phpunit",
+    "analyse": "tools/phpstan analyse",
+    "style": "tools/phpcs --standard=psr2 src"
+  },
+  "config": {
+    "allow-plugins": {
+      "php-http/discovery": true
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "pgdump",
+  "options": {
+    "host": "localhost",
+    "port": "1234",
+    "jobs": "4",
+    "user": "myUserName",
+    "password": "topSecret",
+    "database": "myDatabaseName",
+    "schemaOnly": true,
+    "dataOnly": true,
+    "schemas": "schema1,schema2,schema3",
+    "excludeSchemas": "schema4,schema5,schema6",
+    "tables": "table1,table2,table3",
+    "excludeTables": "table4,table5,table6",
+    "excludeTableData": "table7,table8,table9",
+    "noPermissions": true,
+    "noOwner": true,
+    "clean": true,
+    "format": "custom",
+    "encoding": "utf-8",
+    "pathToPgdump": "/path/to/custom/bin"
+  }
+}

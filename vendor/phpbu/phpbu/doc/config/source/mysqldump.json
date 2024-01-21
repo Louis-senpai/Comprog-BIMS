@@ -1,0 +1,24 @@
+{
+  "type": "mysqldump",
+  "option": {
+    "host": "myHost",
+    "port": "4711",
+    "user": "myUserName",
+    "password": "mySecretPassword",
+    "databases": "myDB1,mydB2",
+    "tables": "myTable1,myTable2,myTable3",
+    "ignoreTables": "myTableToIgnore1,myTableToIgnore2",
+    "structureOnly": "myTableWithoutData1,myTableWithoutData2",
+    "quick": true,
+    "lockTables": true,
+    "singleTransaction": true,
+    "compress": true,
+    "skipExtendedInsert": false,
+    "hexBlob": true,
+    "skipTriggers": false,
+    "routines": true,
+    "gtidPurged": "AUTO",
+    "sslCa": "/var/www/html/BaltimoreCyberTrustRoot.crt.pem",
+    "pathToMysqldump": "/path/to/custom/bin"
+  }
+}

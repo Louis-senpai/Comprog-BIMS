@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpbu bootstrap="backup/bootstrap.php"
+       verbose="false"
+       colors="true">
+
+  <backups>
+    <backup name="tarball">
+    </backup>
+  </backups>
+</phpbu>

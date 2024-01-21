@@ -7,4 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'SebastianBergmann\\Environment\\Console' => $vendorDir . '/sebastian/environment/src/Console.php',
+    'SebastianBergmann\\Environment\\Runtime' => $vendorDir . '/sebastian/environment/src/Runtime.php',
 );

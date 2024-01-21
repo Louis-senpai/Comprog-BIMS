@@ -7,7 +7,7 @@ if ($accountModel->notVerifyRole('admin') && $accountModel->notVerifyRole('super
     exit();
 }
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-$total_rows = $surveyModel->getTotalSurveys();
+$total_rows = $accountModel->getTotalAccounts();
 
 if ($page > 2) {
     $minus = $page - 2;
@@ -81,8 +81,11 @@ $total_pages = ceil($total_rows / $per_page);
                                         <label for="users-search" class="sr-only">Search</label>
                                         <div class="relative mt-1 lg:w-64 xl:w-96">
                                             <input type="text" name="name" id="users-search"
+                                            hx-get="/api/GetAccountsRows.php"
+                                        hx-target="#accounts-rows" hx-swap="innerHTML"
+                                        hx-trigger="keyup changed delay:500ms" hx-indicator=".loading-indicator"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                placeholder="Search for users by name">
+                                                placeholder="Search for users by name or email">
                                         </div>
                                     </form>
                                     <div class="flex pl-0 mt-3 space-x-1 sm:pl-2 sm:mt-0">
@@ -172,7 +175,7 @@ $total_pages = ceil($total_rows / $per_page);
                                         </thead>
                                         <tbody
                                             hx-get="/api/GetAccountsRows.php?page=<?php echo $page?>" hx-trigger="load"
-                                        hx-target="this" hx-swap="innerHTML"
+                                        hx-target="this" hx-swap="innerHTML" id='accounts-rows'
                                             class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                          
                                         </tbody>
@@ -180,6 +183,52 @@ $total_pages = ceil($total_rows / $per_page);
                                 </div>
                             </div>
                         </div>
+                        <nav class="flex flex-col items-start justify-between p-4 space-y-3 md:flex-row md:items-center md:space-y-0"
+                        aria-label="Table navigation">
+                        <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+                            Showing
+                            <span class="font-semibold text-gray-900 dark:text-white">1 - <?php echo $per_page;?></span>
+                            of
+                            <span class="font-semibold text-gray-900 dark:text-white"><?php echo $total_rows; ?></span>
+                        </span>
+                        <ul class="inline-flex items-stretch -space-x-px">
+                            <?php if ($page > 1) : ?>
+                            <li>
+                                <a href="residents.php?page=<?php echo $page - 1;?>"
+                                    class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                    <span class="sr-only">Previous</span>
+                                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <?php endif; ?>
+                            <?php for ($i = $minus; $i <= min($page + 2, min($total_pages, $minus + 4)); $i++) : ?>
+                            <li>
+                                <a href="residents.php?page=<?php echo $i;?>"
+                                    class="flex items-center justify-center px-3 py-2 text-sm leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><?php echo $i;?></a>
+                            </li>
+                            <?php endfor; ?>
+                            <?php if ($page < $total_pages) : ?>
+                            <li>
+                                <a href="residents.php?page=<?php echo $page + 1;?>"
+                                    class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                    <span class="sr-only">Next</span>
+                                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <?php endif; ?>
+
+                        </ul>
+                    </nav>
                     </div>
 
                     <div id="add-account-modal" tabindex="-1" aria-hidden="true"
@@ -258,7 +307,7 @@ $total_pages = ceil($total_rows / $per_page);
                                                 <div
                                                     class="flex items-center border border-gray-200 rounded ps-4 dark:border-gray-700">
                                                     <input id="bordered-checkbox-1" name="permission[]" type="checkbox"
-                                                        value="Manage_Accounts" name="bordered-checkbox"
+                                                        value="Manage_Accounts" 
                                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                                     <label for="bordered-checkbox-1"
                                                         class="w-full py-4 text-sm font-medium text-gray-900 ms-2 dark:text-gray-300">
@@ -268,11 +317,29 @@ $total_pages = ceil($total_rows / $per_page);
                                                 <div
                                                     class="flex items-center border border-gray-200 rounded ps-4 dark:border-gray-700">
                                                     <input id="bordered-checkbox-2" name="permission[]" type="checkbox"
-                                                        value="Manage_Residents" name="bordered-checkbox"
+                                                        value="Manage_Residents" 
                                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                                     <label for="bordered-checkbox-2"
                                                         class="w-full py-4 text-sm font-medium text-gray-900 ms-2 dark:text-gray-300">
                                                         Manage Residents</label>
+                                                </div>
+                                                <div
+                                                    class="flex items-center border border-gray-200 rounded ps-4 dark:border-gray-700">
+                                                    <input id="bordered-checkbox-4" name="permission[]" type="checkbox"
+                                                        value="Add_Residents" 
+                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                    <label for="bordered-checkbox-4"
+                                                        class="w-full py-4 text-sm font-medium text-gray-900 ms-2 dark:text-gray-300">
+                                                        Add Residents</label>
+                                                </div>
+                                                <div
+                                                    class="flex items-center border border-gray-200 rounded ps-4 dark:border-gray-700">
+                                                    <input id="bordered-checkbox-3" name="permission[]" type="checkbox"
+                                                        value="View_Reports" 
+                                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                    <label for="bordered-checkbox-3"
+                                                        class="w-full py-4 text-sm font-medium text-gray-900 ms-2 dark:text-gray-300">
+                                                        View Reports</label>
                                                 </div>
 
                                             </div>

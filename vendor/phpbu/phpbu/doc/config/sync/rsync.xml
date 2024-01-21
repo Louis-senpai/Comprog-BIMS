@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sync type="rsync">
+  <!-- mandatory -->
+  <option name="path" value="/tmp" />
+
+  <!-- optional, default=none -->
+  <option name="user" value="root" />
+
+  <!-- optional, default=none -->
+  <option name="password" value="secret" />
+
+  <!-- optional, default=none -->
+  <option name="passwordFile" value="/config/.rsync-config" />
+
+  <!-- optional, default=none -->
+  <option name="host" value="127.0.0.1" />
+
+  <!-- optional, default=false -->
+  <!-- syncs the whole directory  where your target is stored -->
+  <option name="dirsync" value="true" />
+
+  <!-- optional, default=false -->
+  <!-- adds the "delete" option to the rsync command to also delete files in the sync location -->
+  <option name="delete" value="true" />
+
+  <!-- optional, default=none -->
+  <!-- files you want to ignore separated by ":" -->
+  <option name="exclude" value="*.cvs:*.jpg" />
+
+  <!-- optional, default=none -->
+  <!-- !!!WARNING!!! advanced mode without escaping -->
+  <!-- use %TARGET_DIR% and %TARGET_FILE% as reference to the created backup -->
+  <option name="args" value="-avz '%TARGET_FILE%' ." />
+</sync>

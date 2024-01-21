@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<source type="mysqldump">
+  <!-- optional, default=localhost -->
+  <option name="host" value="myHost" />
+
+  <!-- optional, default=none -->
+  <option name="port" value="4711" />
+
+  <!-- optional, default=system user -->
+  <option name="user" value="myUserName" />
+
+  <!-- optional, default=none -->
+  <option name="password" value="mySecretPassword" />
+
+  <!-- optional, default=all -->
+  <option name="databases" value="myDB1,mydB2" />
+
+  <!-- optional, default=all -->
+  <option name="tables" value="myTable1,myTable2,myTable3" />
+
+  <!-- optional, default=none -->
+  <option name="ignoreTables" value="myTableToIgnore1,myTableToIgnore2" />
+
+  <!-- optional, default=none -->
+  <option name="structureOnly" value="myTableWithoutData1,myTableWithoutData2" />
+
+  <!-- optional, default=false -->
+  <option name="quick" value="true" />
+
+  <!-- optional, default=none -->
+  <option name="lockTables" value="true" />
+
+  <!-- optional, default=false -->
+  <option name="singleTransaction" value="true" />
+
+  <!-- optional, default=false -->
+  <option name="compress" value="true" />
+
+  <!-- optional, default=false -->
+  <option name="skipExtendedInsert" value="false" />
+
+  <!-- optional, default=false -->
+  <option name="hexBlob" value="true" />
+
+  <!-- optional, default=false -->
+  <option name="skipTriggers" value="false" />
+
+  <!-- optional, default=false -->
+  <option name="routines" value="true" />
+
+  <!-- optional, default=none, accepted=ON,OFF,AUTO -->
+  <option name="gtidPurged" value="ON" />
+
+  <!-- optional, default=none -->
+  <option name="sslCa" value="/var/www/html/BaltimoreCyberTrustRoot.crt.pem" />
+
+  <!-- define your custom mysqldump executable location -->
+  <option name="pathToMysqldump" value="/path/to/custom/bin" />
+</source>

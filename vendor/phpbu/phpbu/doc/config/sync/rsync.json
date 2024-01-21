@@ -1,0 +1,15 @@
+{
+  "type": "rsync",
+  "options": {
+    "path": "/tmp/",
+    "user": "root",
+    "password": "secret",
+    "passwordFile": "/config/.rsync-password",
+    "host": "example.com",
+    "dirsync": false,
+    "delete": false,
+    "exclude": "*.cvs:*.jpg",
+    "args": "-avz '%TARGET_FILE%' root@example.com:/tmp/"
+  }
+}
+

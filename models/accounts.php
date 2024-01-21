@@ -252,7 +252,32 @@ class Accounts extends MysqliDb {
                 'results' => $results,
                 'totalCount' => $this->totalCount
             ];
+
         }
+        public function getTotalAccounts(){
+            return $this->getValue($this->tableName, "count(id)");
+        }
+        // a function that update the verify column to 1
+        public function verifyAccount($id){
+            $this->where('id', $id);
+            $data = Array (
+                "verified" => 1
+            );
+            if ($this->update('Accounts', $data)){
+                return true;
+            } else {
+                return false;
+            }
+        }
+        //function that verify the permission of the user in the session and the permission that is passed in the parameter, the permission session is in array format
+        public function verifyPermission($permission){
+            if (in_array($permission, $_SESSION['permissions'])) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
         
 
         

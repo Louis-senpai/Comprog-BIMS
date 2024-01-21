@@ -12,6 +12,15 @@ class ComposerStaticInit10b28516f81d5eda89055c27ffb0b913
     );
 
     public static $prefixLengthsPsr4 = array (
+        'p' => 
+        array (
+            'phpbu\\App\\' => 10,
+        ),
+        'S' => 
+        array (
+            'Symfony\\Component\\Process\\' => 26,
+            'SebastianFeldmann\\Cli\\' => 22,
+        ),
         'P' => 
         array (
             'Psr\\SimpleCache\\' => 16,
@@ -22,6 +31,18 @@ class ComposerStaticInit10b28516f81d5eda89055c27ffb0b913
     );
 
     public static $prefixDirsPsr4 = array (
+        'phpbu\\App\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpbu/phpbu/src',
+        ),
+        'Symfony\\Component\\Process\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/process',
+        ),
+        'SebastianFeldmann\\Cli\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sebastianfeldmann/cli/src',
+        ),
         'Psr\\SimpleCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
@@ -42,6 +63,8 @@ class ComposerStaticInit10b28516f81d5eda89055c27ffb0b913
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'SebastianBergmann\\Environment\\Console' => __DIR__ . '/..' . '/sebastian/environment/src/Console.php',
+        'SebastianBergmann\\Environment\\Runtime' => __DIR__ . '/..' . '/sebastian/environment/src/Runtime.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

@@ -1,0 +1,13 @@
+{
+  "type": "rsync",
+  "options": {
+    "path": "/tmp/",
+    "user": "root",
+    "host": "example.com",
+    "dirsync": false,
+    "delete": false,
+    "exclude": "*.cvs:*.jpg",
+    "args": "-avz root@example.com:/tmp/ '%TARGET_FILE%'",
+    "pathToRsync": "/path/to/custom/bin"
+  }
+}

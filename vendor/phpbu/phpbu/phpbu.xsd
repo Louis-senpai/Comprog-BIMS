@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation source="http://www.phpbu.de/">
+    This schema file defines the rules by which the XML configuration file of phpbu 6.0 may be structured.
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:element name="phpbu" type="phpbuType">
+  </xs:element>
+
+  <xs:complexType name="adaptersType">
+    <xs:sequence>
+      <xs:element name="adapter" type="adapterType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="adapterType">
+    <xs:sequence>
+      <xs:element name="option" type="nameValueType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="name" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="loggersType">
+    <xs:sequence>
+      <xs:element name="log" type="logType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="logType">
+    <xs:sequence>
+      <xs:element name="option" type="nameValueType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="type" use="required" type="xs:string"/>
+    <xs:attribute name="target" type="xs:anyURI"/>
+  </xs:complexType>
+
+  <xs:complexType name="backupsType">
+    <xs:sequence>
+      <xs:element name="backup" type="backupType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="backupType">
+    <xs:sequence>
+      <xs:element name="source" type="sourceType" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="target" type="targetType" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="check" type="checkType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="crypt" type="cryptType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="sync" type="syncType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="cleanup" type="cleanupType" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="stopOnFailure" type="xs:boolean"/>
+    <xs:attribute name="name" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="sourceType">
+    <xs:sequence>
+      <xs:element name="option" type="nameValueType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="targetType">
+    <xs:attribute name="dirname" use="required" type="xs:string"/>
+    <xs:attribute name="filename" use="required" type="xs:string"/>
+    <xs:attribute name="compress">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="bzip2"/>
+          <xs:enumeration value="gzip"/>
+          <xs:enumeration value="zip"/>
+          <xs:enumeration value="7zip"/>
+          <xs:enumeration value="xz"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="checkType">
+    <xs:attribute name="type" use="required" type="xs:string"/>
+    <xs:attribute name="value" use="required" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="cryptType">
+    <xs:sequence>
+      <xs:element name="option" type="nameValueType" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="type" use="required" type="xs:string"/>
+    <xs:attribute name="skipOnFailure" type="xs:boolean"/>
+  </xs:complexType>
+
+  <xs:complexType name="syncType">
+    <xs:sequence>
+      <xs:element name="option" type="nameValueType" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="type" use="required" type="xs:string"/>
+    <xs:attribute name="skipOnFailure" type="xs:boolean"/>
+  </xs:complexType>
+
+  <xs:complexType name="cleanupType">
+    <xs:sequence>
+      <xs:element name="option" type="nameValueType" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="type" use="required" type="xs:string"/>
+    <xs:attribute name="skipOnFailure" type="xs:boolean"/>
+  </xs:complexType>
+
+  <xs:complexType name="nameValueType">
+    <xs:attribute name="name" use="required" type="xs:string"/>
+    <xs:attribute name="value" use="required" type="xs:anySimpleType"/>
+  </xs:complexType>
+
+  <xs:complexType name="phpbuType">
+    <xs:group ref="configGroup"/>
+    <xs:attributeGroup ref="configAttributeGroup"/>
+  </xs:complexType>
+
+  <xs:attributeGroup name="configAttributeGroup">
+    <xs:attribute name="bootstrap" type="xs:anyURI"/>
+    <xs:attribute name="verbose" type="xs:boolean" default="false"/>
+    <xs:attribute name="colors" type="xs:boolean" default="false"/>
+    <xs:attribute name="debug" type="xs:boolean" default="false"/>
+  </xs:attributeGroup>
+
+  <xs:group name="configGroup">
+    <xs:all>
+      <xs:element name="adapters" type="adaptersType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="logging" type="loggersType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="backups" type="backupsType" minOccurs="0" maxOccurs="1"/>
+    </xs:all>
+  </xs:group>
+</xs:schema>

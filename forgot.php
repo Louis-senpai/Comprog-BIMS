@@ -126,6 +126,10 @@ function verifyCode(){
 $filename = basename($_SERVER['PHP_SELF']);
 $filename = substr($filename, 0, -4);
 
+
+
+
+
 ?>
 
 <!DOCTYPE html>

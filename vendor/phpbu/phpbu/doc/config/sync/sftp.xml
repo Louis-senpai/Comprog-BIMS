@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sync type="sftp">
+  <!-- mandatory -->
+  <option name="host" value="backup.example.com" />
+
+  <!-- mandatory -->
+  <option name="user" value="user.name" />
+
+  <!-- optional, if key presented it is used as key password -->
+  <option name="password" value="mysecret" />
+
+  <!-- optional, default 22 -->
+  <option name="port" value="22" />
+
+  <!-- optional -->
+  <option name="key" value="somedir/id_rsa" />
+
+  <!-- optional, default=none -->
+  <option name="path" value="somedir/somesubdir" />
+</sync>

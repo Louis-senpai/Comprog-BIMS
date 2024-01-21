@@ -1,0 +1,8 @@
+{
+  "type": "openssl",
+  "options": {
+    "certFile": "myCertificate.pem",
+    "algorithm": "aes256",
+    "keepUncryptedFile": false
+  }
+}
