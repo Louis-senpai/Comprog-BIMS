@@ -92,6 +92,9 @@ Class Settings {
     public function updateTitle($title){
         $this->set('title', $title);
     }
+    public function getName(){
+        return $this->get('name');
+    }
     // function that will update the Construct function which will change ../settings.json to /settings.json
 }
 

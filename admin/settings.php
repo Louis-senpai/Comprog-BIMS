@@ -95,45 +95,7 @@ $result = mysqli_query($conn, $sql);
                                 </div>
                             </div>
                         </div>
-                        <div
-                            class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                            <h3 class="mb-4 text-xl font-semibold dark:text-white">Language &amp; Time</h3>
-                            <div class="mb-4">
-                                <label for="settings-language"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select
-                                    language</label>
-                                <select id="settings-language" name="countries"
-                                    class="bg-gray-50 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                    <option>English (US)</option>
-                                    <option>Italiano</option>
-                                    <option>Français (France)</option>
-                                    <option>正體字</option>
-                                    <option>Español (España)</option>
-                                    <option>Deutsch</option>
-                                    <option>Português (Brasil)</option>
-                                </select>
-                            </div>
-                            <div class="mb-6">
-                                <label for="settings-timezone"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time
-                                    Zone</label>
-                                <select id="settings-timezone" name="countries"
-                                    class="bg-gray-50 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                    <option>GMT+0 Greenwich Mean Time (GMT)</option>
-                                    <option>GMT+1 Central European Time (CET)</option>
-                                    <option>GMT+2 Eastern European Time (EET)</option>
-                                    <option>GMT+3 Moscow Time (MSK)</option>
-                                    <option>GMT+5 Pakistan Standard Time (PKT)</option>
-                                    <option>GMT+8 China Standard Time (CST)</option>
-                                    <option>GMT+10 Eastern Australia Standard Time (AEST)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <button
-                                    class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Save
-                                    all</button>
-                            </div>
-                        </div>
+
                         <div
                             class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <div class="flow-root">
@@ -198,84 +160,99 @@ $result = mysqli_query($conn, $sql);
 
                             </div>
                         </div>
+                        <?php 
+                        $emailNotifs = $_SESSION['emailNotifs'];
+                        ?>
                         <div
                             class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800 xl:mb-0">
                             <div class="flow-root">
                                 <h3 class="text-xl font-semibold dark:text-white">Email Notifications</h3>
                                 <p class="text-sm font-normal text-gray-500 dark:text-gray-400">You can set up
                                     your account to get email notifications </p>
-                                <div class="divide-y divide-gray-200 dark:divide-gray-700">
-                                    <!-- Item 1 -->
-                                    <div class="flex items-center justify-between py-4">
-                                        <div class="flex flex-col flex-grow">
-                                            <div class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                Account Verify
+                                <form action="../api/UpdateSettings.php" method="POST">
+                                    <div class="divide-y divide-gray-200 dark:divide-gray-700">
+                                        <!-- Item 1 -->
+                                        <div class="flex items-center justify-between py-4">
+                                            <div class="flex flex-col flex-grow">
+                                                <div class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    Account Verify
+                                                </div>
+                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
+                                                    You will receive an email when an Account needs verification.
+                                                </div>
                                             </div>
-                                            <div class="text-base font-normal text-gray-500 dark:text-gray-400">
-                                                You will receive an email when an Account needs verification.
-                                            </div>
+                                            <label for="rating-reminders"
+                                                class="relative flex items-center cursor-pointer">
+                                                <input type="checkbox" id="rating-reminders" name="emailNotif[]"
+                                                    value="Account_verify" class="sr-only"
+                                                    <?php if(in_array("Account_verify", $emailNotifs)){echo "checked";}?>>
+                                                <span
+                                                    class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
+                                            </label>
                                         </div>
-                                        <label for="rating-reminders" class="relative flex items-center cursor-pointer">
-                                            <input type="checkbox" id="rating-reminders" class="sr-only">
-                                            <span
-                                                class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
-                                        </label>
-                                    </div>
-                                    <!-- Item 2 -->
-                                    <div class="flex items-center justify-between py-4">
-                                        <div class="flex flex-col flex-grow">
-                                            <div class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                Resident Notifications
+                                        <!-- Item 2 -->
+                                        <div class="flex items-center justify-between py-4">
+                                            <div class="flex flex-col flex-grow">
+                                                <div class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    Resident Notifications
+                                                </div>
+                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
+                                                    You will receive an email when a Resident was added, removed, or
+                                                    updated.
+                                                </div>
                                             </div>
-                                            <div class="text-base font-normal text-gray-500 dark:text-gray-400">
-                                                You will receive an email when a Resident was added, removed, or
-                                                updated.
-                                            </div>
+                                            <label for="item-update" class="relative flex items-center cursor-pointer">
+                                                <input type="checkbox" id="item-update" class="sr-only"
+                                                    name="emailNotif[]" value="Resident_Notifications"
+                                                    <?php if(in_array("Resident_Notifications", $emailNotifs)){echo "checked";}?>>
+                                                <span
+                                                    class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
+                                            </label>
                                         </div>
-                                        <label for="item-update" class="relative flex items-center cursor-pointer">
-                                            <input type="checkbox" id="item-update" class="sr-only" checked="">
-                                            <span
-                                                class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
-                                        </label>
-                                    </div>
-                                    <!-- Item 3 -->
-                                    <div class="flex items-center justify-between py-4">
-                                        <div class="flex flex-col flex-grow">
-                                            <div class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                System Notifications
+                                        <!-- Item 3 -->
+                                        <div class="flex items-center justify-between py-4">
+                                            <div class="flex flex-col flex-grow">
+                                                <div class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    System Notifications
+                                                </div>
+                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">Send
+                                                    me
+                                                    an email when someone updates the system (eg. logo, descriptions,
+                                                    etc...)</div>
                                             </div>
-                                            <div class="text-base font-normal text-gray-500 dark:text-gray-400">Send me
-                                                an email when someone updates the system (eg. logo, descriptions,
-                                                etc...)</div>
+                                            <label for="item-comment" class="relative flex items-center cursor-pointer">
+                                                <input type="checkbox" id="item-comment" class="sr-only"
+                                                    name="emailNotif[]" value="System_Notifications"
+                                                    <?php if(in_array("System_Notifications", $emailNotifs)){echo "checked";}?>>
+                                                <span
+                                                    class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
+                                            </label>
                                         </div>
-                                        <label for="item-comment" class="relative flex items-center cursor-pointer">
-                                            <input type="checkbox" id="item-comment" class="sr-only" checked="">
-                                            <span
-                                                class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
-                                        </label>
-                                    </div>
-                                    <!-- Item 4 -->
-                                    <div class="flex items-center justify-between pt-4">
-                                        <div class="flex flex-col flex-grow">
-                                            <div class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                Backups Notifications
+                                        <!-- Item 4 -->
+                                        <div class="flex items-center justify-between pt-4">
+                                            <div class="flex flex-col flex-grow">
+                                                <div class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    Backups Notifications
+                                                </div>
+                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
+                                                    Send me email when a backup is created or restored.
+                                                </div>
                                             </div>
-                                            <div class="text-base font-normal text-gray-500 dark:text-gray-400">
-                                                Send me email when a backup is created or restored.
-                                            </div>
+                                            <label for="buyer-rev" class="relative flex items-center cursor-pointer">
+                                                <input type="checkbox" id="buyer-rev" class="sr-only"
+                                                    name="emailNotif[]" value="Backups_Notifications"
+                                                    <?php if(in_array("Backups_Notifications", $emailNotifs)){echo "checked";}?>>
+                                                <span
+                                                    class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
+                                            </label>
                                         </div>
-                                        <label for="buyer-rev" class="relative flex items-center cursor-pointer">
-                                            <input type="checkbox" id="buyer-rev" class="sr-only">
-                                            <span
-                                                class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
-                                        </label>
                                     </div>
-                                </div>
-                                <div class="mt-6">
-                                    <button
-                                        class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Save
-                                        all</button>
-                                </div>
+                                    <div class="mt-6">
+                                        <button type="submit" name="updateEmailNotif"
+                                            class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Save
+                                            all</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
 
@@ -285,7 +262,7 @@ $result = mysqli_query($conn, $sql);
                         <div
                             class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <h3 class="mb-4 text-xl font-semibold dark:text-white">Barangy Officers</h3>
-                            <form action="#">
+                            <form action="../api/UpdateSettings.php" method="POST">
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="Name"
@@ -449,110 +426,129 @@ $result = mysqli_query($conn, $sql);
                                 </div>
                             </form>
                         </div>
+                        <?php 
+                        $notifs = $_SESSION['notifications'];
+                        ?>
                         <div
                             class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800 xl:mb-0">
                             <div class="flow-root">
-                                <h3 class="text-xl font-semibold dark:text-white">Alerts &amp; Notifications</h3>
-                                <p class="text-sm font-normal text-gray-500 dark:text-gray-400">You can set up
-                                    Themesberg to get notifications</p>
-                                <div class="divide-y divide-gray-200 dark:divide-gray-700">
-                                    <!-- Item 1 -->
-                                    <div class="flex items-center justify-between py-4">
-                                        <div class="flex flex-col flex-grow">
-                                            <div class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                New Resident Added
+                                <form action="../api/UpdateSettings.php" method="POST">
+                                    <h3 class="text-xl font-semibold dark:text-white">Alerts &amp; Notifications</h3>
+                                    <p class="text-sm font-normal text-gray-500 dark:text-gray-400">You can set up
+                                        Themesberg to get notifications</p>
+                                    <div class="divide-y divide-gray-200 dark:divide-gray-700">
+                                        <!-- Item 1 -->
+                                        <div class="flex items-center justify-between py-4">
+                                            <div class="flex flex-col flex-grow">
+                                                <div class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    New Resident Added
+                                                </div>
+                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
+                                                    get notified when new resident added
+                                                </div>
                                             </div>
-                                            <div class="text-base font-normal text-gray-500 dark:text-gray-400">
-                                                get notified when new resident added
-                                            </div>
+                                            <label for="company-news" class="relative flex items-center cursor-pointer">
+                                                <input type="checkbox" id="company-news" class="sr-only"
+                                                    name="Pushnotif[]" value="Resident_Added"
+                                                    <?php if(in_array("Resident_Added",$notifs)){echo "checked";}?>>
+                                                <span
+                                                    class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
+                                            </label>
                                         </div>
-                                        <label for="company-news" class="relative flex items-center cursor-pointer">
-                                            <input type="checkbox" id="company-news" class="sr-only">
-                                            <span
-                                                class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
-                                        </label>
-                                    </div>
-                                    <!-- Item 2 -->
-                                    <div class="flex items-center justify-between py-4">
-                                        <div class="flex flex-col flex-grow">
-                                            <div class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                A Resident was removed from the system
+                                        <!-- Item 2 -->
+                                        <div class="flex items-center justify-between py-4">
+                                            <div class="flex flex-col flex-grow">
+                                                <div class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    A Resident was removed from the system
+                                                </div>
+                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
+                                                    get notified when a resident was removed from the system
+                                                </div>
                                             </div>
-                                            <div class="text-base font-normal text-gray-500 dark:text-gray-400">
-                                                get notified when a resident was removed from the system
-                                            </div>
+                                            <label for="account-activity"
+                                                class="relative flex items-center cursor-pointer">
+                                                <input type="checkbox" id="account-activity" class="sr-only"
+                                                    name="Pushnotif[]" value="Resident_Removed"
+                                                    <?php if(in_array("Resident_Removed",$notifs)){echo "checked";}?> />
+                                                <span
+                                                    class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
+                                            </label>
                                         </div>
-                                        <label for="account-activity" class="relative flex items-center cursor-pointer">
-                                            <input type="checkbox" id="account-activity" class="sr-only" checked="">
-                                            <span
-                                                class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
-                                        </label>
-                                    </div>
-                                    <!-- Item 3 -->
-                                    <div class="flex items-center justify-between py-4">
-                                        <div class="flex flex-col flex-grow">
-                                            <div class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                Account activity
+                                        <!-- Item 3 -->
+                                        <div class="flex items-center justify-between py-4">
+                                            <div class="flex flex-col flex-grow">
+                                                <div class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    Account activity
+                                                </div>
+                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
+                                                    get notified when You Login or Logout from your account
+                                                </div>
                                             </div>
-                                            <div class="text-base font-normal text-gray-500 dark:text-gray-400">
-                                                get notified when You Login or Logout from your account
-                                            </div>
+                                            <label for="meetups" class="relative flex items-center cursor-pointer">
+                                                <input type="checkbox" id="meetups" class="sr-only" name="Pushnotif[]"
+                                                    value="Account_Activity"
+                                                    <?php if(in_array("Account_Activity",$notifs)){echo "checked";}?> />
+                                                <span
+                                                    class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
+                                            </label>
                                         </div>
-                                        <label for="meetups" class="relative flex items-center cursor-pointer">
-                                            <input type="checkbox" id="meetups" class="sr-only" checked="">
-                                            <span
-                                                class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
-                                        </label>
-                                    </div>
-                                    <!-- Item 3 -->
-                                    <div class="flex items-center justify-between py-4">
-                                        <div class="flex flex-col flex-grow">
-                                            <div class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                Account Verify
+                                        <?php if($_SESSION['role'] === 'admin'):?>
+                                        <div class="flex items-center justify-between py-4">
+                                            <div class="flex flex-col flex-grow">
+                                                <div class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    Account Verify
+                                                </div>
+                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
+                                                    get notified when someone's Account need verification to the admin
+                                                </div>
+                                                <!-- add a warning that this is only available for admins only -->
+                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
+                                                    <span class="text-xs font-normal text-gray-500 dark:text-gray-400">
+                                                        <i class="fas fa-exclamation-circle mr-1"></i>
+                                                        Only available for admins
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <div class="text-base font-normal text-gray-500 dark:text-gray-400">
-                                                get notified when someone's Account need verification to the admin
-                                            </div>
-                                            <!-- add a warning that this is only available for admins only -->
-                                            <div class="text-base font-normal text-gray-500 dark:text-gray-400">
-                                                <span class="text-xs font-normal text-gray-500 dark:text-gray-400">
-                                                    <i class="fas fa-exclamation-circle mr-1"></i>
-                                                    Only available for admins
-                                                </span>
-                                            </div>
+                                            <label for="Account_verify"
+                                                class="relative flex items-center cursor-pointer">
+                                                <input type="checkbox" id="Account_verify" class="sr-only"
+                                                    name="Pushnotif[]" value="Account_Verify"
+                                                    <?php if(in_array("Account_Verify",$notifs)){echo "checked";}?> />
+                                                <span
+                                                    class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
+                                            </label>
                                         </div>
-                                        <label for="Account_verify" class="relative flex items-center cursor-pointer">
-                                            <input type="checkbox" id="Account_verify" class="sr-only" checked="">
-                                            <span
-                                                class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
-                                        </label>
-                                    </div>
-                                    <!-- Item 4 -->
-                                    <div class="flex items-center justify-between pt-4">
-                                        <div class="flex flex-col flex-grow">
-                                            <div class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                System updates
+                                        <?php endif;?>
+                                        <!-- Item 4 -->
+                                        <div class="flex items-center justify-between pt-4">
+                                            <div class="flex flex-col flex-grow">
+                                                <div class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    System updates
+                                                </div>
+                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
+                                                    get notified when someone updated the system
+                                                </div>
                                             </div>
-                                            <div class="text-base font-normal text-gray-500 dark:text-gray-400">
-                                                get notified when someone updated the system
-                                            </div>
+                                            <label for="new-messages" class="relative flex items-center cursor-pointer">
+                                                <input type="checkbox" id="new-messages" class="sr-only"
+                                                    name="Pushnotif[]" value="System_Updates"
+                                                    <?php if(in_array("System_Updates",$notifs)){echo "checked";}?> />
+                                                <span
+                                                    class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
+                                            </label>
                                         </div>
-                                        <label for="new-messages" class="relative flex items-center cursor-pointer">
-                                            <input type="checkbox" id="new-messages" class="sr-only">
-                                            <span
-                                                class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
-                                        </label>
                                     </div>
-                                </div>
-                                <div class="mt-6">
-                                    <button
-                                        class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Save
-                                        all</button>
-                                </div>
+                                    <div class="mt-6">
+                                        <button type="submit" name="updatePushNotif"
+                                            class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Save
+                                            all</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
 
                     </div>
+                    <?php if ($_SESSION['role'] === 'admin' ):?>
                     <h1 class="col-span-3 text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">System
                         settings</h1>
                     <div class="col-span-full xl:col-auto">
@@ -583,57 +579,56 @@ $result = mysqli_query($conn, $sql);
                                 </div>
                             </div>
                         </div>
-                    
+
                         <div
                             class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <form action="../api/UpdateSettings.php" method="POST">>
-                            <h3 class="mb-4 text-xl font-semibold dark:text-white">Set Title / Organization</h3>
-                            <div class="mb-4">
-                                <label for="settings-language"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    Organization / Title
-                                </label>
-                                <input type="text" id="settings-title" name="title"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    value="<?php echo $Settings->get('name');?>">
+                                <h3 class="mb-4 text-xl font-semibold dark:text-white">Set Title / Organization</h3>
+                                <div class="mb-4">
+                                    <label for="settings-language"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Organization / Title
+                                    </label>
+                                    <input type="text" id="settings-title" name="title"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        value="<?php echo $Settings->get('name');?>">
 
-                            </div>
-                            <div class="mb-6">
-                                <label for="settings-timezone"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    Website / System Email
-                                </label>
+                                </div>
+                                <div class="mb-6">
+                                    <label for="settings-timezone"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Website / System Email
+                                    </label>
 
-                                <input type="email" id="settings-email" name="webEmail"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    value="<?php echo $Settings->get('websiteEmail');?>" required>
+                                    <input type="email" id="settings-email" name="webEmail"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        value="<?php echo $Settings->get('websiteEmail');?>" required>
 
 
 
-                            </div>
-                            <div>
-                                <button type="submit" name="updateTitle"
-                                     class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Save
-                                    all</button>
-                            </div>
+                                </div>
+                                <div>
+                                    <button type="submit" name="updateTitle"
+                                        class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Save
+                                        all</button>
+                                </div>
                             </form>
                         </div>
 
 
                     </div>
                     <?php 
-                    $smtp = $Settings->getSMTP();
-                    $facebook = $Settings->getFacebookAPI();
-                    $google = $Settings->getGoogleAPI();
-                    
-                    ?>
+                                $smtp = $Settings->getSMTP();
+                                $facebook = $Settings->getFacebookAPI();
+                                $google = $Settings->getGoogleAPI();
+                                
+                                ?>
                     <div class="col-span-2">
                         <div
                             class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <h3 class="mb-4 text-xl font-semibold dark:text-white">SMTP configuration</h3>
-                            <p
-                            class="mb-4 text-sm text-gray-500 dark:text-gray-400"
-                            > this is where you set the email account that will be used for email notification and OTP</p>
+                            <p class="mb-4 text-sm text-gray-500 dark:text-gray-400"> this is where you set the email
+                                account that will be used for email notification and OTP</p>
                             <form action="../api/UpdateSettings.php" method="POST">
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6 sm:col-span-3">
@@ -642,17 +637,17 @@ $result = mysqli_query($conn, $sql);
                                             HOST</label>
                                         <input type="text" name="host" id="host"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="smtp.gmail.com" required="" value='<?php echo $smtp['host'];?>'  />
+                                            placeholder="smtp.gmail.com" required=""
+                                            value='<?php echo $smtp['host'];?>' />
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="port"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                             Port</label>
-                                        <input 
-                                            type="number" id="port" name="port"
+                                        <input type="number" id="port" name="port"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="" required="" value='<?php echo $smtp['port'];?>'  />
-                                        
+                                            placeholder="" required="" value='<?php echo $smtp['port'];?>' />
+
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="email"
@@ -660,7 +655,8 @@ $result = mysqli_query($conn, $sql);
                                             Email</label>
                                         <input type="text" name="email" id="email"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="example@gmail.com" required="" value='<?php echo $smtp['user'];?>'  />
+                                            placeholder="example@gmail.com" required=""
+                                            value='<?php echo $smtp['user'];?>' />
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="password"
@@ -668,7 +664,8 @@ $result = mysqli_query($conn, $sql);
                                             password</label>
                                         <input type="text" name="password" id="password"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="••••••••" required="" value='<?php echo $smtp['password'];?>'  />
+                                            placeholder="••••••••" required=""
+                                            value='<?php echo $smtp['password'];?>' />
                                     </div>
                                     <div class="col-span-6 sm:col-full">
                                         <button name="updateSMTP"
@@ -681,9 +678,8 @@ $result = mysqli_query($conn, $sql);
                         <div
                             class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <h3 class="mb-4 text-xl font-semibold dark:text-white">Facebook Auth configuration</h3>
-                            <p
-                            class="mb-4 text-sm text-gray-500 dark:text-gray-400"
-                            > this is where you set the Facebook API for connecting your account to facebook</p>
+                            <p class="mb-4 text-sm text-gray-500 dark:text-gray-400"> this is where you set the Facebook
+                                API for connecting your account to facebook</p>
                             <form action="../api/UpdateSettings.php" method="POST">
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6 sm:col-span-3">
@@ -692,33 +688,32 @@ $result = mysqli_query($conn, $sql);
                                             Appp ID</label>
                                         <input type="text" name="fbAppId" id="app_id"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="smtp.gmail.com" required="" value='<?php echo $facebook['app_id'];?>'  />
+                                            placeholder="smtp.gmail.com" required=""
+                                            value='<?php echo $facebook['app_id'];?>' />
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="app_secret"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                             App Secret</label>
-                                        <input 
-                                            type="number" id="app_secret" name="fbAppSecret"
+                                        <input type="number" id="app_secret" name="fbAppSecret"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="" required="" value='<?php echo $facebook['app_secret'];?>'  />
-                                        
+                                            placeholder="" required="" value='<?php echo $facebook['app_secret'];?>' />
+
                                     </div>
                                     <div class="col-span-6 sm:col-full">
                                         <button name="updateFacebookAPI"
                                             class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                                             type="submit">Save all</button>
                                     </div>
-                                    
+
                                 </div>
                             </form>
                         </div>
                         <div
                             class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
                             <h3 class="mb-4 text-xl font-semibold dark:text-white">Google Auth configuration</h3>
-                            <p
-                            class="mb-4 text-sm text-gray-500 dark:text-gray-400"
-                            > this is where you set the Google API for connecting your account to Google account or Gmail</p>
+                            <p class="mb-4 text-sm text-gray-500 dark:text-gray-400"> this is where you set the Google
+                                API for connecting your account to Google account or Gmail</p>
                             <form action="../api/UpdateSettings.php" method="POST">
 
                                 <div class="grid grid-cols-6 gap-6">
@@ -728,28 +723,29 @@ $result = mysqli_query($conn, $sql);
                                             App ID</label>
                                         <input type="text" name="googleClientId" id="host"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="smtp.gmail.com" required="" value='<?php echo $google['app_id'];?>'  />
+                                            placeholder="smtp.gmail.com" required=""
+                                            value='<?php echo $google['app_id'];?>' />
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
-                                        <label for="app_scret" 
+                                        <label for="app_scret"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                             App Secret</label>
-                                        <input 
-                                            type="text" id="app_scret" name="googleClientSecret"
+                                        <input type="text" id="app_scret" name="googleClientSecret"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="" required="" value='<?php echo $google['app_secret'];?>'  />
-                                        
+                                            placeholder="" required="" value='<?php echo $google['app_secret'];?>' />
+
                                     </div>
                                     <div class="col-span-6 sm:col-full">
                                         <button name="updateGoogleAPI"
                                             class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                                             type="submit">Save all</button>
                                     </div>
-                                    
+
                                 </div>
                             </form>
                         </div>
                     </div>
+                    <?php endif; ?>
 
                 </div>
                 <!-- Included Footer.php -->

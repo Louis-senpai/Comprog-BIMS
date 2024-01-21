@@ -32,6 +32,8 @@ class Accounts extends MysqliDb {
             // Hash the password for security
             $hashedPassword = md5($password);
             $permisions = array();
+            $emailNotifs = array();
+            $notifs = array();
             // Prepare the user data
             $data = Array (
                 "username" => $username,
@@ -39,7 +41,9 @@ class Accounts extends MysqliDb {
                 "email" => $email,
                 "role" => "none",
                 "permissions" => json_encode($permisions),
-                "verified" => 0
+                "verified" => 0,
+                "email_notifications" => json_encode($emailNotifs),
+                "notifications" => json_encode($notifs)
             );
     
             // Insert the user data into the database
@@ -55,6 +59,22 @@ class Accounts extends MysqliDb {
                 return "Registration failed: " + $this->getLastError();
             }
         }
+        public function updateEmailNotif($emailNotifsJson, $id){
+            $this->where('id', $id);
+            $data = Array (
+                "email_notifications" => $emailNotifsJson
+            );
+            $this->update($this->tableName, $data);
+
+        }
+        public function updatePushNotif($pushNotifs, $id){
+            $this->where('id', $id);
+            $data = Array (
+                "notifications" => $pushNotifs
+            );
+            $this->update($this->tableName, $data);
+        }
+      
         public function registerWithAdmin($username, $password, $repeatPassword, $permission, $email, $role) {
             // Check if the passwords match
             if ($password !== $repeatPassword) {
@@ -69,7 +89,8 @@ class Accounts extends MysqliDb {
     
             // Hash the password for security
             $hashedPassword = md5($password);
-    
+            $emailNotifs = array();
+            $notifs = array();
             // Prepare the user data
             $data = Array (
                 "username" => $username,
@@ -77,7 +98,9 @@ class Accounts extends MysqliDb {
                 "email" => $email,
                 "role" => $role,
                 "permissions" => $permission,
-                "verified" => 1
+                "verified" => 1,
+                "email_notifications" => json_encode($emailNotifs),
+                "notifications" => json_encode($notifs)
             );
     
             // Insert the user data into the database
@@ -110,6 +133,8 @@ class Accounts extends MysqliDb {
                     $_SESSION['role'] = $user['role'];
                     $_SESSION['permissions'] = json_decode($user['permissions']);
                     $_SESSION['image_url'] = $user['image_url'];
+                    $_SESSION['emailNotifs'] = json_decode($user['email_notifications']);
+                    $_SESSION['notifications'] = json_decode($user['notifications']);
                     
                     // Set a success message
                     $_SESSION['success_message'] = "You have successfully logged in!";
@@ -149,6 +174,17 @@ class Accounts extends MysqliDb {
             // Log the logout activity
             
         }
+        public function updateProfileImage($userId, $imageName){
+            $this->where('id', $userId);
+            $data = Array (
+                "image_url" => $imageName
+            );
+            if ($this->update('Accounts', $data)){
+                return true;
+            } else {
+                return false;
+            }
+        }
 
         public function getAccount($id) {
             $this->where('id', $id);
@@ -175,6 +211,23 @@ class Accounts extends MysqliDb {
         public function deleteAccount($id){
             $this->where('id', $id);
             if ($this->delete($this->tableName)){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+ 
+        public function verifyRole($role){
+           
+            if ($_SESSION['role'] === $role){
+                return true;
+            } else {
+                return false;
+            }
+        }
+        public function notVerifyRole($role){
+            if ($_SESSION['role']!= $role){
                 return true;
             } else {
                 return false;

@@ -45,6 +45,7 @@ function findAccountByEmail($email) {
         return false;
     }
 }
+
 $SMTP = $Settings->getSMTP();
 
 // Check if the email form has been submitted
@@ -72,7 +73,7 @@ if (isset($_POST['forgot'])) {
             $mail->Port       = $SMTP['port'];
             
             // Recipients
-            $mail->setFrom('from@example.com', 'Mailer');
+            $mail->setFrom($Settings->get('websiteEmail'), $Settings->get('name'));
             $mail->addAddress($email); // Add a recipient
             
             // Content

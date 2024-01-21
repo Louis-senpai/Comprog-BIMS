@@ -4,8 +4,10 @@ require_once '../vendor/autoload.php';
 require_once '../config.php';
 require_once '../models/userActivityLogs.php';
 require_once '../models/settings.php';
+require_once '../models/accounts.php';
 $Settings = new Settings('../settings.json');
 $Logs = new UserActivityLogs($conn);
+$account = new Accounts($conn);
 
 
 if (isset($_POST['updateTitle'])){
@@ -48,5 +50,21 @@ if (isset($_POST['updateGoogleAPI'])){
     $_SESSION['success_message'] = "Google API settings updated successfully!";
     header("Location:../admin/settings.php");
 }
+if (isset($_POST['updateEmailNotif'])){
+   $emailNotifsJson = json_encode($_POST['emailNotif']);
+   $account->updateEmailNotif($emailNotifsJson, $_SESSION['user_id']);
+   $_SESSION['emailNotifs'] = $_POST['emailNotif'];
+   $Logs->logActivity($_SESSION['user_id'], " {$_SESSION['username']} Updated Email Notification settings");
+   $_SESSION['success_message'] = "Email Notification settings updated successfully!";
+   header("Location:../admin/settings.php");
+}
+if (isset($_POST['updatePushNotif'])){
+    $pushNotifs = json_encode($_POST['Pushnotif']);
+    $_SESSION['notifications'] = $_POST['Pushnotif'];
+    $account->updatePushNotif($pushNotifs, $_SESSION['user_id']);
+    $Logs->logActivity($_SESSION['user_id'], " {$_SESSION['username']} Updated Push Notification settings");
+    $_SESSION['success_message'] = "Push Notification settings updated successfully!";
+    header("Location:../admin/settings.php");
 
+}
 

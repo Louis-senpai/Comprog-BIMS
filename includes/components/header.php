@@ -29,7 +29,7 @@ $Settings = new Settings();
 
 <head>
     <meta charset="UTF-8">
-    <title>BIMS | <?php echo $filename;?></title>
+    <title><?php echo $Settings->getName();?> | <?php echo $filename;?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../js/tailwindcss.js"></script>
     <link rel="canonical" href="https://flowbite-admin-dashboard.vercel.app/">
