@@ -66,4 +66,3 @@ if (isset($_POST['submit_logo']) && isset($_FILES['system_logo'])) {
         header("Location:../admin/settings.php");
     }
 }
-?>

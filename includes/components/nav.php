@@ -81,7 +81,7 @@
                         $notif = $logs->getActivityLog();
                     }
                     else{
-                        $notif = $logs->getActivityLog($_SESSION['user_id']);
+                        $notif = $logs->getActivitylogByID($_SESSION['user_id']);
                     }
                         foreach($notif as $row){
                         ?>
