@@ -1,0 +1,29 @@
+{
+    "phpbu": {
+        "backups": [
+            {
+                "name": "MySqlBackup",
+                "source": {
+                    "type": "mysqldump",
+                    "options": {
+                        "host": "delta.optiklink.com",
+                        "user": "u126067_6YObtWKgqn",
+                        "password": "!yQ4Q2@Da6BB!8VWIhLcKKMw",
+                        "databases": "s126067_student"
+                    }
+                },
+                "target": {
+                    "dirname": "backup/",
+                    "filename": "backup-%Y%m%d-%H%i.sql",
+                    "compress": "gzip"
+                },
+                "cleanup": {
+                    "type": "Capacity",
+                    "options": {
+                        "size": "500M"
+                    }
+                }
+            }
+        ]
+    }
+}

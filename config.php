@@ -32,6 +32,7 @@ $user = "u126067_6YObtWKgqn";
 $name = "s126067_student";
 $pass = "!yQ4Q2@Da6BB!8VWIhLcKKMw";
 $port = "3306";
+$charset = 'utf8';
 
 $conn = mysqli_connect($host, $user, $pass, $name, $port);
 

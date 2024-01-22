@@ -63,7 +63,7 @@ foreach ($paginatedResults['results'] as $row) {
         echo "";
         echo "<div>";
 
-        echo "<a href='../api/VerifyAccount.php?id={$row['id']}' title='verify account' class='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-lime-600 rounded-lg hover:bg-lime-800 focus:ring-4 focus:ring-lime-300 dark:focus:ring-lime-900'>";
+        echo "<a href='../api/VerifyAccount.php?id={$row['id']}' title='verify account' class='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-lime-600 hover:bg-lime-800 focus:ring-4 focus:ring-lime-300 dark:focus:ring-lime-900'>";
         echo '<svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m7 10 2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
       </svg>';

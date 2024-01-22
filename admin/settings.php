@@ -86,7 +86,7 @@ $result = mysqli_query($conn, $sql);
                                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                                 name="profile_image" id="profile_image" onchange="previewImage();">
                                             <button type="submit" name="submit_image"
-                                                class="py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                                class="px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                                 Save
                                             </button>
                                         </div>
@@ -302,7 +302,7 @@ $result = mysqli_query($conn, $sql);
                                         <div class="flex items-center justify-between">
                                             <div class="flex items-center">
                                                 <div class="flex-shrink-0">
-                                                    <img class="h-10 w-10 rounded-full" src="../includes/images/bot.png"
+                                                    <img class="w-10 h-10 rounded-full" src="../includes/images/bot.png"
                                                         alt="">
                                                 </div>
                                                 <div class="ml-4">
@@ -312,7 +312,7 @@ $result = mysqli_query($conn, $sql);
                                                         Contact</p>
                                                 </div>
                                                 <div class="ml-4">
-                                                    <p class="text-sm font-bold text-lg text-gray-700 dark:text-white">
+                                                    <p class="text-sm text-lg font-bold text-gray-700 dark:text-white">
                                                         Designation</p>
 
                                                 </div>
@@ -504,7 +504,7 @@ $result = mysqli_query($conn, $sql);
                                                 <!-- add a warning that this is only available for admins only -->
                                                 <div class="text-base font-normal text-gray-500 dark:text-gray-400">
                                                     <span class="text-xs font-normal text-gray-500 dark:text-gray-400">
-                                                        <i class="fas fa-exclamation-circle mr-1"></i>
+                                                        <i class="mr-1 fas fa-exclamation-circle"></i>
                                                         Only available for admins
                                                     </span>
                                                 </div>
@@ -548,8 +548,10 @@ $result = mysqli_query($conn, $sql);
                         </div>
 
                     </div>
+                    <!-- System Settings -->
                     <?php if ($accountModel->verifyRole('superadmin')):?>
-                    <h1 class="col-span-3 text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">System
+                    <h1 class="col-span-3 text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
+                        System
                         settings</h1>
                     <div class="col-span-full xl:col-auto">
                         <div
@@ -570,7 +572,7 @@ $result = mysqli_query($conn, $sql);
                                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                                 name="system_logo" id="system_logo" onchange="previewImage1();">
                                             <button type="submit" name="submit_logo"
-                                                class="py-2 px-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                                class="px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                                                 Save
                                             </button>
                                         </div>
@@ -614,8 +616,36 @@ $result = mysqli_query($conn, $sql);
                                 </div>
                             </form>
                         </div>
+                        <div
+                            class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                            <form hx-target="this" hx-swap="innerHTML">
+                                <h3 class="mb-4 text-xl font-semibold dark:text-white">Backup Database</h3>
+                                <div class="mb-4" id="progress_start">    
+                                    <label for="settings-language"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Name of the Backup
+                                    </label>
+                                    <input type="text" id="settings-title" name="name"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        value="">
 
-
+                                </div>
+    
+                                <div>
+                                    <button type="submit" hx-post="/api/BackupuStart.php" name="Backup"
+                                        class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                        Backup</button>
+                                        <a href="Backups.php"
+                                        class="text-white bg-lime-700 hover:bg-lime-800 focus:ring-4 focus:ring-lime-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800">
+                                         See All Backups</a>
+                                </div>
+                                
+                                
+                                <!-- List here the Backups that was made  in directory /backups/ -->
+                                
+                            </form>
+                        </div>
+                       
                     </div>
                     <?php 
                                 $smtp = $Settings->getSMTP();

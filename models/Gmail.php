@@ -1,6 +1,7 @@
 <?php 
+require '../vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
-
+echo $GLOBALS['a'];
 // make a Email class that exdends the PHPMailer class and let me use easy functions
 class Gmail extends PHPMailer {
 
