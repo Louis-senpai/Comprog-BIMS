@@ -131,6 +131,9 @@ $total_pages = ceil($total_rows / $per_page);
                                 echo $Components->AlertDiv($_SESSION['success_message'], 'success');
                                 unset($_SESSION['success_message']);
                                 
+                            }elseif (isset($_SESSION['error_message'])) {
+                                echo $Components->AlertDiv($_SESSION['error_message'], 'error');
+                                unset($_SESSION['error_message']);
                             }
                             ?>
                             <!---------------------------search side------------------------------------->
@@ -255,8 +258,7 @@ $total_pages = ceil($total_rows / $per_page);
                                     </button>
                                 </div>
                                 <!-- Modal body -->
-                                <form hx-post="/api/createAccount.php" hx-target="#success-message" hx-swap="innserHTML"
-                                    hx-trigger="submit">
+                                <form action="../api/createAccount.php" method='post'>
                                     <div class="grid gap-4 mb-4 sm:grid-cols-2">
                                         <div>
                                             <label for="name"

@@ -59,9 +59,9 @@ require_once '../includes/components/header.php';
                     </div>
                     <div id="response"></div>
                     <section class="bg-white dark:bg-gray-900">
-                        <div class="py-8 px-4 mx-auto max-w-1xl lg:py-16">
+                        <div class="px-4 py-8 mx-auto max-w-1xl lg:py-16">
 
-                            <form action="#" hx-post="/api/AddSurveyData.php" hx-target="#response" hx-trigger="submit">
+                            <form action="../api/AddSurveyData.php" methd="post">
                                 <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 sm:gap-6">
                                     <div class="w-full">
                                         <label for="FirstName"

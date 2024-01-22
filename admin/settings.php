@@ -60,11 +60,15 @@ $result = mysqli_query($conn, $sql);
                         </nav>
                         <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">User settings</h1>
                         <?php 
-                        if(isset($_SESSION['success_message'])){
-                            echo $Components->AlertDiv($_SESSION['success_message'], "success");
-                            unset($_SESSION['success_message']);
-                        }
-                        ?>
+                            if(isset($_SESSION['success_message'])){
+                                echo $Components->AlertDiv($_SESSION['success_message'], 'success');
+                                unset($_SESSION['success_message']);
+                                
+                            }elseif (isset($_SESSION['error_message'])) {
+                                echo $Components->AlertDiv($_SESSION['error_message'], 'error');
+                                unset($_SESSION['error_message']);
+                            }
+                            ?>
                     </div>
                     <!-- Right Content -->
                     <div class="col-span-full xl:col-auto">
