@@ -1,4 +1,5 @@
 <?php 
+
 /**
  * This file contains the Restore_Database class wich performs
  * a partial or complete restoration of any given MySQL database
@@ -136,7 +137,10 @@ class Restore_Database {
             */
             $handle = fopen($backupDir . '/' . $backupFile, "r");
             if ($handle) {
+                $fileSize = filesize($backupDir . '/' . $backupFile);
+            $currentPosition = 0; // Current position in the file
                 while (($line = fgets($handle)) !== false) {
+                    $currentPosition += strlen($line);
                     $line = ltrim(rtrim($line));
                     if (strlen($line) > 1) { // avoid blank lines
                         $lineIsComment = false;
@@ -153,7 +157,7 @@ class Restore_Database {
                                 // execute query
                                 if(mysqli_query($this->conn, $sql)) {
                                     if (preg_match('/^CREATE TABLE `([^`]+)`/i', $sql, $tableName)) {
-                                        $this->obfPrint("Table succesfully created: `" . $tableName[1] . "`");
+                                        
                                     }
                                     $sql = '';
                                 } else {
@@ -164,6 +168,8 @@ class Restore_Database {
                             $multiLineComment = false;
                         }
                     }
+                    $progress = ($currentPosition / $fileSize) * 100;
+                    $_SESSION['backup_progress'] = number_format($progress, 0) . "%";
                 }
                 fclose($handle);
             } else {
@@ -177,7 +183,7 @@ class Restore_Database {
         if ($backupFileIsGzipped) {
             unlink($backupDir . '/' . $backupFile);
         }
-
+        header("Hx-Trigger: done");
         return true;
     }
 
@@ -194,7 +200,7 @@ class Restore_Database {
         $source = $this->backupDir . '/' . $this->backupFile;
         $dest = $this->backupDir . '/' . date("Ymd_His", time()) . '_' . substr($this->backupFile, 0, -3);
 
-        $this->obfPrint('Gunzipping backup file ' . $source . '... ', 1, 1);
+        // $this->obfPrint('Gunzipping backup file ' . $source . '... ', 1, 1);
 
         // Remove $dest file if exists
         if (file_exists($dest)) {

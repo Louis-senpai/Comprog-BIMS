@@ -2,7 +2,11 @@
 
 require_once '../includes/components/header.php';
 require_once '../models/BackupsModel.php';
-
+if ($accountModel->notVerifyRole('admin') && $accountModel->notVerifyRole('superadmin')) {
+    $_SESSION['error_message'] = 'Unauthorized Access!';
+    header("Location: home.php");
+    exit();
+}
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $total_rows = $Backup->getBackupCount();
 
@@ -108,6 +112,12 @@ $total_pages = ceil($total_rows / $per_page);
                             </div>
                         </div>
 
+                        <div class="w-full rounded-full " id="Progress_bar">
+                            <!-- <div class="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 h-6 leading-none rounded-full"
+                                style="width: 100%"> 45%</div> -->
+                        </div>
+
+
                     </div>
                     <?php 
                             if(isset($_SESSION['success_message'])){
@@ -118,6 +128,7 @@ $total_pages = ceil($total_rows / $per_page);
                             ?>
 
 
+
                 </div>
                 <div class="flex flex-col">
                     <div class="overflow-x-auto">
@@ -126,12 +137,12 @@ $total_pages = ceil($total_rows / $per_page);
                                 <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
                                     <thead class="bg-gray-100 dark:bg-gray-700">
                                         <tr>
-                                           
+
                                             <th scope="col"
                                                 class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                                 Name
                                             </th>
-                                           
+
                                             <th scope="col"
                                                 class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                                                 TimeStamp
@@ -166,8 +177,8 @@ $total_pages = ceil($total_rows / $per_page);
                                             </td>
                                         </tr>
                                         <!-- end loading svg -->
-                                        
-                                        
+
+
 
                                     </tbody>
                                 </table>

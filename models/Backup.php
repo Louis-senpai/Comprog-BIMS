@@ -175,7 +175,7 @@ class Backup_Database {
                     $progress = ($processedTables / $totalTables) * 100;
                     
 // Inside the foreach loop after processing each table
-$_SESSION['backup_progress'] = round($progress);
+                    $_SESSION['backup_progress'] = round($progress);
 
                 
                 /**
