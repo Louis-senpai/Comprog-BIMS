@@ -17,6 +17,12 @@ Class officers extends MysqliDb{
         $result = $this->get($this->tablename);
         return $result;
     }
+    // delete officer
+    public function deleteOfficer($id)
+    {
+        $result = $this->delete($this->tablename, array('id' => $id));
+        return $result;
+    }
 
 
 

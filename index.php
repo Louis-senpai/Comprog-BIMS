@@ -6,7 +6,8 @@ if (isset($_SESSION['logged_in'])) {
     header("Location: /admin/home.php");
     exit();
 }
-
+require_once 'models/Components.php';
+$Components = new Tailwind();
 
 ?>
 
@@ -18,11 +19,8 @@ if (isset($_SESSION['logged_in'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <!-- Add any additional head elements if needed -->
-
-    <!-- Include Tailwind CSS -->
-    <script src="js/tailwind.config.js"></script>
     <script src="js/tailwindcss.js"></script>
+    <script src="js/tailwind.config.js"></script>
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 
 </head>
@@ -40,36 +38,23 @@ if (isset($_SESSION['logged_in'])) {
                         class="flex items-center justify-center px-4 py-10 rounded-l-lg shadow-lg bg-gray-50 dark:bg-slate-800 sm:px-6 lg:px-8 sm:py-16 lg:py-24">
                         <div class="xl:w-full xl:max-w-sm 2xl:max-w-md xl:mx-auto">
                             <?php
-                            if (isset($_SESSION['error_message'])) {
-                                echo '<div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                                </svg>
-                                <span class="sr-only">Info</span>
-                                <div>
-                                  <span class="font-medium">Error </span> '.$_SESSION['error_message'].'
-                                </div>
-                              </div>';
-                                unset($_SESSION['error_message']);
-                            }
+                        
+                             if(isset($_SESSION['success_message'])){
+                                 echo $Components->AlertDiv($_SESSION['success_message'], 'success');
+                                 unset($_SESSION['success_message']);
+                                 
+                             }elseif (isset($_SESSION['error_message'])) {
+                                 echo $Components->AlertDiv($_SESSION['error_message'], 'error');
+                                 unset($_SESSION['error_message']);
+                             }
+                          
                             if(isset($_SESSION['reset_success'])){
                                 echo '<div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
                                 <span class="font-medium">Success </span> Password Has Been Reset
                               </div>';
                               session_destroy();
                             }
-                            if(isset($_SESSION['success_message'])){
-                                echo '<div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-                                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                                </svg>
-                                <span class="sr-only">Info</span>
-                                <div>
-                                  <span class="font-medium">Success </span> '.$_SESSION['success_message'].'
-                                </div>
-                              </div>';
-                              unset($_SESSION['success_message']);
-                            }
+                            
                             ?>
                             <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl dark:text-white">Sign in
                                 to BIMS
@@ -136,9 +121,10 @@ if (isset($_SESSION['logged_in'])) {
                                 </p>
 
                                 <div class="flex items-center justify-center mt-10 space-x-3">
-                                    <div class="bg-lime-500 rounded-full w-20 h-1.5"></div>
+
 
                                     <div class="bg-gray-200 rounded-full w-12 h-1.5"></div>
+                                    <div class="bg-lime-500 rounded-full w-20 h-1.5"></div>
 
                                     <div class="bg-gray-200 rounded-full w-12 h-1.5"></div>
                                 </div>

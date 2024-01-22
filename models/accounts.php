@@ -20,13 +20,17 @@ class Accounts extends MysqliDb {
         public function registerUser($username, $password, $repeatPassword, $email) {
             // Check if the passwords match
             if ($password !== $repeatPassword) {
-                return "Passwords do not match.";
+                $_SESSION['error_message'] = "Passwords do not match.";
+                header('Location: signup.php');
+                exit();
             }
     
             // Check if the email is already used
             $this->where('email', $email);
             if ($this->has($this->tableName)) {
-                return "Email is already in use.";
+                $_SESSION['error_message'] = "Email is already in use.";
+                header('Location: signup.php');
+                exit();
             }
     
             // Hash the password for security
@@ -56,7 +60,9 @@ class Accounts extends MysqliDb {
                 exit();
             } else {
                 // Handle error case
-                return "Registration failed: " + $this->getLastError();
+                $_SESSION['error_message'] = "Registration failed: " + $this->getLastError();
+                header("Location: signup.php");
+                exit();
             }
         }
         public function updateEmailNotif($emailNotifsJson, $id){
@@ -78,13 +84,15 @@ class Accounts extends MysqliDb {
         public function registerWithAdmin($username, $password, $repeatPassword, $permission, $email, $role) {
             // Check if the passwords match
             if ($password !== $repeatPassword) {
-                return "Passwords do not match.";
+                $_SESSION['error_message'] = "Passwords do not match.";
+                header('Location: /admin/addAccounts.php');
             }
     
             // Check if the email is already used
             $this->where('email', $email);
             if ($this->has($this->tableName)) {
-                return "Email is already in use.";
+                $_SESSION['error_message'] = "Email is already in use.";
+                header('Location: /admin/addAccounts.php');
             }
     
             // Hash the password for security
@@ -112,7 +120,7 @@ class Accounts extends MysqliDb {
                 
             } else {
                 // Handle error case
-                return "Registration failed: " + $this->getLastError();
+                $_SESSION['success_message'] = "Registration failed: " + $this->getLastError();
             }
         }
         public function loginUser($email, $password) {
