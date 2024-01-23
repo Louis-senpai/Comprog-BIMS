@@ -32,6 +32,17 @@ if(isset($_POST['updateSMTP'])){
     $_SESSION['success_message'] = "SMTP settings updated successfully!";
     header("Location:../admin/settings.php");
 }
+if(isset($_POST['updateMysql'])){
+    $host = $_POST['host'];
+    $username = $_POST['username'];
+    $database = $_POST['database'];
+    $password = $_POST['password'];
+
+    $Settings->updateMysql($host, $username, $password, $database);
+    $Logs->logActivity($_SESSION['user_id'], " {$_SESSION['username']} Updated Mysql settings");
+    $_SESSION['success_message'] = "Mysql settings updated successfully!";
+    header("Location:../admin/settings.php");
+}
 if(isset($_POST['updateFacebookAPI'])){
     $fbAppId = $_POST['fbAppId'];
     $fbAppSecret = $_POST['fbAppSecret'];
@@ -67,4 +78,3 @@ if (isset($_POST['updatePushNotif'])){
     header("Location:../admin/settings.php");
 
 }
-

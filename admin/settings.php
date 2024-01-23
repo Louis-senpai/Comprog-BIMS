@@ -100,68 +100,125 @@ $result = mysqli_query($conn, $sql);
                             </div>
                         </div>
 
+                        
+                        <?php 
+                        $notifs = $_SESSION['notifications'];
+                        ?>
                         <div
-                            class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+                            class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800 xl:mb-0">
                             <div class="flow-root">
-                                <h3 class="text-xl font-semibold dark:text-white">Social accounts</h3>
-                                <ul class="divide-y divide-gray-200 dark:divide-gray-700">
-                                    <li class="py-4">
-                                        <div class="flex items-center space-x-4">
-                                            <div class="flex-shrink-0">
-                                                <svg class="w-5 h-5 dark:text-white" aria-hidden="true"
-                                                    focusable="false" data-prefix="fab" data-icon="facebook-f"
-                                                    role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                                    <path fill="currentColor"
-                                                        d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z">
-                                                    </path>
-                                                </svg>
+                                <form action="../api/UpdateSettings.php" method="POST">
+                                    <h3 class="text-xl font-semibold dark:text-white">Alerts &amp; Notifications</h3>
+                                    <p class="text-sm font-normal text-gray-500 dark:text-gray-400">You can set up
+                                        Themesberg to get notifications</p>
+                                    <div class="divide-y divide-gray-200 dark:divide-gray-700">
+                                        <!-- Item 1 -->
+                                        <div class="flex items-center justify-between py-4">
+                                            <div class="flex flex-col flex-grow">
+                                                <div class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    New Resident Added
+                                                </div>
+                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
+                                                    get notified when new resident added
+                                                </div>
                                             </div>
-                                            <div class="flex-1 min-w-0">
+                                            <label for="company-news" class="relative flex items-center cursor-pointer">
+                                                <input type="checkbox" id="company-news" class="sr-only"
+                                                    name="Pushnotif[]" value="Resident_Added"
+                                                    <?php if(in_array("Resident_Added",$notifs)){echo "checked";}?>>
                                                 <span
-                                                    class="block text-base font-semibold text-gray-900 truncate dark:text-white">
-                                                    Facebook account
-                                                </span>
-                                                <a href="#"
-                                                    class="block text-sm font-normal truncate text-primary-700 hover:underline dark:text-primary-500">
-                                                    www.facebook.com/themesberg
-                                                </a>
-                                            </div>
-                                            <div class="inline-flex items-center">
-                                                <a href="#"
-                                                    class="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Disconnect</a>
-                                            </div>
+                                                    class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
+                                            </label>
                                         </div>
-                                    </li>
-
-                                    <li class="pt-4 pb-6">
-                                        <div class="flex items-center space-x-4">
-                                            <div class="flex-shrink-0">
-                                                <svg class="w-5 h-5 dark:text-white" aria-hidden="true"
-                                                    focusable="false" data-prefix="fab" data-icon="dribbble" role="img"
-                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                    <path fill="currentColor"
-                                                        d="M256 8C119.252 8 8 119.252 8 256s111.252 248 248 248 248-111.252 248-248S392.748 8 256 8zm163.97 114.366c29.503 36.046 47.369 81.957 47.835 131.955-6.984-1.477-77.018-15.682-147.502-6.818-5.752-14.041-11.181-26.393-18.617-41.614 78.321-31.977 113.818-77.482 118.284-83.523zM396.421 97.87c-3.81 5.427-35.697 48.286-111.021 76.519-34.712-63.776-73.185-116.168-79.04-124.008 67.176-16.193 137.966 1.27 190.061 47.489zm-230.48-33.25c5.585 7.659 43.438 60.116 78.537 122.509-99.087 26.313-186.36 25.934-195.834 25.809C62.38 147.205 106.678 92.573 165.941 64.62zM44.17 256.323c0-2.166.043-4.322.108-6.473 9.268.19 111.92 1.513 217.706-30.146 6.064 11.868 11.857 23.915 17.174 35.949-76.599 21.575-146.194 83.527-180.531 142.306C64.794 360.405 44.17 310.73 44.17 256.323zm81.807 167.113c22.127-45.233 82.178-103.622 167.579-132.756 29.74 77.283 42.039 142.053 45.189 160.638-68.112 29.013-150.015 21.053-212.768-27.882zm248.38 8.489c-2.171-12.886-13.446-74.897-41.152-151.033 66.38-10.626 124.7 6.768 131.947 9.055-9.442 58.941-43.273 109.844-90.795 141.978z">
-                                                    </path>
-                                                </svg>
+                                        <!-- Item 2 -->
+                                        <div class="flex items-center justify-between py-4">
+                                            <div class="flex flex-col flex-grow">
+                                                <div class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    A Resident was removed from the system
+                                                </div>
+                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
+                                                    get notified when a resident was removed from the system
+                                                </div>
                                             </div>
-                                            <div class="flex-1 min-w-0">
+                                            <label for="account-activity"
+                                                class="relative flex items-center cursor-pointer">
+                                                <input type="checkbox" id="account-activity" class="sr-only"
+                                                    name="Pushnotif[]" value="Resident_Removed"
+                                                    <?php if(in_array("Resident_Removed",$notifs)){echo "checked";}?> />
                                                 <span
-                                                    class="block text-base font-semibold text-gray-900 truncate dark:text-white">
-                                                    Dribbble account
-                                                </span>
-                                                <span
-                                                    class="block text-sm font-normal text-gray-500 truncate dark:text-gray-400">
-                                                    Not connected
-                                                </span>
-                                            </div>
-                                            <div class="inline-flex items-center">
-                                                <a href="#"
-                                                    class="px-3 py-2 mb-3 mr-3 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Connect</a>
-                                            </div>
+                                                    class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
+                                            </label>
                                         </div>
-                                    </li>
-                                </ul>
-
+                                        <!-- Item 3 -->
+                                        <div class="flex items-center justify-between py-4">
+                                            <div class="flex flex-col flex-grow">
+                                                <div class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    Account activity
+                                                </div>
+                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
+                                                    get notified when You Login or Logout from your account
+                                                </div>
+                                            </div>
+                                            <label for="meetups" class="relative flex items-center cursor-pointer">
+                                                <input type="checkbox" id="meetups" class="sr-only" name="Pushnotif[]"
+                                                    value="Account_Activity"
+                                                    <?php if(in_array("Account_Activity",$notifs)){echo "checked";}?> />
+                                                <span
+                                                    class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
+                                            </label>
+                                        </div>
+                                        <?php if($_SESSION['role'] === 'admin'):?>
+                                        <div class="flex items-center justify-between py-4">
+                                            <div class="flex flex-col flex-grow">
+                                                <div class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    Account Verify
+                                                </div>
+                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
+                                                    get notified when someone's Account need verification to the admin
+                                                </div>
+                                                <!-- add a warning that this is only available for admins only -->
+                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
+                                                    <span class="text-xs font-normal text-gray-500 dark:text-gray-400">
+                                                        <i class="mr-1 fas fa-exclamation-circle"></i>
+                                                        Only available for admins
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <label for="Account_verify"
+                                                class="relative flex items-center cursor-pointer">
+                                                <input type="checkbox" id="Account_verify" class="sr-only"
+                                                    name="Pushnotif[]" value="Account_Verify"
+                                                    <?php if(in_array("Account_Verify",$notifs)){echo "checked";}?> />
+                                                <span
+                                                    class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
+                                            </label>
+                                        </div>
+                                        <?php endif;?>
+                                        <!-- Item 4 -->
+                                        <div class="flex items-center justify-between pt-4">
+                                            <div class="flex flex-col flex-grow">
+                                                <div class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    System updates
+                                                </div>
+                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
+                                                    get notified when someone updated the system
+                                                </div>
+                                            </div>
+                                            <label for="new-messages" class="relative flex items-center cursor-pointer">
+                                                <input type="checkbox" id="new-messages" class="sr-only"
+                                                    name="Pushnotif[]" value="System_Updates"
+                                                    <?php if(in_array("System_Updates",$notifs)){echo "checked";}?> />
+                                                <span
+                                                    class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="mt-6">
+                                        <button type="submit" name="updatePushNotif"
+                                            class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Save
+                                            all</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                      
@@ -346,126 +403,7 @@ $result = mysqli_query($conn, $sql);
                                 </div>
                             </form>
                         </div>
-                        <?php 
-                        $notifs = $_SESSION['notifications'];
-                        ?>
-                        <div
-                            class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800 xl:mb-0">
-                            <div class="flow-root">
-                                <form action="../api/UpdateSettings.php" method="POST">
-                                    <h3 class="text-xl font-semibold dark:text-white">Alerts &amp; Notifications</h3>
-                                    <p class="text-sm font-normal text-gray-500 dark:text-gray-400">You can set up
-                                        Themesberg to get notifications</p>
-                                    <div class="divide-y divide-gray-200 dark:divide-gray-700">
-                                        <!-- Item 1 -->
-                                        <div class="flex items-center justify-between py-4">
-                                            <div class="flex flex-col flex-grow">
-                                                <div class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                    New Resident Added
-                                                </div>
-                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
-                                                    get notified when new resident added
-                                                </div>
-                                            </div>
-                                            <label for="company-news" class="relative flex items-center cursor-pointer">
-                                                <input type="checkbox" id="company-news" class="sr-only"
-                                                    name="Pushnotif[]" value="Resident_Added"
-                                                    <?php if(in_array("Resident_Added",$notifs)){echo "checked";}?>>
-                                                <span
-                                                    class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
-                                            </label>
-                                        </div>
-                                        <!-- Item 2 -->
-                                        <div class="flex items-center justify-between py-4">
-                                            <div class="flex flex-col flex-grow">
-                                                <div class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                    A Resident was removed from the system
-                                                </div>
-                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
-                                                    get notified when a resident was removed from the system
-                                                </div>
-                                            </div>
-                                            <label for="account-activity"
-                                                class="relative flex items-center cursor-pointer">
-                                                <input type="checkbox" id="account-activity" class="sr-only"
-                                                    name="Pushnotif[]" value="Resident_Removed"
-                                                    <?php if(in_array("Resident_Removed",$notifs)){echo "checked";}?> />
-                                                <span
-                                                    class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
-                                            </label>
-                                        </div>
-                                        <!-- Item 3 -->
-                                        <div class="flex items-center justify-between py-4">
-                                            <div class="flex flex-col flex-grow">
-                                                <div class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                    Account activity
-                                                </div>
-                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
-                                                    get notified when You Login or Logout from your account
-                                                </div>
-                                            </div>
-                                            <label for="meetups" class="relative flex items-center cursor-pointer">
-                                                <input type="checkbox" id="meetups" class="sr-only" name="Pushnotif[]"
-                                                    value="Account_Activity"
-                                                    <?php if(in_array("Account_Activity",$notifs)){echo "checked";}?> />
-                                                <span
-                                                    class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
-                                            </label>
-                                        </div>
-                                        <?php if($_SESSION['role'] === 'admin'):?>
-                                        <div class="flex items-center justify-between py-4">
-                                            <div class="flex flex-col flex-grow">
-                                                <div class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                    Account Verify
-                                                </div>
-                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
-                                                    get notified when someone's Account need verification to the admin
-                                                </div>
-                                                <!-- add a warning that this is only available for admins only -->
-                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
-                                                    <span class="text-xs font-normal text-gray-500 dark:text-gray-400">
-                                                        <i class="mr-1 fas fa-exclamation-circle"></i>
-                                                        Only available for admins
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <label for="Account_verify"
-                                                class="relative flex items-center cursor-pointer">
-                                                <input type="checkbox" id="Account_verify" class="sr-only"
-                                                    name="Pushnotif[]" value="Account_Verify"
-                                                    <?php if(in_array("Account_Verify",$notifs)){echo "checked";}?> />
-                                                <span
-                                                    class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
-                                            </label>
-                                        </div>
-                                        <?php endif;?>
-                                        <!-- Item 4 -->
-                                        <div class="flex items-center justify-between pt-4">
-                                            <div class="flex flex-col flex-grow">
-                                                <div class="text-lg font-semibold text-gray-900 dark:text-white">
-                                                    System updates
-                                                </div>
-                                                <div class="text-base font-normal text-gray-500 dark:text-gray-400">
-                                                    get notified when someone updated the system
-                                                </div>
-                                            </div>
-                                            <label for="new-messages" class="relative flex items-center cursor-pointer">
-                                                <input type="checkbox" id="new-messages" class="sr-only"
-                                                    name="Pushnotif[]" value="System_Updates"
-                                                    <?php if(in_array("System_Updates",$notifs)){echo "checked";}?> />
-                                                <span
-                                                    class="h-6 bg-gray-200 border border-gray-200 rounded-full w-11 toggle-bg dark:bg-gray-700 dark:border-gray-600"></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="mt-6">
-                                        <button type="submit" name="updatePushNotif"
-                                            class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Save
-                                            all</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                        
 
                     </div>
                     <!-- System Settings -->
@@ -569,8 +507,7 @@ $result = mysqli_query($conn, $sql);
                     </div>
                     <?php 
                                 $smtp = $Settings->getSMTP();
-                                $facebook = $Settings->getFacebookAPI();
-                                $google = $Settings->getGoogleAPI();
+                                $mysqli = $Settings->getMysql();
                                 
                                 ?>
                     <div class="col-span-2">
@@ -627,73 +564,59 @@ $result = mysqli_query($conn, $sql);
                         </div>
                         <div
                             class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                            <h3 class="mb-4 text-xl font-semibold dark:text-white">Facebook Auth configuration</h3>
-                            <p class="mb-4 text-sm text-gray-500 dark:text-gray-400"> this is where you set the Facebook
-                                API for connecting your account to facebook</p>
+                            <h3 class="mb-4 text-xl font-semibold dark:text-white">Database configuration</h3>
+                            <p class="mb-4 text-sm text-gray-500 dark:text-gray-400">
+                                This is where you can configure your database. or the place where we store the Resident Datas
+                            </p>
                             <form action="../api/UpdateSettings.php" method="POST">
-                                <div class="grid grid-cols-6 gap-6">
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="app_id"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            Appp ID</label>
-                                        <input type="text" name="fbAppId" id="app_id"
-                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="smtp.gmail.com" required=""
-                                            value='<?php echo $facebook['app_id'];?>' />
-                                    </div>
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="app_secret"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            App Secret</label>
-                                        <input type="number" id="app_secret" name="fbAppSecret"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="" required="" value='<?php echo $facebook['app_secret'];?>' />
-
-                                    </div>
-                                    <div class="col-span-6 sm:col-full">
-                                        <button name="updateFacebookAPI"
-                                            class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                                            type="submit">Save all</button>
-                                    </div>
-
-                                </div>
-                            </form>
-                        </div>
-                        <div
-                            class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                            <h3 class="mb-4 text-xl font-semibold dark:text-white">Google Auth configuration</h3>
-                            <p class="mb-4 text-sm text-gray-500 dark:text-gray-400"> this is where you set the Google
-                                API for connecting your account to Google account or Gmail</p>
-                            <form action="../api/UpdateSettings.php" method="POST">
-
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="host"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            App ID</label>
-                                        <input type="text" name="googleClientId" id="host"
+                                            HOST</label>
+                                        <input type="text" name="host" id="host"
                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="smtp.gmail.com" required=""
-                                            value='<?php echo $google['app_id'];?>' />
+                                            placeholder="localhost / url" required=""
+                                            value='<?php echo $mysqli['host'];?>' />
                                     </div>
                                     <div class="col-span-6 sm:col-span-3">
-                                        <label for="app_scret"
+                                        <label for="port"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                            App Secret</label>
-                                        <input type="text" id="app_scret" name="googleClientSecret"
+                                            username</label>
+                                        <input type="text" id="port" name="username"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="" required="" value='<?php echo $google['app_secret'];?>' />
+                                            placeholder="username" required="" value='<?php echo $mysqli['user'];?>' />
 
                                     </div>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="database"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            database name</label>
+                                        <input type="text" name="database" id="database"
+                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="name of the database" required=""
+                                            value='<?php echo $mysqli['database'];?>' />
+                                    </div>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="password"
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            password</label>
+                                        <input type="text" name="password" id="password"
+                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            placeholder="••••••••" required=""
+                                            value='<?php echo $mysqli['password'];?>' />
+                                    </div>
                                     <div class="col-span-6 sm:col-full">
-                                        <button name="updateGoogleAPI"
+                                        <button name="updateMysql"
+                                        onclick="return confirm('Are you sure you want to update the database settings? Make sure that backup has made')"
                                             class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                                             type="submit">Save all</button>
                                     </div>
-
                                 </div>
                             </form>
                         </div>
+                        
+                        
                     </div>
                     <?php endif; ?>
 

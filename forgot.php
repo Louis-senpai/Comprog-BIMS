@@ -5,6 +5,8 @@ require_once 'models/accounts.php';
 require_once 'models/settings.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+require_once 'models/Components.php';
+$Components = new Tailwind();
 
 $Settings = new Settings('settings.json');
 session_start();
@@ -83,22 +85,24 @@ if (isset($_POST['forgot'])) {
             
             $mail->send();
             $_SESSION['code_sent'] = true;
+            $_SESSION['success_message'] = 'A code has been sent to your email';
         } catch (Exception $e) {
-            $_SESSION['email_error'] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            $_SESSION['error_message'] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+           
         }
         
         // Insert the code into the Codes table
         $account_id = $account['id']; // Assuming the account's ID is in the 'id' field
         insertOrUpdateCode($code, $account_id);
         
-        // Store the account ID in the session to use later
+        // Store the account ID in the session to usem later
         $_SESSION['reset_account_id'] = $account_id;
         
 
      
     
     } else {
-        $_SESSION['email_error'] = 'Email not found';
+        $_SESSION['error_message'] = 'Email not found';
     }
 }
 
@@ -118,9 +122,11 @@ function verifyCode(){
         $row = $result->fetch_assoc();
         $_SESSION['reset_success'] = true;
         header("Location: reset_password.php");
+        exit();
     } else {
-        $_SESSION['code_error'] = 'Incorrect Code';
+        $_SESSION['error_message'] = 'incorrect code please try again';	
         header("Location: forgot.php");
+        exit();
     }
 }
 $filename = basename($_SERVER['PHP_SELF']);
@@ -138,8 +144,9 @@ $filename = substr($filename, 0, -4);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BIMS | <?php echo $filename;?></title>
-    <script src="js/tailwind.config.js"></script>
     <script src="js/tailwindcss.js"></script>
+    <script src="js/tailwind.config.js"></script>
+
     <script>
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
     if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
@@ -158,7 +165,8 @@ $filename = substr($filename, 0, -4);
           <?php echo $Settings->getName();?>   
       </a>
       <?php 
-      if (!isset($_POST['forgot'])){
+      if (!isset($_SESSION['code_sent'])){
+    
       ?>
       <div class="w-full p-6 bg-white rounded-lg shadow-lg dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
       <h2 class="mb-3 text-2xl font-bold text-gray-900 dark:text-white">
@@ -167,11 +175,15 @@ $filename = substr($filename, 0, -4);
             <p class="text-base font-normal text-gray-500 dark:text-gray-400">
                 Don't fret! Just type in your email and we will send you a code to reset your password!
             </p>
-          <?php if (isset($_SESSION['email_error'])) {
-        echo '<div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-        <span class="font-medium"> alert!</span> '.$_SESSION['email_error'].'
-      </div>';
-      }
+          <?php 
+                             if(isset($_SESSION['success_message'])){
+                                 echo $Components->AlertDiv($_SESSION['success_message'], 'success');
+                                 unset($_SESSION['success_message']);
+                                 
+                             }elseif (isset($_SESSION['error_message'])) {
+                                 echo $Components->AlertDiv($_SESSION['error_message'], 'error');
+                                 unset($_SESSION['error_message']);
+                             }
         ?>
           <form class="mt-4 space-y-4 lg:mt-5 md:space-y-5" action="forgot.php" method="post">
               <div>
@@ -184,18 +196,21 @@ $filename = substr($filename, 0, -4);
           <a href="index.php" class="text-blue-500"> go back</a>
       </div>
       <?php 
-      } if(isset($_SESSION['code_sent'])) {
-
+      } if(isset($_SESSION['code_sent'])) {      
       ?>
       <div class="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
       <h2 class="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
          Input the Code
       </h2>
-      <?php if (isset($_SESSION['code_error'])){
-        echo '<div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-        <span class="font-medium"> alert!</span> Incorrect Code and try again.
-      </div>';
-      }
+      <?php 
+                             if(isset($_SESSION['success_message'])){
+                                 echo $Components->AlertDiv($_SESSION['success_message'], 'success');
+                                 unset($_SESSION['success_message']);
+                                 
+                             }elseif (isset($_SESSION['error_message'])) {
+                                 echo $Components->AlertDiv($_SESSION['error_message'], 'error');
+                                 unset($_SESSION['error_message']);
+                             }
         ?>
       <form class="mt-4 space-y-4 lg:mt-5 md:space-y-5" action="forgot.php" method="post">
           <div>

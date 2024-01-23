@@ -18,7 +18,7 @@ define("BACKUP_DIR", '../backups'); // Comment this line to use same script's di
 define("TABLES", '*'); // Full backup
 //define("TABLES", 'table1, table2, table3'); // Partial backup
 define('IGNORE_TABLES',array(
-    'tbl_token_auth',
+    'Accounts',
     'codes'
 )); // Tables to ignore
 define("CHARSET", 'utf8');
@@ -297,7 +297,7 @@ class Backup_Database {
             print_r($e->getMessage());
             return false;
         }
-        
+        header("Hx-Trigger: done");
         return true;
     }
 

@@ -63,14 +63,14 @@ require_once '../includes/components/header.php';
 
                             <form action="../api/AddSurveyData.php" methd="post">
                                 <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 sm:gap-6">
-                                    <div class="w-full">
+                                    <div class="col-span-3 md:col-span-2">
                                         <label for="FirstName"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">FirstName</label>
                                         <input type="text" name="FirstName" id="FirstName"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                             placeholder=" FirstName" required="">
                                     </div>
-                                    <div class="w-full">
+                                    <div class="col-span-3 md:col-span-1" >
                                         <label for="LastName"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">LastName</label>
                                         <input type="text" name="LastName" id="LastName"
@@ -179,7 +179,7 @@ require_once '../includes/components/header.php';
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                             placeholder="YOur Phone Number" required="">
                                     </div>
-                                    <div>
+                                    <div class="col-span-3 md:col-span-3">
                                         <label for="Email"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                             Email</label>
@@ -190,7 +190,7 @@ require_once '../includes/components/header.php';
 
 
 
-                                    <div class="sm:col-span-2">
+                                    <div class="col-span-3 md:col-span-2">
                                         <label for="Remarks"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Remarks</label>
                                         <textarea id="Remarks" rows="8" name="Remarks"

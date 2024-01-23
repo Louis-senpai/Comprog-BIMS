@@ -1,0 +1,5 @@
+[23-Jan-2024 05:28:11 Europe/Berlin] PHP Warning:  Constant ROOT_DIR already defined in C:\xampp\htdocs\Comprog-BIMS\config.php on line 11
+[23-Jan-2024 05:28:12 Europe/Berlin] Access denied for user 'u126067_6YObtWKgqn'@'%' to database 's126067_studenta'
+[23-Jan-2024 05:28:18 Europe/Berlin] Access denied for user 'u126067_6YObtWKgqn'@'%' to database 's126067_studenta'
+[23-Jan-2024 05:28:24 Europe/Berlin] Access denied for user 'u126067_6YObtWKgqn'@'%' to database 's126067_studenta'
+[23-Jan-2024 05:28:55 Europe/Berlin] Access denied for user 'u126067_6YObtWKgqn'@'%' to database 's126067_studenta'

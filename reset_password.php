@@ -2,8 +2,9 @@
 require_once 'config.php';  
 require_once 'vendor/autoload.php';
 require_once 'models/accounts.php';
+require_once 'models/settings.php';
 session_start();
-
+$Settings = new Settings('settings.json');
 $account = new Accounts($conn);
 if (isset($_POST['reset'])) {
     $password = $_POST['password'];
@@ -45,8 +46,9 @@ function deleteCode($account_id) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <script src="js/tailwind.config.js"></script>
     <script src="js/tailwindcss.js"></script>
+    <script src="js/tailwind.config.js"></script>
+
     <script>
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
     if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
@@ -61,8 +63,8 @@ function deleteCode($account_id) {
 <section class="bg-gray-200 dark:bg-gray-900">
   <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
       <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-          <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
-          Flowbite  
+          <img class="w-[4rem] mr-2" src="includes/images/<?php echo $Settings->getLogo();?>" alt="logo">
+         <?php echo $Settings->getName();?>
       </a>
       <div class="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
           <h2 class="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">

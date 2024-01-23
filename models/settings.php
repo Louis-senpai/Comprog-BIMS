@@ -95,6 +95,18 @@ Class Settings {
     public function getName(){
         return $this->get('name');
     }
+    public function getMysql(){
+        return $this->get('mysql');
+    }
+    public function updateMysql($host, $user, $password, $database){
+        $this->set('mysql', [
+            'host' => $host,
+            'port' => 3306,
+            'user' => $user,
+            'password' => $password,
+            'database' => $database
+        ]);
+    }
     // function that will update the Construct function which will change ../settings.json to /settings.json
 }
 
