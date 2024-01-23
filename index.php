@@ -10,34 +10,7 @@ require_once 'models/Components.php';
 $Components = new Tailwind();
 require_once 'models/settings.php';
 $Settings = new Settings('settings.json');
-$checkTable = mysqli_query($conn, "SHOW TABLES LIKE 'Accounts'");
-if (mysqli_num_rows($checkTable) == 0) {
-    // The "Accounts" table does not exist, so create it
-    $createQuery = "CREATE TABLE `Accounts` (
-        `id` int(11) NOT NULL AUTO_INCREMENT,
-        `username` varchar(20) NOT NULL,
-        `password` varchar(255) DEFAULT NULL,
-        `email` varchar(50) NOT NULL,
-        `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-        `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-        `role` varchar(55) DEFAULT 'others',
-        `permissions` text DEFAULT '[]',
-        `verified` tinyint(1) DEFAULT NULL,
-        `image_url` varchar(255) NOT NULL DEFAULT 'bot.png',
-        `notifications` text DEFAULT '[]',
-        `email_notifications` text DEFAULT '[]',
-        PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci";
-    
-    if (!mysqli_query($conn, $createQuery)) {
-        error_log("Error creating table: " . mysqli_error($conn));
-        terminateScriptWithError("Error creating the Accounts table. Please check your database and try again.");
-    }
-}
-if (checkForSuperadmin($conn)) {
-    header("Location: " . ROOT_DIR . "\setup.php");
-    exit();
-}
+
 ?>
 
 
