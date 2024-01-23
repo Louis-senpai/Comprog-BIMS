@@ -193,6 +193,14 @@ class Survey extends MysqliDb {
         return $this->rawQuery('SELECT CivilStatus, COUNT(ID) AS count FROM Survey GROUP BY CivilStatus');
     }
 
+    // get all different kinds of jobs with distinct
+    public function getJobTypes() {
+        $this->groupBy('Job');
+        $this->orderBy('Job', 'asc');
+        return $this->get($this->tableName, null, 'Job');
+    }
+    
+
     // SELECT year_added, COUNT(*) as response_count FROM surveys GROUP BY year_added ORDER BY year_added ASC
     
 }

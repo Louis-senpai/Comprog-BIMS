@@ -40,10 +40,10 @@ function deleteOfficer(id) {
 </script>
 
 
-<body class="bg-gray-50 dark:bg-gray-800">
+<body>
 
     <?php require_once "../includes/components/nav.php"; ?>
-    <div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
+    <div class="flex pt-16 overflow-hidden">
         <?php require_once '../includes/components/sidebar.php'; ?>
 
         <div id="main-content" class="relative w-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
@@ -193,8 +193,7 @@ function deleteOfficer(id) {
                                         <li class="py-3 sm:py-4">
                                             <div class="flex items-center space-x-4">
                                                 <div class="flex-shrink-0">
-                                                    <img class="w-8 h-8 rounded-full"
-                                                        src="../includes/images/bot.png"
+                                                    <img class="w-8 h-8 rounded-full" src="../includes/images/bot.png"
                                                         alt="Neil image">
                                                 </div>
                                                 <div class="flex-1 min-w-0">
@@ -304,7 +303,7 @@ function deleteOfficer(id) {
                                     },
                                     height: "100%",
                                     width: "100%",
-                                    type: "area",
+                                    type: "bar",
                                     fontFamily: "Inter, sans-serif",
                                     dropShadow: {
                                         enabled: false,
@@ -351,6 +350,79 @@ function deleteOfficer(id) {
                         });
                         </script>
 
+
+                    </div>
+                    <div class="grid gap-4 mt-4 xl:grid-cols-2 2xl:grid-cols-2">
+
+                        <div class="w-full col-span-2 bg-white rounded-lg shadow-lg dark:bg-gray-800">
+                            <div class="flex justify-between p-4 pb-0 md:p-6 md:pb-0">
+                                <div>
+                                    <h5 class="pb-2 text-3xl font-bold leading-none text-gray-900 dark:text-white">
+                                        <?php
+
+                $lastData = end($responseData);
+                $responseCount = $lastData['response_count'];
+                echo json_encode($responseCount);
+
+                ?>
+
+                                    </h5>
+                                    <p class="text-base font-normal text-gray-500 dark:text-gray-400">Registered
+                                        Residents this Year
+                                    </p>
+                                </div>
+                                <div
+                                    class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">
+                                    <?php
+            // caclulate the percentage of responses that between the last 1 year and echo it 
+            $lastYear = date('Y') - 1;
+            $percentage = ($responseCount / $lastYear) * 100;
+            // but round it off to 2 decimal places
+            $percentage = round($percentage, 2);
+            echo $percentage . '%';
+
+            ?>
+
+
+                                    <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 10 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div id="jobsPieChart" class="chart"></div>
+
+                        </div>
+
+                        <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            var options = {
+                                series: [44, 55, 13, 43,
+                                22], // Example data, replace with actual job sector data
+                                chart: {
+                                    width: 380,
+                                    type: 'pie',
+                                },
+                                labels: ['IT', 'Marketing', 'Finance', 'Sales',
+                                'HR'], // Example labels, replace with actual job sector names
+                                responsive: [{
+                                    breakpoint: 480,
+                                    options: {
+                                        chart: {
+                                            width: 200
+                                        },
+                                        legend: {
+                                            position: 'bottom'
+                                        }
+                                    }
+                                }]
+                            };
+
+                            var chart = new ApexCharts(document.querySelector("#jobsPieChart"), options);
+                            chart.render();
+                        });
+                        </script>
 
                     </div>
 

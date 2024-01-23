@@ -37,33 +37,47 @@ class Gmail extends PHPMailer {
         $this->setFrom($this->user, $this->name);
     }
     // send a email to marianolouis18@gmail.com
-    public function sendPushNotif($email, $name) {
-        $this->addAddress($email, 'louis');
-        $this->msgHTML('<h1>Hello</h1>');
-        $this->AltBody = 'Your code is: wdawdad';
-        $this->Subject = $this->name.' Push Notification';
-        $this->Body = 'Your code is: wdawdad';
+    public function sendPushNotif($email, $name, $body, $title) {
+        $this->addAddress($email, $name);
+        $this->AltBody = $body;
+        $this->Subject = $this->name.' | '. $title;
+        $this->Body = $body;
         if (!$this->send()) {
             return false;
         } else {
             return true;
         }
     }
+    public function sendNewResidentNotification($recipientEmail, $recipientName, $residentName) {
+        $this->addAddress($recipientEmail, $recipientName);
+        $this->Subject = 'New Resident Added';
+        $this->Body = "Hello {$recipientName},\n\nA new resident named {$residentName} has been added.";
+        $this->AltBody = "Hello {$recipientName}, A new resident named {$residentName} has been added.";
+
+        if (!$this->send()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    
+    
 
 
     
 }
 
-// $smtp1 = $Settings->getSMTP();
+$smtp1 = $Settings->getSMTP();
 
-// $host = $smtp1['host'];
-// $port = $smtp1['port'];
-// $user = $smtp1['user'];
-// $password = $smtp1['password'];
-// $name = $Settings->get('name');
-// $subject = 'Your Password Reset Code';
+$host = $smtp1['host'];
+$port = $smtp1['port'];
+$user = $smtp1['user'];
+$password = $smtp1['password'];
+$name = $Settings->get('name');
+$subject = 'Your Password Reset Code';
 
-// $email = new Gmail($Settings->get('websiteEmail'), $password, $host, $port, $user, $name, $subject);
+$email = new Gmail($Settings->get('websiteEmail'), $password, $host, $port, $user, $name, $subject);
 
 // if($email->sendPushNotif('marianolouis18@gmail.com', 'name')){
 //     echo "Email sent!";

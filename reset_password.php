@@ -47,6 +47,15 @@ function deleteCode($account_id) {
     <title>Login</title>
     <script src="js/tailwind.config.js"></script>
     <script src="js/tailwindcss.js"></script>
+    <script>
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+            '(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark')
+    }
+    </script>
 </head>
 <body class="">
 <section class="bg-gray-200 dark:bg-gray-900">

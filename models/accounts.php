@@ -6,15 +6,27 @@
 
 require_once 'userActivityLogs.php';
 
+
+
+
+
+
+
 // Make a Accounts Model that uses the Accounts Table to get data
 class Accounts extends MysqliDb {
 
         protected $tableName = 'Accounts';
         protected $primaryKey = 'id';
         protected $activityLogger;
+
+        protected $smtp;
+
+    
         public function __construct($conn) {
             parent::__construct($conn);
             $this->activityLogger = new UserActivityLogs($conn);
+           
+           
         }
     
         public function registerUser($username, $password, $repeatPassword, $email) {
@@ -31,7 +43,7 @@ class Accounts extends MysqliDb {
                 $_SESSION['error_message'] = "Email is already in use.";
                 header('Location: signup.php');
                 exit();
-            }
+            }   
     
             // Hash the password for security
             $hashedPassword = md5($password);
@@ -285,7 +297,26 @@ class Accounts extends MysqliDb {
                 return false;
             }
         }
+        public function veirfyNotifPermission($permission){
+            if (!in_array($permission, $_SESSION['emailNotifs'])) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        public function getAccountsForNotification($permission) {
+            $accounts = $this->get($this->tableName);
+            $accountsWithPermission = [];
         
+            foreach ($accounts as $account) {
+                $permissions = json_decode($account['permissions'], true);
+                if (in_array($permission, $permissions)) {
+                    $accountsWithPermission[] = $account;
+                }
+            }
+        
+            return $accountsWithPermission;
+        }
         
 
         

@@ -155,7 +155,7 @@
                         </button>
                     </div>
 
-                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-background-700 dark:divide-gray-600"
+                    <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-secondary-800 dark:divide-gray-600"
                         id="dropdown-2"
                         style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(1564px, 61px);"
                         data-popper-placement="bottom">
@@ -170,18 +170,18 @@
                         <ul class="py-1" role="none">
                             <li>
                                 <a href="home.php"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-background-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary-100 dark:text-gray-300 dark:hover:bg-accent-600 dark:hover:text-white"
                                     role="menuitem">Dashboard</a>
                             </li>
                             <li>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-background-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                <a href="settings.php"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary-100 dark:text-gray-300 dark:hover:bg-accent-600 dark:hover:text-white"
                                     role="menuitem">Settings</a>
                             </li>
 
                             <li>
                                 <a href="../Authentication.php?logout=true"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-background-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary-100 dark:text-gray-300 dark:hover:bg-accent-600 dark:hover:text-white"
                                     role="menuitem">Sign out</a>
                             </li>
                         </ul>

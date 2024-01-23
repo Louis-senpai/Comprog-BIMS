@@ -33,7 +33,7 @@ $officers = new officers($conn);
     <meta charset="UTF-8">
     <style type="text/tailwindcss">
 
-@layer components{
+        @layer components{
     .dt-button-collection {
    @apply p-4 rounded-lg h-full;
     }
@@ -44,8 +44,9 @@ $officers = new officers($conn);
         @apply bg-blue-400 dark:bg-blue-500 duration-500 ease-in-out;
     }
     .apexcharts-legend-text{
-        @apply dark:text-gray-300;
+        @apply text-white;
     }
+
 }
 
 
@@ -59,21 +60,23 @@ $officers = new officers($conn);
     <link rel="canonical" href="https://flowbite-admin-dashboard.vercel.app/">
     <script src="../js/alpine.min.js"></script>
     <script src="../js/htmx.min.js"></script>
-    <script src="../js/tailwind.config.js" > </script>
+    <script src="../js/tailwind.config.js"> </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://flowbite-admin-dashboard.vercel.app//app.css">
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/searchbuilder/1.6.0/css/searchBuilder.dataTables.min.css">
-<script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://flowbite-admin-dashboard.vercel.app//app.css">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/searchbuilder/1.6.0/css/searchBuilder.dataTables.min.css">
+    <script>
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+            '(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
     } else {
         document.documentElement.classList.remove('dark')
     }
-</script>
+    </script>
 
 
 

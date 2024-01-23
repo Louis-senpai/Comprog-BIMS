@@ -123,5 +123,7 @@ tailwind.config = {
 			},
 		},
 	},
+	
 	darkMode: "class",
+
 };

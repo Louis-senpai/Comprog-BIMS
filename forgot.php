@@ -140,13 +140,22 @@ $filename = substr($filename, 0, -4);
     <title>BIMS | <?php echo $filename;?></title>
     <script src="js/tailwind.config.js"></script>
     <script src="js/tailwindcss.js"></script>
+    <script>
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+            '(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark')
+    }
+    </script>
 </head>
 <body class="">
 <section class="bg-gray-200 dark:bg-gray-900">
   <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
       <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-          <img class="w-16 mr-2" src="includes/images/logo1.png" alt="logo">
-          BIMS    
+          <img class="w-16 mr-2" src="includes/images/<?php echo $Settings->getLogo();?>" alt="logo">
+          <?php echo $Settings->getName();?>   
       </a>
       <?php 
       if (!isset($_POST['forgot'])){
