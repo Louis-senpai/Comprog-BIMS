@@ -29,7 +29,7 @@
 $db = new MysqliDb ($conn);
 // using the $db that used the MysqliDb class make a Survey model that uses the Survey Table to get data
 class Survey extends MysqliDb {
-    protected $tableName = 'Survey';
+    protected $tableName = 'survey';
 
     public function __construct($conn) {
         parent::__construct($conn);

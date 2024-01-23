@@ -61,7 +61,7 @@ require_once '../includes/components/header.php';
                     <section class="bg-white dark:bg-gray-900">
                         <div class="px-4 py-8 mx-auto max-w-1xl lg:py-16">
 
-                            <form action="../api/AddSurveyData.php" methd="post">
+                            <form action="../api/AddSurveyData.php" method="POST">
                                 <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 sm:gap-6">
                                     <div class="col-span-3 md:col-span-2">
                                         <label for="FirstName"

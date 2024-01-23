@@ -15,7 +15,7 @@ require_once 'userActivityLogs.php';
 // Make a Accounts Model that uses the Accounts Table to get data
 class Accounts extends MysqliDb {
 
-        protected $tableName = 'Accounts';
+        protected $tableName = 'accounts';
         protected $primaryKey = 'id';
         protected $activityLogger;
 

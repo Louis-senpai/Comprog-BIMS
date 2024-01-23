@@ -2,7 +2,7 @@
 
 
 class UserActivityLogs extends MysqliDb {
-    protected $tableName = 'UserActivityLogs';
+    protected $tableName = 'useractivitylogs';
     protected $logFilePath = '/cache/history/user_activities.json'; // Default path
 
     public function __construct($conn) {

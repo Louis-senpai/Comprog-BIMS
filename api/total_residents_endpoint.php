@@ -6,11 +6,10 @@ require_once '../models/survey.php';
 $surveyModel = new Survey($conn);
 // Define a cache file path
 $cacheFile = '../cache/surveyData.json';
-$cacheTime = 3600; // Cache for 1 hour
+$cacheTime = 600; // Cache for 1 hour
 
 // Function to fetch and cache survey data
-function fetchAndCacheSurveyData($surveyModel, $cacheFile)
-{
+function fetchAndCacheSurveyData($surveyModel, $cacheFile) {
     // Fetch data from the database
     $data = [
         'totalResidents' => $surveyModel->countSurveys(),
@@ -18,27 +17,25 @@ function fetchAndCacheSurveyData($surveyModel, $cacheFile)
         'totalFemales' => $surveyModel->getTotalFemales(),
         'totalSeniors' => $surveyModel->getTotalSeniors(),
     ];
-    // Cache the data
-    file_put_contents($cacheFile, serialize($data));
+    // Cache the data in JSON format
+    file_put_contents($cacheFile, json_encode($data));
     return $data;
 }
 
 // Check if the cache file exists and is still valid
-if (file_exists($cacheFile) && (filemtime($cacheFile) > (time() - $cacheTime))) {
+if (file_exists($cacheFile) && (time() - filemtime($cacheFile) < $cacheTime)) {
     // Cache file is valid, read the data from the cache
-    $cachedData = unserialize(file_get_contents($cacheFile));
-    $totalResidents = $cachedData['totalResidents'];
-    $totalMales = $cachedData['totalMales'];
-    $totalFemales = $cachedData['totalFemales'];
-    $totalSeniors = $cachedData['totalSeniors'];
+    $cachedData = json_decode(file_get_contents($cacheFile), true);
 } else {
     // Cache is invalid or doesn't exist, fetch and cache the data
-    $data = fetchAndCacheSurveyData($surveyModel, $cacheFile);
-    $totalResidents = $data['totalResidents'];
-    $totalMales = $data['totalMales'];
-    $totalFemales = $data['totalFemales'];
-    $totalSeniors = $data['totalSeniors'];
+    $cachedData = fetchAndCacheSurveyData($surveyModel, $cacheFile);
 }
+
+// Extract the data
+$totalResidents = $cachedData['totalResidents'];
+$totalMales = $cachedData['totalMales'];
+$totalFemales = $cachedData['totalFemales'];
+$totalSeniors = $cachedData['totalSeniors'];
 // This is the content that will replace the widget
 ?>
 <div

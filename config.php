@@ -24,8 +24,6 @@ $conn = mysqli_connect($host, $user, $pass, $name, $port);
 if (!$conn) {
     error_log("Failed to connect to MySQL: " . mysqli_connect_error());
     terminateScript();
-}else{
-    echo "Connected to MySQL successfully";
 }
 
 function checkForSuperadmin($conn) {
@@ -35,7 +33,7 @@ function checkForSuperadmin($conn) {
         error_log("Error checking for superadmin: " . mysqli_error($conn));
         terminateScriptWithError("Error checking for superadmin account. Please check your database and try again.");
     }
-    if (mysqli_num_rows($result) == 0) {
+    if (mysqli_num_rows($result) === 0) {
         // No superadmin account found
         return true;
     } else {

@@ -228,8 +228,15 @@ function deleteOfficer(id) {
                                         <?php
 
                                         $lastData = end($responseData);
+                                        
                                         $responseCount = $lastData['response_count'];
-                                        echo json_encode($responseCount);
+                                        if (!$responseCount){
+                                            echo 0;
+                                        }
+                                        else{
+                                            echo json_encode($responseCount);
+
+                                        }
 
                                         ?>
 
