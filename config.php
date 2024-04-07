@@ -10,7 +10,8 @@ ini_set('log_errors', '1');
 
 require_once ROOT_DIR . '\models\settings.php';
 $config = new Settings(ROOT_DIR . '\settings.json');
-
+$dotenv = Dotenv\Dotenv::createImmutable($_SERVER['DOCUMENT_ROOT']);
+$dotenv->load();
 $sql = $config->getMysql();
 $host = $sql['host'];
 $user = $sql['user'];
@@ -26,7 +27,8 @@ if (!$conn) {
     terminateScript();
 }
 
-function checkForSuperadmin($conn) {
+function checkForSuperadmin($conn)
+{
     $query = "SELECT * FROM `Accounts` WHERE `role` = 'superadmin'";
     $result = mysqli_query($conn, $query);
     if (!$result) {
@@ -40,7 +42,9 @@ function checkForSuperadmin($conn) {
         // Superadmin account exists
         return false;
     }
-}function createTableIfNotExists($conn, $tableName, $createQuery) {
+}
+function createTableIfNotExists($conn, $tableName, $createQuery)
+{
     $checkTable = mysqli_query($conn, "SHOW TABLES LIKE '$tableName'");
     if (mysqli_num_rows($checkTable) == 0) {
         if (!mysqli_query($conn, $createQuery)) {
@@ -53,7 +57,8 @@ function checkForSuperadmin($conn) {
 
 
 
-function terminateScript() {
+function terminateScript()
+{
     $_SESSION = array(); // Unset all session variables
     session_destroy(); // Destroy the session
     session_start(); // Start a new session to pass the error message
@@ -61,7 +66,8 @@ function terminateScript() {
     header("Location: " . ROOT_DIR . "\index.php");
     exit();
 }
-function terminateScriptWithError($errorMessage) {
+function terminateScriptWithError($errorMessage)
+{
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }

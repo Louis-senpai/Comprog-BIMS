@@ -1,1 +1,31 @@
-{"name":"BIMS","version":"1.0","depends":["base"],"author":"Comprog Students","description":"","website":"http:\/\/www.yourcompany.com","websiteEmail":"BIMS@gmail.com","category":"Uncategorized","init_xml":[],"demo_xml":[],"update_xml":["test_module.xml"],"active":false,"installed":true,"Logo":"100899_blank.png","smtp":{"host":"smtp.gmail.com","port":"465","user":"marianolukkanit17@gmail.com","password":"uafb tmsk tydm ywfz "},"mysql":{"host":"localhost","port":3306,"user":"root","password":"","database":"s126067_student"},"facebookAPI":{"app_id":"1234567890","app_secret":"1234567890"},"googleAPI":{"app_id":"1234567890","app_secret":"1234567890"}}
+{
+  "name": "BIMS",
+  "version": "0.0.0.1",
+  "depends": ["base"],
+  "author": "Comprog Students",
+  "description": "",
+  "website": "http://www.yourcompany.com",
+  "websiteEmail": "BIMS@gmail.com",
+  "category": "Uncategorized",
+  "init_xml": [],
+  "demo_xml": [],
+  "update_xml": ["test_module.xml"],
+  "active": false,
+  "installed": true,
+  "Logo": "100899_blank.png",
+  "smtp": {
+    "host": "smtp.gmail.com",
+    "port": "465",
+    "user": "marianolukkanit17@gmail.com",
+    "password": "uafb tmsk tydm ywfz "
+  },
+  "mysql": {
+    "host": "localhost",
+    "port": 3306,
+    "user": "root",
+    "password": "admin",
+    "database": "s126067_student"
+  },
+  "facebookAPI": { "app_id": "1234567890", "app_secret": "1234567890" },
+  "googleAPI": { "app_id": "1234567890", "app_secret": "1234567890" }
+}

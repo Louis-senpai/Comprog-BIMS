@@ -1,7 +1,8 @@
 <?php
 session_start();
 require_once "config.php";
-
+$dotenv = Dotenv\Dotenv::createImmutable($_SERVER['DOCUMENT_ROOT']);
+$dotenv->load();
 if (isset($_SESSION['logged_in'])) {
     header("Location: /admin/home.php");
     exit();
@@ -25,13 +26,13 @@ $Settings = new Settings('settings.json');
     <script src="js/tailwind.config.js"></script>
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <script>
-    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
-            '(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-    } else {
-        document.documentElement.classList.remove('dark')
-    }
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                '(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
     </script>
 
 </head>
@@ -45,34 +46,30 @@ $Settings = new Settings('settings.json');
             <!-- Login Form -->
             <section class="">
                 <div class="grid grid-cols-1 rounded-lg lg:grid-cols-2 dark:border dark:border-primary-700">
-                    <div
-                        class="flex items-center justify-center px-4 py-10 rounded-l-lg shadow-lg bg-gray-50 dark:bg-slate-800 sm:px-6 lg:px-8 sm:py-16 lg:py-24">
+                    <div class="flex items-center justify-center px-4 py-10 rounded-l-lg shadow-lg bg-gray-50 dark:bg-slate-800 sm:px-6 lg:px-8 sm:py-16 lg:py-24">
                         <div class="xl:w-full xl:max-w-sm 2xl:max-w-md xl:mx-auto">
                             <?php
-                        
-                             if(isset($_SESSION['success_message'])){
-                                 echo $Components->AlertDiv($_SESSION['success_message'], 'success');
-                                 unset($_SESSION['success_message']);
-                                 
-                             }elseif (isset($_SESSION['error_message'])) {
-                                 echo $Components->AlertDiv($_SESSION['error_message'], 'error');
-                                 unset($_SESSION['error_message']);
-                             }
-                          
-                            if(isset($_SESSION['reset_success'])){
+
+                            if (isset($_SESSION['success_message'])) {
+                                echo $Components->AlertDiv($_SESSION['success_message'], 'success');
+                                unset($_SESSION['success_message']);
+                            } elseif (isset($_SESSION['error_message'])) {
+                                echo $Components->AlertDiv($_SESSION['error_message'], 'error');
+                                unset($_SESSION['error_message']);
+                            }
+
+                            if (isset($_SESSION['reset_success'])) {
                                 echo '<div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
                                 <span class="font-medium">Success </span> Password Has Been Reset
                               </div>';
-                              session_destroy();
+                                session_destroy();
                             }
-                            
+
                             ?>
                             <h2 class="text-3xl font-bold leading-tight text-text-800 sm:text-4xl dark:text-text-300">Sign in
                                 to BIMS
                             </h2>
-                            <p class="mt-2 text-base text-gray-600 dark:text-gray-400">Don’t have an account? <a
-                                    href="signup.php" title=""
-                                    class="font-medium text-blue-600 transition-all duration-200 hover:text-blue-700 hover:underline focus:text-blue-700">Create
+                            <p class="mt-2 text-base text-gray-600 dark:text-gray-400">Don’t have an account? <a href="signup.php" title="" class="font-medium text-blue-600 transition-all duration-200 hover:text-blue-700 hover:underline focus:text-blue-700">Create
                                     a account</a></p>
 
                             <form action="Authentication.php" method="POST" class="mt-8">
@@ -82,32 +79,25 @@ $Settings = new Settings('settings.json');
                                             Email address
                                         </label>
                                         <div class="mt-2.5">
-                                            <input type="email" name="email" id=""
-                                                placeholder="Enter email to get started"
-                                                class="block w-full p-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md dark:bg-gray-700 dark:text-white bg-gray-50 focus:outline-none focus:border-blue-600 caret-blue-600" />
+                                            <input type="email" name="email" id="" placeholder="Enter email to get started" class="block w-full p-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md dark:bg-gray-700 dark:text-white bg-gray-50 focus:outline-none focus:border-blue-600 caret-blue-600" />
                                         </div>
                                     </div>
 
                                     <div>
                                         <div class="flex items-center justify-between">
-                                            <label for=""
-                                                class="text-base font-medium text-text-900 dark:text-text-100"> Password
+                                            <label for="" class="text-base font-medium text-text-900 dark:text-text-100"> Password
                                             </label>
 
-                                            <a href="forgot.php" title=""
-                                                class="text-sm font-medium text-blue-600 hover:underline hover:text-blue-700 focus:text-blue-700">
+                                            <a href="forgot.php" title="" class="text-sm font-medium text-blue-600 hover:underline hover:text-blue-700 focus:text-blue-700">
                                                 Forgot password? </a>
                                         </div>
                                         <div class="mt-2.5">
-                                            <input type="password" name="password" id=""
-                                                placeholder="Enter your password"
-                                                class="block w-full p-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md dark:bg-gray-700 dark:text-white bg-gray-50 focus:outline-none focus:border-blue-600 caret-blue-600" />
+                                            <input type="password" name="password" id="" placeholder="Enter your password" class="block w-full p-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md dark:bg-gray-700 dark:text-white bg-gray-50 focus:outline-none focus:border-blue-600 caret-blue-600" />
                                         </div>
                                     </div>
 
                                     <div>
-                                        <button type="submit" name="login"
-                                            class="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent rounded-md bg-accent-600 focus:outline-none hover:bg-accent-700 focus:bg-accent-700">Log
+                                        <button type="submit" name="login" class="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent rounded-md bg-accent-600 focus:outline-none hover:bg-accent-700 focus:bg-accent-700">Log
                                             in</button>
                                     </div>
                                 </div>
@@ -117,15 +107,14 @@ $Settings = new Settings('settings.json');
                         </div>
                     </div>
 
-                    <div
-                        class="flex items-center justify-center hidden px-4 py-10 rounded-r-lg shadow-lg lg:block bg-secondary-300 dark:bg-secondary-500 sm:py-16 lg:py-24 sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-center hidden px-4 py-10 rounded-r-lg shadow-lg lg:block bg-secondary-300 dark:bg-secondary-500 sm:py-16 lg:py-24 sm:px-6 lg:px-8">
                         <div>
-                            <img class="w-[20rem] mx-auto" src="includes/images/<?php echo $Settings->getLogo();?>" alt="" />
+                            <img class="w-[20rem] mx-auto" src="includes/images/<?php echo $Settings->getLogo(); ?>" alt="" />
 
                             <div class="w-full max-w-md mx-auto xl:max-w-xl">
                                 <h3 class="text-2xl font-bold text-center text-text-900 dark:text-slate-900">
                                     Barangay Management System
-                                                                </h3>
+                                </h3>
                                 <p class="leading-relaxed text-center text-gray-500 dark:text-gray-400 mt-2.5">
 
 

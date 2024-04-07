@@ -3,6 +3,7 @@
         "thingengineer/mysqli-database-class": "dev-master",
         "phpfastcache/phpfastcache": "^9.2",
         "phpmailer/phpmailer": "^6.9",
-        "phpbu/phpbu": "^6.0"
+        "phpbu/phpbu": "^6.0",
+        "vlucas/phpdotenv": "^5.6"
     }
 }
