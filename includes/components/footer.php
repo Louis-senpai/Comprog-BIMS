@@ -58,8 +58,9 @@
 </p>
 
 <script async="" defer="" src="https://buttons.github.io/buttons.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script> -->
 <script src="https://flowbite-admin-dashboard.vercel.app//app.bundle.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+
 <script>
 var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
 var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');

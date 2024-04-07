@@ -7,7 +7,7 @@ define('ROOT_DIR', realpath(__DIR__));
 ini_set('display_errors', '1');
 ini_set('log_errors', '1');
 // ini_set('error_log', ROOT_DIR. '/error_log.txt'); // Specify where to log the errors
-
+require_once ROOT_DIR . '\vendor\autoload.php';
 require_once ROOT_DIR . '\models\settings.php';
 $config = new Settings(ROOT_DIR . '\settings.json');
 $dotenv = Dotenv\Dotenv::createImmutable($_SERVER['DOCUMENT_ROOT']);

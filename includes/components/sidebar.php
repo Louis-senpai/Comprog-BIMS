@@ -1,4 +1,42 @@
-<aside id="sidebar" class="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 hidden w-64 h-full pt-16 font-normal duration-75 lg:flex transition-width" aria-label="Sidebar">
+<aside id="sidebar" x-data="side()" x-init="checkForUpdates()" class="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 hidden w-64 h-full pt-16 font-normal duration-75 lg:flex transition-width" aria-label="Sidebar">
+
+
+<div id="toast-interactive" x-show="isUpdateAvailable" x-cloak class="fixed flex items-center w-full max-w-xs p-4 space-x-4 text-gray-500 bg-white divide-x divide-gray-200 rounded-lg shadow rtl:divide-x-reverse right-5 bottom-5 dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800" role="alert">
+    <div class="flex">
+        <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-blue-500 bg-blue-100 rounded-lg dark:text-blue-300 dark:bg-blue-900">
+            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 1v5h-5M2 19v-5h5m10-4a8 8 0 0 1-14.947 3.97M1 10a8 8 0 0 1 14.947-3.97"/>
+            </svg>
+            <span class="sr-only">Refresh icon</span>
+        </div>
+        <div class="text-sm font-normal ms-3">
+            <span class="mb-1 text-sm font-semibold text-gray-900 dark:text-white">Update available</span>
+            <div class="mb-2 text-sm font-normal">A new software version is available for download.</div> 
+            <div class="grid grid-cols-2 gap-2">
+                <div>
+                    <a href="#" class="inline-flex justify-center w-full px-2 py-1.5 text-xs font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">Update</a>
+                </div>
+                <div>
+                    <a href="#" class="inline-flex justify-center w-full px-2 py-1.5 text-xs font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-600 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700">Not now</a> 
+                </div>
+            </div>    
+        </div>
+        <button type="button" @click="isUpdateAvailable = false"        x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0" class="ms-auto -mx-1.5 -my-1.5 bg-white items-center justify-center flex-shrink-0 text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-interactive" aria-label="Close">
+     
+            <span class="sr-only">Close</span>
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+        </button>
+    </div>
+</div>
+
+
     <div class="relative flex flex-col flex-1 min-h-0 pt-0 border-r border-accent-200 bg-background-100 dark:bg-gray-800 dark:border-accent-700">
         <div class="flex flex-col flex-1 pt-5 pb-4 overflow-y-auto">
             <div class="flex-1 px-3 space-y-1 divide-y divide-gray-200 bg-background-100 dark:bg-gray-800 dark:divide-gray-700">
@@ -129,12 +167,48 @@
                             <span class="ml-3" sidebar-toggle-item="">Releases / Changelogs</span>
                         </a>
                     </li>
+                    <li>
+                        <a @click="checkForUpdates()" class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700 ">
+                            <!-- Backup svg -->
+                            <svg class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                            </svg>
+
+                            <span class="ml-3" sidebar-toggle-item="" x-text="version">Check for Updates</span>
+                    </a>
+                    </li>
 
 
 
                 </ul>
 
             </div>
+            <script>
+                function side(){
+                    return {
+                        isUpdated: false,
+                        version: '0.0.0',
+                        text: 'check For Updates',
+                        LatestRelease: null,
+                        isUpdateAvailable: false,
+                        checkForUpdates(){
+                            fetch('/api/CheckForUpdates.php')
+                                .then(response => response.json())
+                                .then(data => {
+                                    this.LatestRelease = data.latestRelease;
+                                    if(data.version !== this.version){
+                                        this.isUpdateAvailable = true;
+                                    }
+
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                });
+                        },
+                    }
+                }
+                
+            </script>
         </div>
         <div class="absolute bottom-0 left-0 justify-center hidden w-full p-4 space-x-4 bg-white lg:flex dark:bg-gray-800" sidebar-bottom-menu="">
             <a href="#" class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">

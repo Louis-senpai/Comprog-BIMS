@@ -89,6 +89,7 @@ class Github
         $releases = $this->getReleases();
 
         if (is_null($releases)) {
+            $_SESSION['error_message'] = 'Failed to fetch the releases.';
             return json_encode(['error' => 'Failed to fetch the releases.']);
         }
 
@@ -101,16 +102,19 @@ class Github
         }
 
         if (is_null($latestRelease)) {
+            $_SESSION['error_message'] = 'No releases found.';
             return json_encode(['error' => 'No releases found.']);
         }
 
         $latestVersion = $latestRelease['name'];
 
         if (version_compare($currentVersion, $latestVersion, '<')) {
-            // Current version is lower than the latest version
+
+            $_SESSION['error_message'] = 'A new version is available.';
             return json_encode($latestRelease);
         } else {
             // Current version is up-to-date
+            $_SESSION['error_message'] = 'You are using the latest version.';
             return json_encode(['message' => 'You are using the latest version.']);
         }
     }
