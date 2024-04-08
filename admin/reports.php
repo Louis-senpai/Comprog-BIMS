@@ -76,12 +76,12 @@ require_once '../includes/components/header.php';
                                     </th>
                                     <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
                                         <label>
-                                            Lastname
+                                            First Name
                                         </label>
                                     </th>
                                     <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
                                         <label>
-                                            FirstName
+                                            Last Name
                                         </label>
                                     </th>
                                     <th class="sticky top-0 px-3 py-2 bg-gray-100 border-b border-gray-200">
